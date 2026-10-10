@@ -1,26 +1,20 @@
 ---
 import '../styles/global.css';
-import { ui, pick, localePath, basePath, type Lang } from '../i18n';
+import { ui, pick, localePath, basePath, sections, type Lang } from '../i18n';
 import { contacts } from '../config';
 
 interface Props { lang: Lang; title?: string; description?: string }
 const { lang, title, description } = Astro.props;
 
 const here = basePath(Astro.url.pathname);
-const nav = [
-  { path: '/research', label: pick(ui.navResearch, lang) },
-  { path: '/engineering', label: pick(ui.navEngineering, lang) },
-  { path: '/papers', label: pick(ui.navPapers, lang) },
-  { path: '/about', label: pick(ui.navAbout, lang) },
-  { path: '/contact', label: pick(ui.navContact, lang) },
-];
+const home = localePath('/', lang);
+const nav = sections.map((s) => ({ href: `${home}#${s.id}`, label: pick(s.label, lang) }));
 const name = pick(ui.name, lang);
 const fullTitle = title ? `${title} | ${name}` : name;
 const desc = description ?? (lang === 'ko'
-  ? 'MRI 영상 재구성 연구와 ML 엔지니어링. 김진호의 포트폴리오.'
+  ? 'MRI reconstruction 연구와 ML engineering. 김진호의 포트폴리오.'
   : 'MRI reconstruction research and ML engineering. Portfolio of Jinho Kim.');
 const other: Lang = lang === 'en' ? 'ko' : 'en';
-const isActive = (p: string) => here === p || here.startsWith(`${p}/`);
 ---
 <!doctype html>
 <html lang={lang}>
@@ -42,16 +36,10 @@ const isActive = (p: string) => here === p || here.startsWith(`${p}/`);
   </head>
   <body class="min-h-screen flex flex-col bg-paper">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 bg-white px-3 py-2">{pick(ui.skip, lang)}</a>
-    <header class="border-b border-rule">
+    <header class="sm:sticky top-0 z-10 border-b border-rule bg-paper/95 backdrop-blur">
       <nav aria-label="Main" class="mx-auto max-w-6xl px-4 sm:px-10 py-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[15px]">
-        <a href={localePath('/', lang)} class="mr-auto py-2 text-base font-semibold text-navy no-underline">{name}</a>
-        {nav.map((n) => (
-          <a
-            href={localePath(n.path, lang)}
-            aria-current={isActive(n.path) ? 'page' : undefined}
-            class:list={['py-2 no-underline border-b-2', isActive(n.path) ? 'border-navy text-navy font-semibold' : 'border-transparent text-muted hover:text-navy']}
-          >{n.label}</a>
-        ))}
+        <a href={home} class="mr-auto py-2 text-base font-semibold text-navy no-underline">{name}</a>
+        {nav.map((n) => <a href={n.href} class="py-2 text-muted no-underline hover:text-navy">{n.label}</a>)}
         <a
           href={localePath(here, other)}
           hreflang={other}

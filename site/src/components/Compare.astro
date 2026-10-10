@@ -19,7 +19,7 @@ const cases = compareCases.filter((c) => !only || c.id === only).map((c) => ({
   })),
 }));
 const t = lang === 'ko'
-  ? { study: '연구 선택', quick: '비교 조합', cor: '관상면', sag: '시상면', all: '셋 다 보기', divider: '구분선' }
+  ? { study: '연구 선택', quick: '비교 조합', cor: 'Coronal', sag: 'Sagittal', all: '셋 다 보기', divider: 'Divider' }
   : { study: 'Study', quick: 'Comparisons', cor: 'Coronal', sag: 'Sagittal', all: 'All three', divider: 'Divider' };
 const first = cases[0];
 const fallback = first.layers[first.layers.length - 1];

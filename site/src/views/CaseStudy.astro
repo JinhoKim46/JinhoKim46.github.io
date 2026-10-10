@@ -14,7 +14,7 @@ const others = studies.filter((x) => x.slug !== slug);
 ---
 <Base lang={lang} title={s.data.short} description={s.data.sub}>
   <article class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-20">
-    <a href={localePath('/research', lang)} class="text-[15px]">{pick(ui.backResearch, lang)}</a>
+    <a href={`${localePath('/', lang)}#research`} class="text-[15px]">{pick(ui.backResearch, lang)}</a>
     <p class="mt-6 mb-0 text-sm text-faint">{s.data.venue}, {s.data.year}</p>
     <h1 class="mt-2 mb-0 max-w-[22em] font-serif text-3xl sm:text-[42px] font-medium leading-tight text-navy">{s.data.title}</h1>
     <p class="mt-4 mb-0 max-w-[40em] text-[19px] leading-relaxed text-body">{s.data.sub}</p>

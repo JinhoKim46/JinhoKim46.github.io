@@ -4,7 +4,7 @@ import type { Lang } from '../i18n';
 interface Props { lang: Lang; heading?: boolean }
 const { lang, heading = true } = Astro.props;
 const copy = lang === 'ko'
-  ? { h: '연락처', p: '연구 협력, 채용, 프로젝트 문의는 이메일로 보내 주세요.' }
+  ? { h: 'Contact', p: '연구 협력, 채용, 프로젝트 문의는 이메일로 보내 주세요.' }
   : { h: 'Contact', p: 'For research collaborations, roles or projects, email works best.' };
 ---
 <section class="flex flex-col gap-5">

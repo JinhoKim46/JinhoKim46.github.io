@@ -1,36 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
 import Compare from '../components/Compare.astro';
-import Frame from '../components/Frame.astro';
-import SectionTitle from '../components/SectionTitle.astro';
 import PaperList from '../components/PaperList.astro';
 import ContactBlock from '../components/ContactBlock.astro';
-import { ui, pick, localePath, type Lang } from '../i18n';
-import { profile } from '../config';
-import { homeCards } from '../data/engineering';
-import { journals } from '../data/papers';
+import { ui, pick, localePath, sections, type Lang } from '../i18n';
+import { profile, intro } from '../config';
+import { groups } from '../data/engineering';
+import { paperGroups } from '../data/papers';
+import { bio, timeline, extras } from '../data/about';
 import { research } from '../research';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const studies = await research(lang);
-const intro = {
-  en: 'I train deep learning models that reconstruct MRI from undersampled data, mostly MRCP, and usually without fully-sampled references to learn from. I also build what that work runs on: Slurm and Ray for training, MLflow on AWS during my time at BMW, and lately LLM agents for research tasks.',
-  ko: '적게 샘플링한 MRI 데이터로 영상을 복원하는 딥러닝을 연구합니다. 주로 MRCP를 다루고, fully-sampled 정답 없이 학습하는 self-supervised와 zero-shot 방식이 중심입니다. 연구에 필요한 학습 인프라도 직접 만듭니다. Slurm과 Ray로 실험을 돌리고, BMW에서는 AWS 위에 MLflow를 구축했습니다. 요즘은 연구용 LLM 에이전트를 만들고 있습니다.',
-};
+const label = (id: string) => pick(sections.find((s) => s.id === id)!.label, lang);
+const wrap = 'mx-auto max-w-6xl px-4 sm:px-10';
+const h2 = 'm-0 font-serif text-[28px] sm:text-[32px] font-medium text-navy';
+const ext = (h?: string) => !!h && !h.startsWith('/');
 ---
 <Base lang={lang}>
-  <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-12 pb-10 flex flex-wrap gap-12 items-start">
-    <div class="flex-[1_1_340px] max-w-[420px]">
+  <section class={`${wrap} pt-10 sm:pt-14 pb-16 flex flex-wrap gap-12 items-start`}>
+    <div class="flex-[1_1_340px] max-w-[440px]">
       <h1 class="m-0 font-serif font-medium text-5xl sm:text-[64px] leading-[1.02] text-navy">{pick(ui.name, lang)}</h1>
       <p class="mt-2.5 mb-0 text-[22px] text-[#8592ab]" lang={lang === 'en' ? 'ko' : 'en'}>{pick(ui.altName, lang)}</p>
       <p class="mt-7 mb-0 text-lg font-semibold text-navy">{pick(profile.role, lang)}</p>
       <p class="mt-1 mb-0 text-[15px] leading-normal text-muted">{pick(profile.affiliation, lang)}</p>
-      <p class="mt-5 mb-0 text-[17px] leading-[1.75] text-body">{pick(intro, lang)}</p>
-      <p class="mt-3 mb-0 text-[17px] leading-[1.75] text-body">{pick(profile.status, lang)}</p>
-      <div class="mt-6 flex flex-wrap gap-2.5">
-        <a href={localePath('/research', lang)} class="rounded-md bg-navy px-5 py-3 font-medium text-white no-underline hover:text-white hover:bg-[#1c3566]">{pick(ui.viewResearch, lang)}</a>
-        <a href={localePath('/contact', lang)} class="rounded-md border border-[#a9b4c8] px-5 py-3 no-underline">{pick(ui.contactMe, lang)}</a>
+      <p class="mt-5 mb-0 text-[17px] leading-[1.8] text-body">{pick(intro, lang)}</p>
+      <div class="mt-7 flex flex-wrap gap-2.5">
+        <a href="#research" class="rounded-md bg-navy px-5 py-3 font-medium text-white no-underline hover:bg-[#1c3566] hover:text-white">{label('research')}</a>
+        <a href="#contact" class="rounded-md border border-[#a9b4c8] px-5 py-3 no-underline">{pick(ui.contactMe, lang)}</a>
       </div>
     </div>
     <div class="flex-[1_1_600px] min-w-0">
@@ -39,46 +37,86 @@ const intro = {
   </section>
 
   <div class="bg-white border-t border-rule">
-    <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-14 pb-6">
-      <SectionTitle class="mb-6">{pick(ui.navResearch, lang)}</SectionTitle>
-      <div class="grid gap-9" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
+    <section id="research" class={`${wrap} py-16`}>
+      <h2 class={h2}>{label('research')}</h2>
+      <div class="mt-8 grid gap-x-10 gap-y-8" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
         {studies.map((s) => (
-          <article class="flex flex-col gap-2.5">
-            <a href={localePath(`/research/${s.slug}`, lang)} aria-hidden="true" tabindex="-1">
-              <Frame src={s.data.image.src} alt="" focus={s.data.image.focus} fit={s.data.image.fit} />
-            </a>
-            <h3 class="mt-1 mb-0 text-[19px] font-semibold leading-snug text-navy">{s.data.short}</h3>
-            <p class="m-0 text-base leading-relaxed text-body">{s.data.card}</p>
+          <article class="flex flex-col gap-2.5 border-t-2 border-navy pt-5">
             <p class="m-0 text-sm text-faint">{s.data.venue}, {s.data.year}</p>
-            <a href={localePath(`/research/${s.slug}`, lang)} class="self-start text-[15px]">{pick(ui.readCase, lang)}<span class="sr-only">: {s.data.short}</span></a>
+            <h3 class="m-0 text-xl font-semibold leading-snug"><a href={localePath(`/research/${s.slug}`, lang)} class="text-navy no-underline hover:underline">{s.data.short}</a></h3>
+            <p class="m-0 text-base leading-relaxed text-body">{s.data.card}</p>
+            <a href={localePath(`/research/${s.slug}`, lang)} class="mt-auto self-start pt-1 text-[15px]">{pick(ui.caseStudy, lang)}<span class="sr-only">: {s.data.short}</span></a>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-6">
-      <SectionTitle class="mb-6">{pick(ui.navEngineering, lang)}</SectionTitle>
-      <div class="grid gap-x-9 gap-y-8" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
-        {homeCards.map((c) => (
-          <article class="flex flex-col gap-2 border-t border-rule pt-4">
-            <h3 class="m-0 text-lg font-semibold text-navy">{pick(c.title, lang)}</h3>
-            <p class="m-0 text-base leading-relaxed text-body">{pick(c.text, lang)}</p>
-            <p class="m-0 text-sm text-faint">{pick(c.meta, lang)}</p>
-          </article>
+    <section id="engineering" class={`${wrap} py-16 border-t border-rule`}>
+      <h2 class={h2}>{label('engineering')}</h2>
+      <div class="mt-8 flex flex-col gap-10">
+        {groups.map((g) => (
+          <div class="grid gap-x-10 gap-y-3 sm:grid-cols-[200px_1fr]">
+            <h3 class="m-0 pt-3 text-[15px] font-semibold text-muted">{g.title}</h3>
+            <ul class="m-0 list-none p-0">
+              {g.items.map((p) => (
+                <li class="grid gap-x-8 gap-y-1 border-t border-rule py-3 md:grid-cols-[220px_1fr]">
+                  <div>
+                    <span class="font-semibold text-navy">{ext(p.href) ? <a href={p.href} class="text-navy">{p.title}</a> : p.title}</span>
+                    <span class="block text-sm text-faint">{pick(p.meta, lang)}</span>
+                  </div>
+                  <p class="m-0 text-[15px] leading-relaxed text-body">{pick(p.text, lang)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
       </div>
-      <a href={localePath('/engineering', lang)} class="mt-6 inline-block text-[15px]">{pick(ui.allEngineering, lang)}</a>
     </section>
 
-    <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-6">
-      <SectionTitle class="mb-5">{pick(ui.selectedPapers, lang)}</SectionTitle>
-      <div class="max-w-[62em]"><PaperList items={journals.slice(0, 3)} /></div>
-      <p class="mt-3 mb-0 text-sm text-faint">{pick(ui.coFirst, lang)}</p>
-      <a href={localePath('/papers', lang)} class="mt-5 inline-block text-[15px]">{pick(ui.allPapers, lang)}</a>
+    <section id="about" class={`${wrap} py-16 border-t border-rule`}>
+      <h2 class={h2}>{label('about')}</h2>
+      <div class="mt-8 flex flex-wrap gap-10 items-start">
+        <img src="/media/portrait.jpg" alt={lang === 'ko' ? '김진호 사진' : 'Portrait of Jinho Kim'} width="720" height="960" loading="lazy" class="block w-40 sm:w-48 flex-none rounded-sm object-cover" style="aspect-ratio: 3 / 4;" />
+        <div class="flex-[1_1_480px] min-w-0">
+          <p class="m-0 max-w-[40em] text-lg leading-[1.8] text-body">{pick(bio, lang)}</p>
+          <ol class="mt-8 mb-0 list-none p-0 border-l-2 border-navy">
+            {timeline.map((x, i) => (
+              <li class="relative pl-6 pb-6 last:pb-0">
+                <span class:list={['absolute -left-[7px] top-1.5 h-3 w-3 rounded-full', i === 0 ? 'bg-navy' : 'bg-white border-2 border-navy']} aria-hidden="true"></span>
+                <p class="m-0 text-sm text-faint">{pick(x.when, lang)}</p>
+                <p class="m-0 mt-0.5 text-[17px] font-semibold text-navy">{pick(x.what, lang)}</p>
+                <p class="m-0 text-[15px] text-muted">{pick(x.where, lang)}</p>
+                {x.note && <p class="m-0 mt-1 max-w-[44em] text-[15px] leading-relaxed text-body">{pick(x.note, lang)}</p>}
+              </li>
+            ))}
+          </ol>
+          <dl class="mt-10 mb-0">
+            {extras.map((e) => (
+              <div class="grid gap-x-8 gap-y-1 border-t border-rule py-3 sm:grid-cols-[140px_1fr]">
+                <dt class="text-[15px] font-semibold text-navy">{pick(e.title, lang)}</dt>
+                <dd class="m-0 text-[15px] leading-relaxed text-body">{pick(e.text, lang)}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
     </section>
 
-    <div class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-20">
+    <section id="papers" class={`${wrap} py-16 border-t border-rule`}>
+      <h2 class={h2}>{label('papers')}</h2>
+      <div class="mt-8 flex flex-col gap-10 max-w-[64em]">
+        {paperGroups.map((g) => (
+          <div>
+            <h3 class="mb-3 mt-0 text-[15px] font-semibold text-muted">{pick(g.title, lang)}</h3>
+            <PaperList items={g.items} />
+          </div>
+        ))}
+        <p class="m-0 text-sm text-faint">{pick(ui.coFirst, lang)}</p>
+      </div>
+    </section>
+
+    <section id="contact" class={`${wrap} pt-16 pb-20 border-t border-rule`}>
       <ContactBlock lang={lang} />
-    </div>
+    </section>
   </div>
 </Base>

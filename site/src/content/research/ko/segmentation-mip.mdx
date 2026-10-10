@@ -1,8 +1,8 @@
 ---
-title: nnU-Net 분할로 MRCP MIP 가독성을 높인 임상 평가
-short: 분할 기반 MIP 개선
-sub: 투영 전에 겹치는 밝은 장기를 지워, 담관이 바로 보이게 합니다.
-card: 투영 전에 nnU-Net으로 겹치는 장기를 지웁니다. 구조 중첩 점수가 4점 만점에 2.5에서 3.5로 올랐습니다.
+title: nnU-Net segmentation으로 MRCP MIP 가시성을 높인 임상 평가
+short: Segmentation-enhanced MIP
+sub: 투영 전에 겹치는 밝은 구조를 지워, 담관이 바로 보이게 합니다.
+card: 투영 전에 nnU-Net으로 겹치는 구조를 지웁니다. Structure overlap 점수가 4점 만점에 2.5에서 3.5로 올랐습니다.
 venue: MAGMA
 year: 2026
 order: 3
@@ -16,16 +16,16 @@ image: { src: /media/seg_segmented_cor.png, alt: "분할 기반 배경 제거 �
 
 ## 문제
 
-MIP는 시선 방향으로 가장 밝은 신호만 보여 줍니다. 위나 십이지장의 액체처럼 밝은 구조가 담관 위에 겹치면 판독이 어려워집니다.
+MIP는 투영 방향으로 가장 밝은 신호만 보여 줍니다. 위나 십이지장의 액체처럼 밝은 구조가 담관 위에 겹치면 판독이 어려워집니다.
 
 ## 접근
 
-3D nnU-Net으로 배경, 주요 구조, 보조 구조 세 가지 라벨을 분할하고, 담관을 잘라내지 않도록 안전 여유를 넉넉히 둔 뒤 남은 부분만 투영했습니다.
+3D nnU-Net으로 background, primary, secondary structure 세 label을 segmentation하고, 담관이 잘리지 않도록 safety margin을 넉넉히 둔 뒤 남은 volume만 투영했습니다.
 
 ## 구현
 
-환자 162명의 3D MRCP 322건을 사용했습니다. 학습에 127명 265건, 평가에 환자당 1건씩 35건을 썼습니다. 영상의학과 전문의 2명이 원본과 처리 영상을 4점 척도로 따로 평가했고, Wilcoxon 검정과 Benjamini–Hochberg 보정을 적용했습니다.
+환자 162명의 3D MRCP 322건을 썼습니다. 학습에 127명 265건, 평가에 환자당 1건씩 35건입니다. 영상의학과 전문의 2명이 original MIP와 processed MIP를 4점 척도로 따로 평가했고, Wilcoxon test와 Benjamini–Hochberg correction을 적용했습니다.
 
 ## 결과
 
-구조 중첩 점수는 2.5 ± 0.6에서 3.5 ± 0.9로 유의하게 올랐고, 진단 확신도도 3.2에서 3.4로 높아졌습니다. 코드는 공개하지 않았습니다.
+Structure overlap 점수는 2.5 ± 0.6에서 3.5 ± 0.9로 유의하게 올랐고, diagnostic confidence도 3.2에서 3.4로 높아졌습니다. 코드는 공개하지 않았습니다.

@@ -11,4 +11,4 @@ npm run dev      # http://localhost:4321
 npm run build    # static output in site/dist
 ```
 
-Content lives in `site/src/content/research/{en,ko}/*.mdx` (case studies) and `site/src/data/*.ts` (engineering, papers, about, comparison slider). Degree status and contact links are in `site/src/config.ts`.
+One home page (`site/src/views/Home.astro`) plus a page per case study. Case studies live in `site/src/content/research/{en,ko}/*.mdx`; engineering, papers, timeline and the comparison slider in `site/src/data/*.ts`; degree status, intro and contact links in `site/src/config.ts`.
