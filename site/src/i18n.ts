@@ -21,11 +21,11 @@ export function basePath(pathname: string) {
 
 /** Home page sections, in order. Their ids are the nav anchors. */
 export const sections = [
-  { id: 'research', label: { en: 'Research', ko: 'Research' } },
-  { id: 'engineering', label: { en: 'Engineering', ko: 'Engineering' } },
-  { id: 'about', label: { en: 'About', ko: 'About' } },
-  { id: 'papers', label: { en: 'Papers', ko: 'Papers' } },
-  { id: 'contact', label: { en: 'Contact', ko: 'Contact' } },
+  { id: 'research', label: { en: 'Research', ko: '연구' } },
+  { id: 'engineering', label: { en: 'Engineering', ko: '엔지니어링' } },
+  { id: 'about', label: { en: 'About', ko: '소개' } },
+  { id: 'papers', label: { en: 'Papers', ko: '논문' } },
+  { id: 'contact', label: { en: 'Contact', ko: '연락처' } },
 ] as const;
 
 export const ui = {

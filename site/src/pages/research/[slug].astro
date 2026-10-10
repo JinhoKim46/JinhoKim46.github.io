@@ -1,5 +1,6 @@
 ---
-import View from '../../views/CaseStudy.astro';
+import Base from '../../layouts/Base.astro';
+import CaseStudy from '../../views/CaseStudy.astro';
 import { research } from '../../research';
 
 export async function getStaticPaths() {
@@ -7,5 +8,10 @@ export async function getStaticPaths() {
   return studies.map((s) => ({ params: { slug: s.slug } }));
 }
 const { slug } = Astro.params;
+const en = (await research('en')).find((x) => x.slug === slug)!;
+const ko = (await research('ko')).find((x) => x.slug === slug)!;
 ---
-<View lang="en" slug={slug} />
+<Base lang="en" title={en.data.short} titleKo={ko.data.short} description={en.data.sub} descriptionKo={ko.data.sub}>
+  <div class="l-en"><CaseStudy lang="en" slug={slug} /></div>
+  <div class="l-ko"><CaseStudy lang="ko" slug={slug} /></div>
+</Base>

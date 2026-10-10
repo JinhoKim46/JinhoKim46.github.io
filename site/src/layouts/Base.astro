@@ -1,33 +1,26 @@
 ---
 import '../styles/global.css';
-import { ui, pick, localePath, basePath, sections, type Lang } from '../i18n';
+import { ui, sections, type Lang } from '../i18n';
 import { contacts } from '../config';
 
-interface Props { lang: Lang; title?: string; description?: string }
-const { lang, title, description } = Astro.props;
-
-const here = basePath(Astro.url.pathname);
-const home = localePath('/', lang);
-const nav = sections.map((s) => ({ href: `${home}#${s.id}`, label: pick(s.label, lang) }));
-const name = pick(ui.name, lang);
-const fullTitle = title ? `${title} | ${name}` : name;
-const desc = description ?? (lang === 'ko'
-  ? 'MRI reconstruction 연구와 ML engineering. 김진호의 포트폴리오.'
-  : 'MRI reconstruction research and ML engineering. Portfolio of Jinho Kim.');
-const other: Lang = lang === 'en' ? 'ko' : 'en';
+interface Props { title: string; titleKo: string; description: string; descriptionKo: string; lang: Lang }
+const { title, titleKo, description, descriptionKo, lang } = Astro.props;
+const fullEn = `${title} | ${ui.name.en}`;
+const fullKo = `${titleKo} | ${ui.name.ko}`;
+const pageEn = Astro.url.pathname.replace(/^\/ko(?=\/|$)/, '') || '/';
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-title-en={fullEn} data-title-ko={fullKo}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{fullTitle}</title>
-    <meta name="description" content={desc} />
+    <title>{lang === 'ko' ? fullKo : fullEn}</title>
+    <meta name="description" content={lang === 'ko' ? descriptionKo : description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    <link rel="alternate" hreflang="en" href={new URL(localePath(here, 'en'), Astro.site)} />
-    <link rel="alternate" hreflang="ko" href={new URL(localePath(here, 'ko'), Astro.site)} />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={desc} />
+    <link rel="alternate" hreflang="en" href={new URL(pageEn, Astro.site)} />
+    <link rel="alternate" hreflang="ko" href={new URL(pageEn === '/' ? '/ko/' : `/ko${pageEn}`, Astro.site)} />
+    <meta property="og:title" content={fullEn} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL('/media/zs_proposed_cor_full.png', Astro.site)} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,18 +28,25 @@ const other: Lang = lang === 'en' ? 'ko' : 'en';
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body class="min-h-screen flex flex-col bg-paper">
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 bg-white px-3 py-2">{pick(ui.skip, lang)}</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 bg-white px-3 py-2">
+      <span class="l-en">{ui.skip.en}</span><span class="l-ko">{ui.skip.ko}</span>
+    </a>
     <header class="sm:sticky top-0 z-10 border-b border-rule bg-paper/95 backdrop-blur">
       <nav aria-label="Main" class="mx-auto max-w-6xl px-4 sm:px-10 py-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[15px]">
-        <a href={home} class="mr-auto py-2 text-base font-semibold text-navy no-underline">{name}</a>
-        {nav.map((n) => <a href={n.href} class="py-2 text-muted no-underline hover:text-navy">{n.label}</a>)}
-        <a
-          href={localePath(here, other)}
-          hreflang={other}
-          lang={other}
-          aria-label={pick(ui.language, lang)}
-          class="rounded-full border border-rule-strong px-3 py-1.5 text-[13px] text-navy no-underline hover:bg-white"
-        >{other === 'ko' ? '한국어' : 'English'}</a>
+        <a href="/" class="l-en mr-auto py-2 text-base font-semibold text-navy no-underline">{ui.name.en}</a>
+        <a href="/ko/" class="l-ko mr-auto py-2 text-base font-semibold text-navy no-underline">{ui.name.ko}</a>
+        {sections.map((s) => (
+          <>
+            <a href={`#en-${s.id}`} class="l-en py-2 text-muted no-underline hover:text-navy">{s.label.en}</a>
+            <a href={`#ko-${s.id}`} class="l-ko py-2 text-muted no-underline hover:text-navy">{s.label.ko}</a>
+          </>
+        ))}
+        <button
+          type="button"
+          data-switch
+          class="rounded-full border border-rule-strong px-3 py-1.5 text-[13px] text-navy hover:bg-white"
+          aria-label={lang === 'ko' ? 'Switch to English' : '한국어로 보기'}
+        >{lang === 'ko' ? 'English' : '한국어'}</button>
       </nav>
     </header>
 
@@ -56,14 +56,32 @@ const other: Lang = lang === 'en' ? 'ko' : 'en';
 
     <footer class="bg-navy text-[#c9d3e6]">
       <div class="mx-auto max-w-6xl px-4 sm:px-10 py-10 flex flex-wrap items-baseline gap-x-8 gap-y-3 text-[15px]">
-        <span class="mr-auto font-semibold text-white">{name}</span>
+        <span class="l-en mr-auto font-semibold text-white">{ui.name.en}</span>
+        <span class="l-ko mr-auto font-semibold text-white">{ui.name.ko}</span>
         {contacts.map((c) => <a href={c.href} class="text-white hover:text-[#c9d3e6]">{c.label}</a>)}
       </div>
     </footer>
+
     <script>
-      // Links that leave the current view open in a new tab and show a link icon.
-      // In-page anchors (#section) and mail links keep their normal behaviour.
+      const root = document.documentElement;
       const SVG = 'http://www.w3.org/2000/svg';
+
+      // In-page language switch: both languages are in the page, so only the language flag changes.
+      const syncTitle = () => {
+        document.title = (root.lang === 'ko' ? root.dataset.titleKo : root.dataset.titleEn) ?? document.title;
+      };
+      const switchBtn = document.querySelector<HTMLButtonElement>('[data-switch]');
+      switchBtn?.addEventListener('click', () => {
+        const next = root.lang === 'ko' ? 'en' : 'ko';
+        root.lang = next;
+        syncTitle();
+        switchBtn.textContent = next === 'ko' ? 'English' : '한국어';
+        switchBtn.setAttribute('aria-label', next === 'ko' ? 'Switch to English' : '한국어로 보기');
+        const path = location.pathname.replace(/^\/ko(?=\/|$)/, '') || '/';
+        history.replaceState(null, '', (next === 'ko' ? '/ko' : '') + path);
+      });
+
+      // Link icons: a box with an arrow for links that open a new tab, a plain arrow for the rest.
       const paths: Record<string, string[]> = {
         external: ['M15 3h6v6', 'M10 14 21 3', 'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'],
         mail: ['M4 4h16v16H4z', 'm22 6-10 7L2 6'],
@@ -96,14 +114,14 @@ const other: Lang = lang === 'en' ? 'ko' : 'en';
         const plainHash = href.startsWith('#');
         const mail = href.startsWith('mailto:');
         const external = /^https?:\/\//.test(href);
-        if (!plainHash && !mail) {
+        // Only case-study pages and engineering repository links open in a new tab.
+        const newTab = !plainHash && !mail && (href.includes('/research/') || a.dataset.newtab !== undefined);
+        if (newTab) {
           a.target = '_blank';
           a.rel = 'noopener noreferrer';
         }
-        // Skip navigation, footer, call-to-action buttons and image links.
         if (plainHash || a.closest('nav, footer') || a.querySelector('img') || a.classList.contains('rounded-md') || a.dataset.noicon !== undefined) return;
-        const kind = mail ? 'mail' : external ? 'external' : 'internal';
-        a.appendChild(icon(kind));
+        a.appendChild(icon(mail ? 'mail' : newTab ? 'external' : 'internal'));
       });
     </script>
   </body>

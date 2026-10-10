@@ -1,4 +1,8 @@
 ---
-import View from '../../views/Home.astro';
+import Base from '../../layouts/Base.astro';
+import Home from '../../views/Home.astro';
 ---
-<View lang="ko" />
+<Base lang="ko" title="Jinho Kim" titleKo="김진호" description="MRI reconstruction research and ML engineering. Portfolio of Jinho Kim." descriptionKo="MRI reconstruction 연구와 ML engineering. 김진호의 포트폴리오.">
+  <div class="l-en"><Home lang="en" /></div>
+  <div class="l-ko"><Home lang="ko" /></div>
+</Base>

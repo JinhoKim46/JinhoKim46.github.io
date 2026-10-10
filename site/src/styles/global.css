@@ -30,3 +30,6 @@
 .prose-case h2 { font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; color: var(--color-navy); margin: 2.5rem 0 0.75rem; }
 .prose-case p { font-size: 1.0625rem; line-height: 1.8; color: var(--color-body); margin: 0 0 0.85rem; }
 .prose-case strong { color: var(--color-ink); }
+
+/* Both languages are in the page; the active one is set by <html lang>. */
+html[lang="en"] .l-ko, html[lang="ko"] .l-en { display: none !important; }

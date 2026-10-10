@@ -1,5 +1,4 @@
 ---
-import Base from '../layouts/Base.astro';
 import Compare from '../components/Compare.astro';
 import PaperList from '../components/PaperList.astro';
 import ContactBlock from '../components/ContactBlock.astro';
@@ -18,7 +17,6 @@ const wrap = 'mx-auto max-w-6xl px-4 sm:px-10';
 const h2 = 'm-0 font-serif text-[28px] sm:text-[32px] font-medium text-navy';
 const ext = (h?: string) => !!h && !h.startsWith('/');
 ---
-<Base lang={lang}>
   <section class={`${wrap} pt-10 sm:pt-14 pb-16 flex flex-wrap gap-12 items-start`}>
     <div class="flex-[1_1_340px] max-w-[440px]">
       <div class="flex items-end gap-5">
@@ -32,8 +30,8 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       <p class="mt-1 mb-0 text-[15px] leading-normal text-muted">{pick(profile.affiliation, lang)}</p>
       <p class="mt-5 mb-0 text-[17px] leading-[1.8] text-body">{pick(intro, lang)}</p>
       <div class="mt-7 flex flex-wrap gap-2.5">
-        <a href="#research" class="rounded-md bg-navy px-5 py-3 font-medium text-white no-underline hover:bg-[#1c3566] hover:text-white">{label('research')}</a>
-        <a href="#contact" class="rounded-md border border-[#a9b4c8] px-5 py-3 no-underline">{pick(ui.contactMe, lang)}</a>
+        <a href={`#${lang}-research`} class="rounded-md bg-navy px-5 py-3 font-medium text-white no-underline hover:bg-[#1c3566] hover:text-white">{label('research')}</a>
+        <a href={`#${lang}-contact`} class="rounded-md border border-[#a9b4c8] px-5 py-3 no-underline">{pick(ui.contactMe, lang)}</a>
       </div>
     </div>
     <div class="flex-[1_1_600px] min-w-0">
@@ -42,7 +40,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
   </section>
 
   <div class="bg-white border-t border-rule">
-    <section id="research" class={`${wrap} py-16`}>
+    <section id={`${lang}-research`} class={`${wrap} py-16`}>
       <h2 class={h2}>{label('research')}</h2>
       <div class="mt-8 grid gap-x-10 gap-y-8" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
         {studies.map((s) => (
@@ -56,7 +54,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       </div>
     </section>
 
-    <section id="engineering" class={`${wrap} py-16 border-t border-rule`}>
+    <section id={`${lang}-engineering`} class={`${wrap} py-16 border-t border-rule`}>
       <h2 class={h2}>{label('engineering')}</h2>
       <div class="mt-8 flex flex-col gap-10">
         {groups.map((g) => (
@@ -66,7 +64,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
               {g.items.map((p) => (
                 <li class="grid gap-x-8 gap-y-1 border-t border-rule py-3 md:grid-cols-[220px_1fr]">
                   <div>
-                    <span class="font-semibold text-navy">{ext(p.href) ? <a href={p.href} class="text-navy">{p.title}</a> : p.title}</span>
+                    <span class="font-semibold text-navy">{ext(p.href) ? <a href={p.href} class="text-navy" data-newtab>{p.title}</a> : p.title}</span>
                     {p.status && <span class="ml-2 inline-block rounded-full border border-emerald-700/30 bg-emerald-50 px-2 py-0.5 align-middle text-xs font-semibold text-emerald-800">{pick(p.status, lang)}</span>}
                     <span class="block text-sm text-faint">{pick(p.meta, lang)}</span>
                   </div>
@@ -79,7 +77,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       </div>
     </section>
 
-    <section id="about" class={`${wrap} py-16 border-t border-rule`}>
+    <section id={`${lang}-about`} class={`${wrap} py-16 border-t border-rule`}>
       <h2 class={h2}>{label('about')}</h2>
       <div class="mt-8">
         <div class="max-w-[56em]">
@@ -119,7 +117,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       </div>
     </section>
 
-    <section id="papers" class={`${wrap} py-16 border-t border-rule`}>
+    <section id={`${lang}-papers`} class={`${wrap} py-16 border-t border-rule`}>
       <h2 class={h2}>{label('papers')}</h2>
       <div class="mt-8 flex flex-col gap-10 max-w-[64em]">
         {paperGroups.map((g) => (
@@ -132,8 +130,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       </div>
     </section>
 
-    <section id="contact" class={`${wrap} pt-16 pb-20 border-t border-rule`}>
+    <section id={`${lang}-contact`} class={`${wrap} pt-16 pb-20 border-t border-rule`}>
       <ContactBlock lang={lang} />
     </section>
   </div>
-</Base>
