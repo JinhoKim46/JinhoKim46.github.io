@@ -25,7 +25,7 @@ export const groups: { title: string; items: Project[] }[] = [
       { title: 'route-work', href: gh('agent-skills'), meta: open,
         text: { en: 'A Claude Code skill that sizes a coding request and routes it through the right skills, issues and PRs.', ko: '코딩 요청의 규모를 판단해 알맞은 skill과 issue·PR 흐름으로 보내는 Claude Code skill.' } },
       { title: 'Laya vs JEV', href: gh('laya-vs-jev'), meta: same('Benchmark'),
-        text: { en: 'Two decision models on identical support tickets: Laya on GPU at about 4 ms per batched request, hosted JEV at about 22 ms.', ko: '같은 support ticket으로 두 decision model을 비교했습니다. GPU의 Laya는 batch 요청당 약 4 ms, hosted JEV는 약 22 ms.' } },
+        text: { en: 'Two decision models on identical support tickets: Laya on GPU at about 4 ms per batched request, hosted JEV at about 22 ms.', ko: '같은 support ticket으로 두 decision model을 비교했습니다. GPU의 Laya는 batch 요청당 약 4 ms, hosted JEV는 약 22 ms.' } },
       { title: 'Adversarial unit test generator', meta: { en: 'Hackbay 2025, team lead', ko: 'Hackbay 2025, 팀 리드' },
         text: { en: 'A VS Code extension in which a generator agent and a checker agent write tests together. Built with a team of four in 48 hours: tests 90% faster, coverage up to 74% higher.', ko: 'Generator agent와 checker agent가 함께 테스트를 쓰는 VS Code extension. 4명이 48시간 동안 만들었고, 테스트 작성은 90% 빨라지고 coverage는 최대 74% 올랐습니다.' } },
     ],

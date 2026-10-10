@@ -30,12 +30,12 @@ Breath-hold 촬영은 이 문제를 피하지만, compressed sensing을 써도 2
 
 ## 구현
 
-13-stage unrolled network와 gradient 기반 data consistency block을 썼습니다. Breath-hold MRCP는 incoherent sampling으로 R = 25, 14초에 획득했습니다.
+13-stage unrolled network와 gradient 기반 data consistency block을 썼습니다. Breath-hold MRCP는 incoherent sampling으로 R = 25, 14초에 획득했습니다.
 
-3 T에서 건강한 지원자 11명을 촬영해 respiratory-triggered parallel imaging(R = 3, 338초), compressed sensing과 비교했습니다. 2명은 40초 breath-hold(R = 6)를 추가로 찍고 R = 25로 다시 undersampling해 PSNR을 계산했습니다.
+3 T에서 건강한 지원자 11명을 촬영해 respiratory-triggered parallel imaging(R = 3, 338초), compressed sensing과 비교했습니다. 2명은 40초 breath-hold(R = 6)를 추가로 찍고 R = 25로 다시 undersampling해 PSNR을 계산했습니다.
 
 ## 결과
 
 MRI 전문가 3명의 reader study에서 zero-shot reconstruction은 전체 화질, noise, aliasing 모두 CS보다 유의하게 높은 점수를 받았고, 호흡이 고른 respiratory-triggered 영상에 가까웠습니다.
 
-12개 stage를 고정해도 PSNR은 38.25 dB에서 37.67 dB로 조금만 떨어졌고, 11명 평균 학습 시간은 136분에서 20분으로 6.7배 줄었습니다.
+12개 stage를 고정해도 PSNR은 38.25 dB에서 37.67 dB로 조금만 떨어졌고, 11명 평균 학습 시간은 136분에서 20분으로 6.7배 줄었습니다.

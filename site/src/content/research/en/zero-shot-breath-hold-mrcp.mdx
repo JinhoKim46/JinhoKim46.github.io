@@ -18,9 +18,9 @@ image: { src: /media/zs_proposed_cor_full.png, alt: "Zero-shot reconstruction of
 
 ## Problem
 
-Respiratory-triggered 3D MRCP takes minutes (338 s in this study) and relies on regular breathing. Irregular breathers get motion artifacts.
+Respiratory-triggered 3D MRCP takes minutes (338 s in this study) and relies on regular breathing. Irregular breathers get motion artifacts.
 
-A breath-hold scan avoids that, but compressed sensing still needs around 20 s of breath-holding and loses SNR at high acceleration. Supervised deep learning would need fully-sampled breath-hold data, which cannot be acquired.
+A breath-hold scan avoids that, but compressed sensing still needs around 20 s of breath-holding and loses SNR at high acceleration. Supervised deep learning would need fully-sampled breath-hold data, which cannot be acquired.
 
 ## Approach
 
@@ -30,12 +30,12 @@ The catch is training time, several hours per scan. The network is split so the 
 
 ## Implementation
 
-A 13-stage unrolled network with gradient-based data consistency. Breath-hold MRCP used an incoherent sampling pattern at R = 25, acquired in 14 s.
+A 13-stage unrolled network with gradient-based data consistency. Breath-hold MRCP used an incoherent sampling pattern at R = 25, acquired in 14 s.
 
-Eleven healthy volunteers were scanned at 3 T and compared with respiratory-triggered parallel imaging (R = 3, 338 s) and compressed sensing. For two of them, 40 s breath-holds at R = 6 were undersampled to R = 25 to compute PSNR.
+Eleven healthy volunteers were scanned at 3 T and compared with respiratory-triggered parallel imaging (R = 3, 338 s) and compressed sensing. For two of them, 40 s breath-holds at R = 6 were undersampled to R = 25 to compute PSNR.
 
 ## Results
 
 In a reader study with three MRI experts, zero-shot reconstruction scored significantly higher than CS for overall quality, noise and aliasing, and came close to successful respiratory-triggered scans.
 
-Freezing 12 stages lowered PSNR only from 38.25 dB to 37.67 dB, while average training time across the 11 volunteers fell from 136 min to 20 min, 6.7× faster.
+Freezing 12 stages lowered PSNR only from 38.25 dB to 37.67 dB, while average training time across the 11 volunteers fell from 136 min to 20 min, 6.7× faster.
