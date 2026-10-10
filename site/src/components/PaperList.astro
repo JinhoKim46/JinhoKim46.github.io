@@ -2,11 +2,18 @@
 import type { Paper } from '../data/papers';
 interface Props { items: Paper[] }
 const { items } = Astro.props;
+// Split an author string so the owner's name stands out in every list.
+const me = /\bKim J\b/g;
+const authorParts = (s: string) => s.split(me).flatMap((part, i, arr) => (i < arr.length - 1 ? [part, 'Kim J'] : [part]));
 ---
 <ol class="m-0 flex flex-col gap-4 pl-5 text-base leading-relaxed">
   {items.map((p) => (
     <li>
-      {p.authors && <span>{p.authors} </span>}
+      {p.authors && (
+        <span>
+          {authorParts(p.authors).map((part) => (part === 'Kim J' ? <strong class="rounded-sm bg-[#dde6f5] px-1 font-semibold text-navy">Kim J</strong> : part))}{' '}
+        </span>
+      )}
       <span class="font-semibold">{p.title}</span> <em>{p.venue}</em>, {p.detail}
       {p.href && <> <a href={p.href}>{p.linkLabel ?? 'DOI'}</a></>}
     </li>
