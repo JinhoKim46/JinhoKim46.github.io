@@ -4,9 +4,25 @@ export interface Step { when: T; what: T; where: T; note?: T }
 
 const same = (s: string): T => ({ en: s, ko: s });
 
-export const bio: T = {
-  en: 'I came to Erlangen in 2018 for a master’s in medical engineering and stayed for an industrial PhD with Siemens Healthineers on a topic of deep learning-based reconstruction and segmentation for MRCP. The dissertation is submitted and the final defense talk will be planned soon. Before that I studied Information, Communication and Electronics Engineering and Computer Science in Korea.',
-  ko: '2018년 의공학 석사를 위해 에를랑겐에 왔고, 이어서 Siemens Healthineers와 산학협력으로 MRCP 딥러닝 재구성 및 영상 분할을 주제로 박사 연구를 진행했습니다. 박사 학위논문은 제출을 마친 상태이며, 최종 구두 시험을 앞두고 있습니다. 그 전에는 한국에서 정보통신전자공학과 컴퓨터공학을 공부했습니다.',
+export const bio: { lead: T; paragraphs: T[] } = {
+  lead: {
+    en: 'Deep learning researcher in MRI reconstruction and applied AI, based in Munich, Germany.',
+    ko: 'MRI 영상 재구성과 응용 AI를 연구하는 뮌헨 기반의 딥러닝 연구자입니다.',
+  },
+  paragraphs: [
+    {
+      en: 'I’m Jinho Kim, a researcher and AI engineer working at the intersection of medical imaging and machine learning.',
+      ko: '저는 의료영상과 머신러닝의 접점에서 연구하고 시스템을 개발하는 김진호입니다.',
+    },
+    {
+      en: 'My doctoral research at FAU and Siemens Healthineers focused on making MRI faster and more practical, especially MRCP. I developed self-supervised reconstruction for 3 T and 0.55 T MRI, scan-specific reconstruction for 14-second breath-hold MRCP, and segmentation-guided MIP enhancement.',
+      ko: 'FAU와 Siemens Healthineers에서 진행한 박사과정 연구에서는 MRI, 특히 MRCP를 더 빠르고 실용적으로 만드는 데 집중했습니다. 3 T와 0.55 T MRI를 위한 자기지도 재구성, 14초 호흡정지 MRCP의 스캔별 재구성, 영상 분할 기반 MIP 개선 기술을 개발했습니다.',
+    },
+    {
+      en: 'I enjoy taking ideas beyond publications and turning them into systems people can use. Alongside my MRI research, I build AI infrastructure and LLM-based agents, and lead a data and workflow automation project for an SME client from concept to production. I’m especially interested in reliable AI that connects rigorous research with real-world impact.',
+      ko: '저는 연구 아이디어를 논문에만 머무르게 하지 않고 실제 사용할 수 있는 시스템으로 구현하는 일을 좋아합니다. MRI 연구와 함께 AI 인프라와 LLM 기반 에이전트를 개발하고 있으며, 중소기업 고객의 데이터·업무 자동화 프로젝트를 기획부터 실제 운영까지 주도하고 있습니다. 엄밀한 연구와 현실의 문제를 연결하는 신뢰할 수 있는 AI에 관심이 있습니다.',
+    },
+  ],
 };
 
 /** Work experience, newest first (CV: Jinho Kim, comprehensive). */

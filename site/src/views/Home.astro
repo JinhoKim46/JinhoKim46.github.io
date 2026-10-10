@@ -81,7 +81,8 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       <h2 class={h2}>{label('about')}</h2>
       <div class="mt-8">
         <div class="max-w-[56em]">
-          <p class="m-0 max-w-[40em] text-lg leading-[1.8] text-body">{pick(bio, lang)}</p>
+          <p class="m-0 max-w-[40em] text-lg font-semibold leading-[1.6] text-navy">{pick(bio.lead, lang)}</p>
+          {bio.paragraphs.map((p) => <p class="mt-4 mb-0 max-w-[40em] text-lg leading-[1.8] text-body">{pick(p, lang)}</p>)}
           {[
             { title: lang === 'ko' ? '경력' : 'Experience', steps: [...learning, ...experience] },
             { title: lang === 'ko' ? '학력' : 'Education', steps: education },
