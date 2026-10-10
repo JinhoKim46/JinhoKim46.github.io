@@ -21,8 +21,13 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
 <Base lang={lang}>
   <section class={`${wrap} pt-10 sm:pt-14 pb-16 flex flex-wrap gap-12 items-start`}>
     <div class="flex-[1_1_340px] max-w-[440px]">
-      <h1 class="m-0 font-serif font-medium text-5xl sm:text-[64px] leading-[1.02] text-navy">{pick(ui.name, lang)}</h1>
-      <p class="mt-2.5 mb-0 text-[22px] text-[#8592ab]" lang={lang === 'en' ? 'ko' : 'en'}>{pick(ui.altName, lang)}</p>
+      <div class="flex items-end gap-5">
+        <img src="/media/portrait.jpg" alt={lang === 'ko' ? '김진호 사진' : 'Portrait of Jinho Kim'} width="720" height="960" class="block w-24 sm:w-28 flex-none rounded-sm object-cover" style="aspect-ratio: 3 / 4;" />
+        <div>
+          <h1 class="m-0 whitespace-nowrap font-serif font-medium text-[40px] sm:text-[50px] leading-[1.05] text-navy">{pick(ui.name, lang)}</h1>
+          <p class="mt-2 mb-0 text-xl text-[#8592ab]" lang={lang === 'en' ? 'ko' : 'en'}>{pick(ui.altName, lang)}</p>
+        </div>
+      </div>
       <p class="mt-7 mb-0 text-lg font-semibold text-navy">{pick(profile.role, lang)}</p>
       <p class="mt-1 mb-0 text-[15px] leading-normal text-muted">{pick(profile.affiliation, lang)}</p>
       <p class="mt-5 mb-0 text-[17px] leading-[1.8] text-body">{pick(intro, lang)}</p>
@@ -75,9 +80,8 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
 
     <section id="about" class={`${wrap} py-16 border-t border-rule`}>
       <h2 class={h2}>{label('about')}</h2>
-      <div class="mt-8 flex flex-wrap gap-10 items-start">
-        <img src="/media/portrait.jpg" alt={lang === 'ko' ? '김진호 사진' : 'Portrait of Jinho Kim'} width="720" height="960" loading="lazy" class="block w-40 sm:w-48 flex-none rounded-sm object-cover" style="aspect-ratio: 3 / 4;" />
-        <div class="flex-[1_1_480px] min-w-0">
+      <div class="mt-8">
+        <div class="max-w-[56em]">
           <p class="m-0 max-w-[40em] text-lg leading-[1.8] text-body">{pick(bio, lang)}</p>
           <ol class="mt-8 mb-0 list-none p-0 border-l-2 border-navy">
             {timeline.map((x, i) => (
