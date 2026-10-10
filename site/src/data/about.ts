@@ -25,8 +25,28 @@ export const timeline: Step[] = [
   { when: { en: '2011 – 2018', ko: '2011 – 2018' }, what: same('B.Eng. Information, Communication and Electronics Engineering'), where: { en: 'The Catholic University of Korea', ko: '가톨릭대학교' }, note: { en: 'Double major in computer science; exchange at St. Cloud State University, 2016.', ko: '컴퓨터공학 복수전공, 2016년 St. Cloud State University 교환학생.' } },
 ];
 
-export const extras: { title: T; text: T }[] = [
-  { title: { en: 'Awards', ko: '수상' }, text: { en: '2nd Best Lecture Award, FAU. Outstanding Exchange Student Award and Academic Excellence Scholarship (4 semesters), The Catholic University of Korea.', ko: 'FAU 우수강의상 2위. 가톨릭대학교 우수 교환학생상, 성적 우수 장학금(4학기).' } },
-  { title: { en: 'Community', ko: '커뮤니티' }, text: { en: 'Founder of the largest Korean online community in Franconia (2019–now). Founder and president of KOIN, a Korean students initiative (2023–2024).', ko: '프랑켄 지역 최대 한인 온라인 커뮤니티 설립·운영(2019–현재). 한인 학생 모임 KOIN 설립, 회장(2023–2024).' } },
-  { title: { en: 'Languages', ko: '언어' }, text: { en: 'Korean (native), English (C1), German (A2/B1)', ko: '한국어(모국어), 영어(C1), 독일어(A2/B1)' } },
+export const extras: { title: T; items: T[] }[] = [
+  {
+    title: { en: 'Awards', ko: '수상' },
+    items: [
+      { en: '2nd Best Lecture Award, Computational MRI, FAU', ko: 'FAU 우수강의상 2위 (Computational MRI)' },
+      { en: 'Outstanding Exchange Student Award, The Catholic University of Korea, 2016', ko: '가톨릭대학교 우수 교환학생상, 2016' },
+      { en: 'Academic Excellence Scholarship, 4 semesters, The Catholic University of Korea', ko: '가톨릭대학교 성적 우수 장학금, 4학기' },
+    ],
+  },
+  {
+    title: { en: 'Community', ko: '커뮤니티' },
+    items: [
+      { en: 'Founder of the largest Korean online community in Franconia, 2019–now', ko: '프랑켄 지역 최대 한인 온라인 커뮤니티 설립·운영, 2019–현재' },
+      { en: 'Founder and president of KOIN, a Korean students initiative, 2023–2024', ko: '한인 학생 모임 KOIN 설립, 회장, 2023–2024' },
+    ],
+  },
+  {
+    title: { en: 'Languages', ko: '언어' },
+    items: [
+      { en: 'Korean, native', ko: '한국어, 모국어' },
+      { en: 'English, C1', ko: '영어, C1' },
+      { en: 'German, A2/B1', ko: '독일어, A2/B1' },
+    ],
+  },
 ];
