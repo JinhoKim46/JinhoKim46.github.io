@@ -14,7 +14,7 @@ const copy = lang === 'ko'
     {contacts.map((c) => (
       <div class="border-t border-rule pt-3">
         <dt class="text-sm text-faint">{c.label}</dt>
-        <dd class="m-0 mt-0.5 break-words"><a href={c.href}>{c.text}</a></dd>
+        <dd class="m-0 mt-0.5 break-words"><a href={c.href} data-newtab={c.href.startsWith('mailto:') ? undefined : true}>{c.text}</a></dd>
       </div>
     ))}
   </dl>

@@ -58,7 +58,7 @@ const pageEn = Astro.url.pathname.replace(/^\/ko(?=\/|$)/, '') || '/';
       <div class="mx-auto max-w-6xl px-4 sm:px-10 py-10 flex flex-wrap items-baseline gap-x-8 gap-y-3 text-[15px]">
         <span class="l-en mr-auto font-semibold text-white">{ui.name.en}</span>
         <span class="l-ko mr-auto font-semibold text-white">{ui.name.ko}</span>
-        {contacts.map((c) => <a href={c.href} class="text-white hover:text-[#c9d3e6]">{c.label}</a>)}
+        {contacts.map((c) => <a href={c.href} class="text-white hover:text-[#c9d3e6]" data-newtab={c.href.startsWith('mailto:') ? undefined : true}>{c.label}</a>)}
       </div>
     </footer>
 
@@ -120,7 +120,7 @@ const pageEn = Astro.url.pathname.replace(/^\/ko(?=\/|$)/, '') || '/';
           a.target = '_blank';
           a.rel = 'noopener noreferrer';
         }
-        if (plainHash || a.closest('nav, footer') || a.querySelector('img') || a.classList.contains('rounded-md') || a.dataset.noicon !== undefined) return;
+        if (plainHash || a.closest('nav') || a.querySelector('img') || a.classList.contains('rounded-md') || a.dataset.noicon !== undefined) return;
         a.appendChild(icon(mail ? 'mail' : newTab ? 'external' : 'internal'));
       });
     </script>
