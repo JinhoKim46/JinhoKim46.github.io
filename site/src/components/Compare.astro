@@ -52,7 +52,10 @@ const fallback = first.layers[first.layers.length - 1];
   .compare .cmp-tab[aria-selected="true"] { background: var(--color-navy); color: #fff; border-color: var(--color-navy); }
   .compare .cmp-preset { font: inherit; font-size: 14px; min-height: 36px; padding: 6px 2px; background: none; border: 0; border-bottom: 1px solid #8c99b3; color: var(--color-muted); cursor: pointer; }
   .compare .cmp-preset[aria-pressed="true"] { border-bottom: 2px solid var(--color-navy); color: var(--color-navy); font-weight: 600; }
-  .compare .cmp-em { color: var(--color-accent); font-weight: 600; }
+  .compare .cmp-em { font-weight: 600; }
+  .compare .cmp-em[data-k="time"] { color: var(--color-em-time); }
+  .compare .cmp-em[data-k="train"] { color: var(--color-em-train); }
+  .compare .cmp-em[data-k="acq"] { color: var(--color-em-acq); }
   .compare input[type=range] { width: 100%; min-height: 28px; accent-color: var(--color-link); }
 </style>
 
