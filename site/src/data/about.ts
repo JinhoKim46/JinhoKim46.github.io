@@ -12,7 +12,7 @@ export const bio: T = {
 /** Work and education on one line of time, newest first. */
 export const timeline: Step[] = [
   {
-    when: { en: '2026 – now', ko: '2026 – 현재' }, what: same('Agentic AI engineering'), where: { en: 'Projects and Turing College AI Engineering', ko: '개인 프로젝트, Turing College AI Engineering' },
+    when: { en: 'Aug 2026 – now', ko: '2026.08 – 현재' }, what: same('Agentic AI engineering'), where: { en: 'Projects and Turing College AI Engineering', ko: '개인 프로젝트, Turing College AI Engineering' },
     note: { en: 'Building LLM agents and tools while studying the field. Alongside, a data and automation project for an SME client.', ko: 'LLM agent와 도구를 만들며 이 분야를 공부하고 있습니다. 중소기업 고객의 데이터·자동화 프로젝트도 함께 하고 있습니다.' },
   },
   { when: { en: 'Jun – Aug 2026', ko: '2026.06 – 08' }, what: same('Senior AI Infrastructure Engineer'), where: same('BMW Group, Munich') },
