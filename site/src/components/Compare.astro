@@ -1,0 +1,259 @@
+---
+// Image comparison slider. Rules: documents/rules/figures.md.
+import { compareCases } from '../data/compare';
+import type { Lang } from '../i18n';
+
+interface Props { lang: Lang; only?: 'zs' | 'dl' | 'seg' }
+const { lang, only } = Astro.props;
+
+const cases = compareCases.filter((c) => !only || c.id === only).map((c) => ({
+  id: c.id,
+  label: c.label[lang],
+  caption: c.caption[lang],
+  corRatio: c.corRatio,
+  sagRatio: c.sagRatio ?? null,
+  start: c.start,
+  layers: c.layers.map((l) => ({
+    name: l.name, cor: l.cor, sag: l.sag ?? null,
+    lines: [l.acq[lang], l.time[lang], l.train?.[lang] ?? ''],
+  })),
+}));
+const t = lang === 'ko'
+  ? { study: '연구 선택', quick: '비교 조합', cor: '관상면', sag: '시상면', all: '셋 다 보기', divider: '구분선' }
+  : { study: 'Study', quick: 'Comparisons', cor: 'Coronal', sag: 'Sagittal', all: 'All three', divider: 'Divider' };
+const first = cases[0];
+const fallback = first.layers[first.layers.length - 1];
+---
+<figure class="compare m-0 flex flex-col gap-3.5" data-compare>
+  <script type="application/json" set:html={JSON.stringify({ cases, t, tabs: !only })} />
+  <noscript>
+    <img src={fallback.cor} alt={fallback.name} class="w-full bg-black" />
+    <figcaption class="mt-2 text-sm text-muted">{first.caption}</figcaption>
+  </noscript>
+</figure>
+
+<style is:global>
+  .compare .cmp-stage { display: grid; column-gap: 4px; background: #000; border-radius: 4px; overflow: hidden; }
+  .compare .cmp-titles { display: grid; column-gap: 4px; font-size: 13px; font-weight: 600; color: var(--color-navy); }
+  .compare .cmp-pane { position: relative; overflow: hidden; }
+  .compare .cmp-pane img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+  .compare .cmp-cor { cursor: ew-resize; touch-action: pan-y; }
+  .compare .cmp-handle { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: #fff; pointer-events: none; }
+  .compare .cmp-handle span { position: absolute; top: 50%; left: -10px; width: 20px; height: 40px; margin-top: -20px; border-radius: 10px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+  .compare .cmp-line { position: absolute; top: 0; bottom: 0; width: 1px; background: #fff; pointer-events: none; }
+  .compare .cmp-chip { position: absolute; bottom: 10px; margin-left: 8px; background: rgba(8,18,40,.8); color: #fff; font-size: 13px; padding: 4px 8px; border-radius: 3px; white-space: nowrap; pointer-events: none; }
+  .compare .cmp-tab { font: inherit; font-size: 14px; min-height: 40px; padding: 8px 14px; border-radius: 999px; cursor: pointer; background: #fff; color: var(--color-navy); border: 1px solid #b9c2d3; }
+  .compare .cmp-tab[aria-selected="true"] { background: var(--color-navy); color: #fff; border-color: var(--color-navy); }
+  .compare .cmp-preset { font: inherit; font-size: 14px; min-height: 36px; padding: 6px 2px; background: none; border: 0; border-bottom: 1px solid #8c99b3; color: var(--color-muted); cursor: pointer; }
+  .compare .cmp-preset[aria-pressed="true"] { border-bottom: 2px solid var(--color-navy); color: var(--color-navy); font-weight: 600; }
+  .compare input[type=range] { width: 100%; min-height: 28px; accent-color: var(--color-link); }
+</style>
+
+<script>
+  type Mode = 'all' | 'p12' | 'p23' | 'p13';
+  interface L { name: string; cor: string; sag: string | null; lines: string[] }
+  interface C { id: string; label: string; caption: string; corRatio: [number, number]; sagRatio: [number, number] | null; start: { mode: Mode; a: number; b: number }; layers: L[] }
+  interface Data { cases: C[]; t: Record<string, string>; tabs: boolean }
+
+  const el = <K extends keyof HTMLElementTagNameMap>(tag: K, cls = '', text = '') => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  };
+
+  class Compare {
+    root: HTMLElement; d: Data; cur!: C; mode: Mode = 'all'; a = 33; b = 67; drag: 'a' | 'b' | null = null;
+    corImgs: HTMLImageElement[] = []; sagImgs: HTMLImageElement[] = []; handles: HTMLElement[] = []; lines: HTMLElement[] = [];
+    chips: HTMLElement[] = []; legend: HTMLElement[] = []; presets: { m: Mode; btn: HTMLButtonElement }[] = [];
+    ranges: { wrap: HTMLElement; label: HTMLElement; input: HTMLInputElement }[] = [];
+    body!: HTMLElement; tabs: HTMLButtonElement[] = [];
+
+    constructor(root: HTMLElement) {
+      this.root = root;
+      this.d = JSON.parse(root.querySelector('script[type="application/json"]')!.textContent!);
+      root.querySelector('noscript')?.remove();
+      if (this.d.tabs && this.d.cases.length > 1) {
+        const bar = el('div', 'flex flex-wrap gap-2');
+        bar.setAttribute('role', 'tablist');
+        bar.setAttribute('aria-label', this.d.t.study);
+        this.d.cases.forEach((c) => {
+          const b = el('button', 'cmp-tab', c.label);
+          b.type = 'button';
+          b.setAttribute('role', 'tab');
+          b.addEventListener('click', () => this.load(c));
+          this.tabs.push(b);
+          bar.append(b);
+        });
+        root.append(bar);
+      }
+      this.body = el('div', 'flex flex-col gap-3.5');
+      root.append(this.body);
+      this.load(this.d.cases[0]);
+    }
+
+    get three() { return this.cur.layers.length === 3; }
+
+    load(c: C) {
+      this.cur = c;
+      ({ mode: this.mode, a: this.a, b: this.b } = c.start);
+      this.tabs.forEach((b, i) => b.setAttribute('aria-selected', String(this.d.cases[i] === c)));
+      this.build();
+      this.update();
+    }
+
+    build() {
+      const { cur: c, d: { t } } = this;
+      this.body.replaceChildren();
+      const cols = c.sagRatio
+        ? `${c.corRatio[0] / c.corRatio[1]}fr ${c.sagRatio[0] / c.sagRatio[1]}fr`
+        : '1fr';
+
+      const titles = el('div', 'cmp-titles');
+      titles.style.gridTemplateColumns = cols;
+      titles.append(el('span', '', t.cor));
+      if (c.sagRatio) titles.append(el('span', 'whitespace-nowrap', t.sag));
+
+      const stage = el('div', 'cmp-stage');
+      stage.style.gridTemplateColumns = cols;
+      const cor = el('div', 'cmp-pane cmp-cor');
+      cor.style.aspectRatio = `${c.corRatio[0]} / ${c.corRatio[1]}`;
+      this.corImgs = c.layers.map((l) => { const i = el('img'); i.src = l.cor; i.alt = `${l.name}, ${t.cor}`; i.draggable = false; cor.append(i); return i; });
+      this.handles = [0, 1].map(() => { const h = el('div', 'cmp-handle'); h.append(el('span')); cor.append(h); return h; });
+      this.chips = c.layers.map((l) => { const s = el('span', 'cmp-chip', l.name); cor.append(s); return s; });
+      cor.addEventListener('pointerdown', (e) => this.down(e, cor));
+      cor.addEventListener('pointermove', (e) => this.drag && this.set(this.drag, this.pct(e, cor)));
+      ['pointerup', 'pointercancel'].forEach((ev) => cor.addEventListener(ev, () => (this.drag = null)));
+      stage.append(cor);
+
+      this.sagImgs = []; this.lines = [];
+      if (c.sagRatio) {
+        const sag = el('div', 'cmp-pane');
+        sag.setAttribute('aria-hidden', 'true');
+        sag.style.aspectRatio = `${c.sagRatio[0]} / ${c.sagRatio[1]}`;
+        this.sagImgs = c.layers.map((l) => { const i = el('img'); i.src = l.sag ?? ''; i.alt = ''; sag.append(i); return i; });
+        this.lines = [0, 1].map(() => { const ln = el('div', 'cmp-line'); sag.append(ln); return ln; });
+        stage.append(sag);
+      }
+
+      const head = el('div', 'flex flex-col gap-1.5');
+      head.append(titles, stage);
+
+      const presetBar = el('div', 'flex flex-wrap items-center gap-x-3.5 gap-y-1');
+      presetBar.setAttribute('role', 'group');
+      presetBar.setAttribute('aria-label', t.quick);
+      const L = c.layers;
+      const defs: [Mode, string, number, number][] = this.three
+        ? [['all', t.all, 33, 67], ['p12', `${L[0].name} vs ${L[1].name}`, 50, 100], ['p23', `${L[1].name} vs ${L[2].name}`, 0, 50], ['p13', `${L[0].name} vs ${L[2].name}`, 50, 50]]
+        : [];
+      this.presets = defs.map(([m, label, a, b]) => {
+        const btn = el('button', 'cmp-preset', label);
+        btn.type = 'button';
+        btn.addEventListener('click', () => { this.mode = m; this.a = a; this.b = b; this.update(); });
+        presetBar.append(btn);
+        return { m, btn };
+      });
+
+      const rangeBar = el('div', 'flex flex-wrap gap-x-6 gap-y-2');
+      this.ranges = (['a', 'b'] as const).map((which) => {
+        const wrap = el('label', 'flex-[1_1_240px] flex flex-col gap-1 text-[13px] text-muted');
+        const label = el('span');
+        const input = el('input');
+        input.type = 'range'; input.min = '0'; input.max = '100';
+        input.addEventListener('input', () => this.set(this.activeFor(which), Number(input.value)));
+        wrap.append(label, input);
+        rangeBar.append(wrap);
+        return { wrap, label, input };
+      });
+
+      const legend = el('div', 'grid border-t border-rule-strong');
+      legend.style.gridTemplateColumns = 'repeat(auto-fit, minmax(180px, 1fr))';
+      this.legend = L.map((l) => {
+        const box = el('div', 'pt-3 pr-3.5 pb-1 flex flex-col gap-0.5 transition-opacity');
+        box.append(el('span', 'font-semibold text-[15px] text-navy', l.name));
+        l.lines.filter(Boolean).forEach((x, i) => box.append(el('span', i === 0 ? 'text-sm leading-snug' : 'text-sm leading-snug text-muted', x)));
+        legend.append(box);
+        return box;
+      });
+
+      const cap = el('figcaption', 'text-sm leading-relaxed text-muted', c.caption);
+      this.body.append(head);
+      if (this.presets.length) this.body.append(presetBar);
+      this.body.append(rangeBar, legend, cap);
+    }
+
+    /** Which divider a range input drives in the current mode. */
+    activeFor(which: 'a' | 'b'): 'a' | 'b' {
+      if (this.mode === 'all') return which;
+      return this.mode === 'p23' ? 'b' : 'a';
+    }
+
+    set(which: 'a' | 'b', v: number) {
+      const x = Math.max(0, Math.min(100, Math.round(v)));
+      if (this.mode === 'p13') { this.a = x; this.b = x; }
+      else if (this.mode === 'p12') this.a = x;
+      else if (this.mode === 'p23') this.b = x;
+      else if (which === 'a') this.a = Math.min(x, this.b - 2);
+      else this.b = Math.max(x, this.a + 2);
+      this.update();
+    }
+
+    pct(e: PointerEvent, pane: HTMLElement) {
+      const r = pane.getBoundingClientRect();
+      return ((e.clientX - r.left) / r.width) * 100;
+    }
+
+    down(e: PointerEvent, pane: HTMLElement) {
+      const p = this.pct(e, pane);
+      this.drag = this.mode === 'all' ? (Math.abs(p - this.a) <= Math.abs(p - this.b) ? 'a' : 'b') : this.mode === 'p23' ? 'b' : 'a';
+      pane.setPointerCapture(e.pointerId);
+      this.set(this.drag, p);
+    }
+
+    update() {
+      const L = this.cur.layers;
+      const three = this.three;
+      const mode = three ? this.mode : 'p12';
+      let { a, b } = this;
+      if (mode === 'p12') b = 100;
+      if (mode === 'p23') a = 0;
+      if (mode === 'p13') b = a;
+      const from = three ? [0, a, b] : [0, a];
+      const to = three ? [a, b, 100] : [a, 100];
+      const show = (i: number) => i === 0 || to[i] - from[i] > 0;
+
+      [this.corImgs, this.sagImgs].forEach((imgs) => imgs.forEach((img, i) => {
+        img.style.clipPath = `inset(0 0 0 ${from[i]}%)`;
+        img.style.display = show(i) ? '' : 'none';
+      }));
+
+      const at = mode === 'all' ? [a, b] : [mode === 'p23' ? b : a];
+      [this.handles, this.lines].forEach((hs) => hs.forEach((h, i) => {
+        h.style.display = i < at.length ? '' : 'none';
+        if (i < at.length) h.style.left = `${at[i]}%`;
+      }));
+
+      this.chips.forEach((c, i) => {
+        c.style.left = `${from[i]}%`;
+        c.style.display = to[i] - from[i] >= 16 ? '' : 'none';
+      });
+      this.legend.forEach((box, i) => (box.style.opacity = to[i] - from[i] > 0 ? '1' : '0.35'));
+      this.presets.forEach(({ m, btn }) => btn.setAttribute('aria-pressed', String(m === mode)));
+
+      const { t } = this.d;
+      const pair = (i: number, j: number) => `${t.divider}: ${L[i].name} | ${L[j].name}`;
+      if (mode === 'all') {
+        this.ranges[0].label.textContent = pair(0, 1); this.ranges[0].input.value = String(a);
+        this.ranges[1].label.textContent = pair(1, 2); this.ranges[1].input.value = String(b);
+        this.ranges[1].wrap.style.display = '';
+      } else {
+        const [i, j] = mode === 'p12' ? [0, 1] : mode === 'p23' ? [1, 2] : [0, 2];
+        this.ranges[0].label.textContent = pair(i, j);
+        this.ranges[0].input.value = String(mode === 'p23' ? b : a);
+        this.ranges[1].wrap.style.display = 'none';
+      }
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-compare]').forEach((root) => new Compare(root));
+</script>

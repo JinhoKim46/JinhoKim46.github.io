@@ -1,0 +1,6 @@
+---
+// Fixed-ratio frame: the whole image is shown (contain) on black, so mixed aspect ratios line up.
+interface Props { src: string; alt: string; ratio?: string; focus?: string; fit?: 'contain' | 'cover'; class?: string }
+const { src, alt, ratio = '4 / 3', focus = '50% 50%', fit = 'contain', class: cls } = Astro.props;
+---
+<img src={src} alt={alt} loading="lazy" class:list={['block w-full bg-black', cls]} style={`aspect-ratio: ${ratio}; object-fit: ${fit}; object-position: ${focus};`} />

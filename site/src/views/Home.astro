@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import Compare from '../components/Compare.astro';
+import Frame from '../components/Frame.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import PaperList from '../components/PaperList.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { ui, pick, localePath, type Lang } from '../i18n';
+import { profile } from '../config';
+import { homeCards } from '../data/engineering';
+import { journals } from '../data/papers';
+import { research } from '../research';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const studies = await research(lang);
+const intro = {
+  en: 'I train deep learning models that reconstruct MRI from undersampled data, mostly MRCP, and usually without fully-sampled references to learn from. I also build what that work runs on: Slurm and Ray for training, MLflow on AWS during my time at BMW, and lately LLM agents for research tasks.',
+  ko: '적게 샘플링한 MRI 데이터로 영상을 복원하는 딥러닝을 연구합니다. 주로 MRCP를 다루고, fully-sampled 정답 없이 학습하는 self-supervised와 zero-shot 방식이 중심입니다. 연구에 필요한 학습 인프라도 직접 만듭니다. Slurm과 Ray로 실험을 돌리고, BMW에서는 AWS 위에 MLflow를 구축했습니다. 요즘은 연구용 LLM 에이전트를 만들고 있습니다.',
+};
+---
+<Base lang={lang}>
+  <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-12 pb-10 flex flex-wrap gap-12 items-start">
+    <div class="flex-[1_1_340px] max-w-[420px]">
+      <h1 class="m-0 font-serif font-medium text-5xl sm:text-[64px] leading-[1.02] text-navy">{pick(ui.name, lang)}</h1>
+      <p class="mt-2.5 mb-0 text-[22px] text-[#8592ab]" lang={lang === 'en' ? 'ko' : 'en'}>{pick(ui.altName, lang)}</p>
+      <p class="mt-7 mb-0 text-lg font-semibold text-navy">{pick(profile.role, lang)}</p>
+      <p class="mt-1 mb-0 text-[15px] leading-normal text-muted">{pick(profile.affiliation, lang)}</p>
+      <p class="mt-5 mb-0 text-[17px] leading-[1.75] text-body">{pick(intro, lang)}</p>
+      <p class="mt-3 mb-0 text-[17px] leading-[1.75] text-body">{pick(profile.status, lang)}</p>
+      <div class="mt-6 flex flex-wrap gap-2.5">
+        <a href={localePath('/research', lang)} class="rounded-md bg-navy px-5 py-3 font-medium text-white no-underline hover:text-white hover:bg-[#1c3566]">{pick(ui.viewResearch, lang)}</a>
+        <a href={localePath('/contact', lang)} class="rounded-md border border-[#a9b4c8] px-5 py-3 no-underline">{pick(ui.contactMe, lang)}</a>
+      </div>
+    </div>
+    <div class="flex-[1_1_600px] min-w-0">
+      <Compare lang={lang} />
+    </div>
+  </section>
+
+  <div class="bg-white border-t border-rule">
+    <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-14 pb-6">
+      <SectionTitle class="mb-6">{pick(ui.navResearch, lang)}</SectionTitle>
+      <div class="grid gap-9" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
+        {studies.map((s) => (
+          <article class="flex flex-col gap-2.5">
+            <a href={localePath(`/research/${s.slug}`, lang)} aria-hidden="true" tabindex="-1">
+              <Frame src={s.data.image.src} alt="" focus={s.data.image.focus} fit={s.data.image.fit} />
+            </a>
+            <h3 class="mt-1 mb-0 text-[19px] font-semibold leading-snug text-navy">{s.data.short}</h3>
+            <p class="m-0 text-base leading-relaxed text-body">{s.data.card}</p>
+            <p class="m-0 text-sm text-faint">{s.data.venue}, {s.data.year}</p>
+            <a href={localePath(`/research/${s.slug}`, lang)} class="self-start text-[15px]">{pick(ui.readCase, lang)}<span class="sr-only">: {s.data.short}</span></a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-6">
+      <SectionTitle class="mb-6">{pick(ui.navEngineering, lang)}</SectionTitle>
+      <div class="grid gap-x-9 gap-y-8" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
+        {homeCards.map((c) => (
+          <article class="flex flex-col gap-2 border-t border-rule pt-4">
+            <h3 class="m-0 text-lg font-semibold text-navy">{pick(c.title, lang)}</h3>
+            <p class="m-0 text-base leading-relaxed text-body">{pick(c.text, lang)}</p>
+            <p class="m-0 text-sm text-faint">{pick(c.meta, lang)}</p>
+          </article>
+        ))}
+      </div>
+      <a href={localePath('/engineering', lang)} class="mt-6 inline-block text-[15px]">{pick(ui.allEngineering, lang)}</a>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-6">
+      <SectionTitle class="mb-5">{pick(ui.selectedPapers, lang)}</SectionTitle>
+      <div class="max-w-[62em]"><PaperList items={journals.slice(0, 3)} /></div>
+      <p class="mt-3 mb-0 text-sm text-faint">{pick(ui.coFirst, lang)}</p>
+      <a href={localePath('/papers', lang)} class="mt-5 inline-block text-[15px]">{pick(ui.allPapers, lang)}</a>
+    </section>
+
+    <div class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-20">
+      <ContactBlock lang={lang} />
+    </div>
+  </div>
+</Base>

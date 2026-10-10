@@ -1,0 +1,4 @@
+# Working documents stay local: they hold client names, CV contact details and raw paper files.
+documents/
+node_modules/
+.DS_Store

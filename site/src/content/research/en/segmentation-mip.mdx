@@ -1,0 +1,31 @@
+---
+title: Clinical evaluation of nnU-Net-based segmentation for enhanced MRCP MIP visualization
+short: Segmentation-enhanced MIP
+sub: Removing overlapping bright anatomy before projection, so the biliary tree reads clearly.
+card: nnU-Net removes overlapping anatomy before projection. Structure-overlap score went from 2.5 to 3.5 out of 4.
+venue: MAGMA
+year: 2026
+order: 3
+role: Shared first author with S. Werner
+collaborators: S. Werner, S. Afat (Tübingen), M. D. Nickel, F. Knoll
+links:
+  - { label: Paper, href: "https://doi.org/10.1007/s10334-026-01407-x" }
+compare: seg
+image: { src: /media/seg_segmented_cor.png, alt: "MRCP maximum intensity projection after segmentation-based background suppression" }
+---
+
+## Problem
+
+A MIP shows only the brightest signal along each ray. Bright fluid in the stomach or duodenum lands on top of the ducts and makes the image hard to read.
+
+## Approach
+
+A 3D nnU-Net segments background, primary and secondary structures. Generous safety margins keep ducts from being cut, and only the remaining volume is projected.
+
+## Implementation
+
+322 3D MRCP datasets from 162 patients: 265 cases from 127 patients for training, 35 single-acquisition cases for evaluation. Two board-certified radiologists rated original and processed MIPs on a 4-point scale; Wilcoxon tests with Benjamini–Hochberg correction.
+
+## Results
+
+The structure-overlap score rose significantly from 2.5 ± 0.6 to 3.5 ± 0.9, and diagnostic confidence went from 3.2 to 3.4. The code is not public.

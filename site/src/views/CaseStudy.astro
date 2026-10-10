@@ -1,0 +1,32 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Compare from '../components/Compare.astro';
+import { ui, pick, localePath, type Lang } from '../i18n';
+import { research } from '../research';
+
+interface Props { lang: Lang; slug: string }
+const { lang, slug } = Astro.props;
+const studies = await research(lang);
+const s = studies.find((x) => x.slug === slug)!;
+const { Content } = await render(s);
+const others = studies.filter((x) => x.slug !== slug);
+---
+<Base lang={lang} title={s.data.short} description={s.data.sub}>
+  <article class="mx-auto max-w-6xl px-4 sm:px-10 pt-10 pb-20">
+    <a href={localePath('/research', lang)} class="text-[15px]">{pick(ui.backResearch, lang)}</a>
+    <p class="mt-6 mb-0 text-sm text-faint">{s.data.venue}, {s.data.year}</p>
+    <h1 class="mt-2 mb-0 max-w-[22em] font-serif text-3xl sm:text-[42px] font-medium leading-tight text-navy">{s.data.title}</h1>
+    <p class="mt-4 mb-0 max-w-[40em] text-[19px] leading-relaxed text-body">{s.data.sub}</p>
+    <dl class="mt-7 mb-0 flex flex-wrap gap-x-10 gap-y-3 text-[15px]">
+      <div><dt class="text-faint">{pick(ui.myRole, lang)}</dt><dd class="m-0 mt-0.5 font-medium">{s.data.role}</dd></div>
+      <div><dt class="text-faint">{pick(ui.collaborators, lang)}</dt><dd class="m-0 mt-0.5 font-medium">{s.data.collaborators}</dd></div>
+      <div><dt class="text-faint">{pick(ui.links, lang)}</dt><dd class="m-0 mt-0.5 flex flex-wrap gap-3.5">{s.data.links.map((l) => <a href={l.href}>{l.label}</a>)}</dd></div>
+    </dl>
+    <div class="mt-10"><Compare lang={lang} only={s.data.compare} /></div>
+    <div class="prose-case mt-6 max-w-[760px]"><Content /></div>
+    <nav aria-label={pick(ui.moreResearch, lang)} class="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-rule-strong pt-6">
+      {others.map((o) => <a href={localePath(`/research/${o.slug}`, lang)} class="text-base">{o.data.short}</a>)}
+    </nav>
+  </article>
+</Base>

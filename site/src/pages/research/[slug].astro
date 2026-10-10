@@ -1,0 +1,11 @@
+---
+import View from '../../views/CaseStudy.astro';
+import { research } from '../../research';
+
+export async function getStaticPaths() {
+  const studies = await research('en');
+  return studies.map((s) => ({ params: { slug: s.slug } }));
+}
+const { slug } = Astro.params;
+---
+<View lang="en" slug={slug} />

@@ -1,0 +1,21 @@
+---
+import { contacts } from '../config';
+import type { Lang } from '../i18n';
+interface Props { lang: Lang; heading?: boolean }
+const { lang, heading = true } = Astro.props;
+const copy = lang === 'ko'
+  ? { h: '연락처', p: '연구 협력, 채용, 프로젝트 문의는 이메일로 보내 주세요.' }
+  : { h: 'Contact', p: 'For research collaborations, roles or projects, email works best.' };
+---
+<section class="flex flex-col gap-5">
+  {heading && <h2 class="font-serif font-medium text-navy text-2xl sm:text-[28px] m-0">{copy.h}</h2>}
+  <p class="m-0 max-w-[38em] text-lg leading-relaxed text-body">{copy.p}</p>
+  <dl class="m-0 grid gap-x-10 gap-y-3" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));">
+    {contacts.map((c) => (
+      <div class="border-t border-rule pt-3">
+        <dt class="text-sm text-faint">{c.label}</dt>
+        <dd class="m-0 mt-0.5 break-words"><a href={c.href}>{c.text}</a></dd>
+      </div>
+    ))}
+  </dl>
+</section>

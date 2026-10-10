@@ -1,0 +1,5 @@
+---
+interface Props { as?: 'h1' | 'h2'; class?: string }
+const { as: Tag = 'h2', class: cls } = Astro.props;
+---
+<Tag class:list={['font-serif font-medium text-navy', Tag === 'h1' ? 'text-4xl sm:text-[44px] leading-tight' : 'text-2xl sm:text-[28px]', cls]}><slot /></Tag>

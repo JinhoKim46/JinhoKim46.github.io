@@ -1,0 +1,14 @@
+---
+import type { Paper } from '../data/papers';
+interface Props { items: Paper[] }
+const { items } = Astro.props;
+---
+<ol class="m-0 flex flex-col gap-4 pl-5 text-base leading-relaxed">
+  {items.map((p) => (
+    <li>
+      {p.authors && <span>{p.authors} </span>}
+      <span class="font-semibold">{p.title}</span> <em>{p.venue}</em>, {p.detail}
+      {p.href && <> <a href={p.href}>{p.linkLabel ?? 'DOI'}</a></>}
+    </li>
+  ))}
+</ol>

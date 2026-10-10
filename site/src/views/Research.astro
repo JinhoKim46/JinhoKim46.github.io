@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Frame from '../components/Frame.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { ui, pick, localePath, type Lang } from '../i18n';
+import { research } from '../research';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const studies = await research(lang);
+const intro = {
+  en: 'My PhD work is on MR cholangiopancreatography (MRCP), the MRI exam for bile and pancreatic ducts. It is slow, and it needs the patient to breathe regularly or hold their breath. I work on reconstructing it from much less data, and on making the final projection easier for radiologists to read.',
+  ko: '박사 연구 주제는 담관과 췌관을 보는 MRI 검사인 MRCP입니다. 촬영이 길고, 환자가 규칙적으로 숨을 쉬거나 숨을 참아야 합니다. 훨씬 적은 데이터로 영상을 복원하는 방법과, 최종 투영 영상을 영상의학과 의사가 읽기 쉽게 만드는 방법을 연구합니다.',
+};
+---
+<Base lang={lang} title={pick(ui.navResearch, lang)}>
+  <section class="mx-auto max-w-6xl px-4 sm:px-10 pt-14 pb-20">
+    <SectionTitle as="h1">{pick(ui.navResearch, lang)}</SectionTitle>
+    <p class="mt-4 mb-0 max-w-[40em] text-lg leading-[1.75] text-body">{pick(intro, lang)}</p>
+    <div class="mt-12 flex flex-col gap-12">
+      {studies.map((s) => (
+        <article class="flex flex-wrap items-start gap-8 border-t border-rule-strong pt-8">
+          <div class="flex-[1_1_360px] max-w-[520px]">
+            <Frame src={s.data.image.src} alt={s.data.image.alt} focus={s.data.image.focus} fit={s.data.image.fit} />
+          </div>
+          <div class="flex-[1_1_360px] flex flex-col gap-2.5">
+            <p class="m-0 text-sm text-faint">{s.data.venue}, {s.data.year}</p>
+            <h2 class="m-0 font-serif text-[26px] font-medium leading-snug text-navy">{s.data.title}</h2>
+            <p class="m-0 text-[17px] leading-relaxed text-body">{s.data.sub}</p>
+            <p class="m-0 text-base leading-relaxed text-body">{s.data.card}</p>
+            <a href={localePath(`/research/${s.slug}`, lang)} class="mt-1.5 self-start rounded-md bg-navy px-[18px] py-[11px] text-white no-underline hover:text-white hover:bg-[#1c3566]">{pick(ui.readCase, lang)}<span class="sr-only">: {s.data.short}</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>

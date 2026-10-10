@@ -1,0 +1,19 @@
+{
+  "name": "jinhokim46-portfolio",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "sync": "node scripts/sync-sources.mjs",
+    "dev": "npm run sync && astro dev",
+    "build": "npm run sync && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.14",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^5.18.2",
+    "tailwindcss": "^4.3.3"
+  }
+}

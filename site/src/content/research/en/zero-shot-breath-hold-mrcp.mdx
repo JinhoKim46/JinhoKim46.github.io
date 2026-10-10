@@ -1,0 +1,41 @@
+---
+title: Zero-shot self-supervised reconstruction for single breath-hold MRCP
+short: Zero-shot breath-hold MRCP
+sub: Reconstructing a 14-second breath-hold MRCP from its own k-space, with no external training data.
+card: Learns from the scan it reconstructs. Freezing 12 of 13 stages makes training 6.7× shorter.
+venue: Magnetic Resonance in Medicine
+year: 2026
+order: 1
+role: First author
+collaborators: M. D. Nickel (Siemens Healthineers), F. Knoll (FAU)
+links:
+  - { label: Paper, href: "https://doi.org/10.1002/mrm.70467" }
+  - { label: Code, href: "https://github.com/JinhoKim46/ZS_BH-MRCP" }
+  - { label: Data, href: "https://doi.org/10.5281/zenodo.16731625" }
+compare: zs
+image: { src: /media/zs_proposed_cor_full.png, alt: "Zero-shot reconstruction of a breath-hold MRCP, coronal MIP" }
+---
+
+## Problem
+
+Respiratory-triggered 3D MRCP takes minutes (338 s in this study) and relies on regular breathing. Irregular breathers get motion artifacts.
+
+A breath-hold scan avoids that, but compressed sensing still needs around 20 s of breath-holding and loses SNR at high acceleration. Supervised deep learning would need fully-sampled breath-hold data, which cannot be acquired.
+
+## Approach
+
+Zero-shot self-supervised learning splits the k-space of a single scan into three disjoint sets and trains an unrolled network for that scan alone.
+
+The catch is training time, several hours per scan. The network is split so the first n stages are frozen copies of a pretrained SSDU model and only the last m stages are trained, which cuts the backpropagation depth.
+
+## Implementation
+
+A 13-stage unrolled network with gradient-based data consistency. Breath-hold MRCP used an incoherent sampling pattern at R = 25, acquired in 14 s.
+
+Eleven healthy volunteers were scanned at 3 T and compared with respiratory-triggered parallel imaging (R = 3, 338 s) and compressed sensing. For two of them, 40 s breath-holds at R = 6 were undersampled to R = 25 to compute PSNR.
+
+## Results
+
+In a reader study with three MRI experts, zero-shot reconstruction scored significantly higher than CS for overall quality, noise and aliasing, and came close to successful respiratory-triggered scans.
+
+Freezing 12 stages lowered PSNR only from 38.25 dB to 37.67 dB, while average training time across the 11 volunteers fell from 136 min to 20 min, 6.7× faster.

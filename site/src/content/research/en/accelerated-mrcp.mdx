@@ -1,0 +1,33 @@
+---
+title: Deep learning-based accelerated MRCP without fully-sampled data
+short: Accelerated MRCP without fully-sampled data
+sub: Six-fold accelerated MRCP at 3 T and 0.55 T, reconstructed by networks trained without fully-sampled references.
+card: Trained without fully-sampled references. Acquisition time fell from 599 s to 255 s at 3 T.
+venue: NMR in Biomedicine
+year: 2025
+order: 2
+role: First author
+collaborators: M. D. Nickel (Siemens Healthineers), F. Knoll (FAU)
+links:
+  - { label: Paper, href: "https://doi.org/10.1002/nbm.70002" }
+  - { label: Code, href: "https://github.com/JinhoKim46/MRCP_DLRecon" }
+  - { label: Data, href: "https://doi.org/10.5281/zenodo.13912092" }
+compare: dl
+image: { src: /media/dl_sv6x_cor.png, alt: "Six-fold accelerated MRCP, supervised deep learning reconstruction, coronal MIP" }
+---
+
+## Problem
+
+Clinical 2× accelerated, respiratory-triggered MRCP takes 599 s at 3 T and 542 s at 0.55 T on average. Going faster needs better reconstruction, and fully-sampled MRCP training data is practically impossible to get.
+
+## Approach
+
+Unrolled networks were trained on 3 T data retrospectively undersampled six-fold, either supervised against the 2× scans or self-supervised with no reference. They were then tested on prospective 6× scans and on 0.55 T data without retraining.
+
+## Implementation
+
+Thirty-five healthy volunteers at 3 T and 0.55 T. Baselines were parallel imaging (GRAPPA, CG-SENSE) and compressed sensing, compared on PSNR and SSIM.
+
+## Results
+
+Deep learning reconstructions had higher PSNR and SSIM than parallel imaging and CS in both retrospective and prospective tests. Acquisition time fell from 599 s to 255 s at 3 T (2.4×) and from 542 s to 180 s at 0.55 T (3.0×), and the 3 T-trained models held up at 0.55 T.

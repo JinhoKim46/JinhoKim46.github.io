@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { ui, pick, type Lang } from '../i18n';
+import { bio, experience, education, awards, activities, skills, languages, type Entry } from '../data/about';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const H = lang === 'ko'
+  ? { exp: '경력', edu: '학력', skills: '기술', awards: '수상', act: '활동', lang: '언어', photo: '김진호 사진' }
+  : { exp: 'Experience', edu: 'Education', skills: 'Skills', awards: 'Awards', act: 'Activities', lang: 'Languages', photo: 'Portrait of Jinho Kim' };
+const sections: [string, Entry[]][] = [[H.exp, experience], [H.edu, education], [H.awards, awards], [H.act, activities]];
+---
+<Base lang={lang} title={pick(ui.navAbout, lang)}>
+  <section class="mx-auto max-w-5xl px-4 sm:px-10 pt-14 pb-20">
+    <div class="flex flex-wrap-reverse items-start gap-10">
+      <div class="flex-[1_1_420px]">
+        <SectionTitle as="h1">{pick(ui.navAbout, lang)}</SectionTitle>
+        {bio.map((b) => <p class="mt-4 mb-0 max-w-[38em] text-lg leading-[1.8] text-body">{pick(b, lang)}</p>)}
+      </div>
+      <img src="/media/portrait.jpg" alt={H.photo} width="720" height="960" class="block w-48 sm:w-60 flex-none rounded-sm object-cover" style="aspect-ratio: 3 / 4;" />
+    </div>
+
+    {sections.map(([title, items]) => (
+      <section class="mt-12">
+        <h2 class="mb-2 mt-0 font-serif text-2xl font-medium text-navy">{title}</h2>
+        {items.map((x) => (
+          <div class="flex flex-wrap gap-x-6 gap-y-1 border-t border-rule py-4">
+            <span class="flex-[0_0_170px] text-[15px] text-faint">{pick(x.when, lang)}</span>
+            <div class="flex-[1_1_360px] flex flex-col gap-1">
+              <span class="text-[17px] font-semibold text-navy">{pick(x.what, lang)}</span>
+              <span class="text-[15px] text-muted">{pick(x.where, lang)}</span>
+              {x.note && <span class="text-base leading-relaxed text-body">{pick(x.note, lang)}</span>}
+            </div>
+          </div>
+        ))}
+      </section>
+    ))}
+
+    <section class="mt-12">
+      <h2 class="mb-2 mt-0 font-serif text-2xl font-medium text-navy">{H.skills}</h2>
+      <dl class="m-0">
+        {skills.map((s) => (
+          <div class="flex flex-wrap gap-x-6 gap-y-1 border-t border-rule py-3.5">
+            <dt class="flex-[0_0_220px] text-[15px] font-semibold text-navy">{pick(s.title, lang)}</dt>
+            <dd class="m-0 flex-[1_1_360px] text-base leading-relaxed text-body">{s.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="mb-2 mt-0 font-serif text-2xl font-medium text-navy">{H.lang}</h2>
+      <p class="m-0 border-t border-rule py-4 text-base text-body">{pick(languages, lang)}</p>
+    </section>
+  </section>
+</Base>
