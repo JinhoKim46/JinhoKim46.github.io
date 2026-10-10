@@ -49,7 +49,7 @@ export const groups: { title: string; items: Project[] }[] = [
       { title: 'MLflow and cost dashboard', meta: same('BMW Group, 2026'),
         text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for 8 projects and about 30 users, with a Superset dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트, 약 30명이 씁니다. AI workload 비용용 Superset dashboard 포함.' } },
       { title: 'Distributed training', meta: same('Siemens Healthineers / FAU'),
-        text: { en: 'Scaled MRI reconstruction training on DGX (Kubernetes, Docker) and Slurm, cutting end-to-end training time by 25%.', ko: 'DGX(Kubernetes, Docker)와 Slurm에서 MRI reconstruction 학습을 확장해 전체 학습 시간을 25% 줄였습니다.' } },
+        text: { en: 'Scaled MRI reconstruction training on DGX (Kubernetes, Docker) and Slurm, cutting end-to-end training time by 25%.', ko: 'DGX(Kubernetes, Docker)와 Slurm으로 MRI 재구성 모델을 분산 학습해 전체 학습 시간을 25% 줄였습니다.' } },
     ],
   },
   {
@@ -58,7 +58,7 @@ export const groups: { title: string; items: Project[] }[] = [
       { title: 'LoRA fine-tuning', href: gh('BMW_LLMs_Finetuning'), meta: { en: 'Personal project, 2026', ko: '개인 프로젝트, 2026' },
         text: { en: 'GPT-2 Large on crawled BMW press releases, training 0.38% of the weights. NLL fell 23.3%.', ko: '수집한 BMW 보도자료로 GPT-2 Large를 학습. 전체 weight의 0.38%만 학습해 NLL을 23.3% 낮췄습니다.' } },
       { title: 'MRI motion correction', meta: { en: 'Siemens Healthineers, 2021', ko: 'Siemens Healthineers, 2021' },
-        text: { en: 'Respiratory motion correction for free-breathing abdominal diffusion-weighted MRI. PSNR up 10.6%, SSIM up 5.7%.', ko: 'Free-breathing 복부 diffusion-weighted MRI의 호흡 motion correction. PSNR 10.6%, SSIM 5.7% 향상.' } },
+        text: { en: 'Corrected respiratory motion in free-breathing abdominal diffusion-weighted MRI. PSNR +10.6%; SSIM +5.7%.', ko: '자유호흡 복부 확산강조 MRI의 호흡 움직임을 보정했습니다. PSNR 10.6%, SSIM 5.7% 향상.' } },
       { title: 'Natural image super-resolution', meta: { en: 'The Catholic University of Korea, 2017', ko: '가톨릭대학교, 2017' },
         text: { en: 'Real-time image enhancement and upscaling, published in the Journal of IEIE.', ko: '실시간 image enhancement와 upscaling 방법. 대한전자공학회 논문지 게재.' } },
     ],

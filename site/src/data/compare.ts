@@ -35,8 +35,8 @@ export const compareCases: CompareCase[] = [
     emphasis: { p12: ['time'], p13: ['time'], p23: ['acq', 'train'] },
     label: { en: 'Zero-shot breath-hold', ko: 'Zero-shot breath-hold' },
     caption: {
-      en: 'Cropped coronal MIP of one volunteer at 3 T. PI-RT is a separate respiratory-triggered scan, so anatomy shifts slightly. Training times are 11-volunteer averages. Kim et al., Magnetic Resonance in Medicine 2026.',
-      ko: '3 T, 피험자 1명의 coronal MIP(crop). PI-RT는 respiratory-triggered로 따로 촬영해 해부학적 위치가 조금 다릅니다. 학습 시간은 11명 평균입니다. Kim et al., Magnetic Resonance in Medicine 2026.',
+      en: 'Cropped coronal MIP from a volunteer at 3 T. PI-RT was acquired separately, so structures are slightly displaced. Training times are 11-volunteer averages. Kim et al., Magnetic Resonance in Medicine 2026.',
+      ko: '3 T 지원자 1명의 관상면 MIP 일부입니다. PI-RT는 별도로 촬영한 호흡동기 영상으로, 구조물 위치가 조금 다릅니다. 학습 시간은 11명 평균입니다. Kim et al., Magnetic Resonance in Medicine 2026.',
     },
     corRatio: [508, 387],
     start: { mode: 'p23', a: 0, b: 50 },
@@ -67,8 +67,8 @@ export const compareCases: CompareCase[] = [
     emphasis: { p12: ['time'], p23: ['acq'], p13: ['acq', 'time'] },
     label: { en: 'Accelerated MRCP', ko: 'Accelerated MRCP' },
     caption: {
-      en: 'One volunteer at 3 T, prospectively undersampled at 2× and 6×. Cropped coronal MIP. Acquisition times are study averages. Kim et al., NMR in Biomedicine 2025.',
-      ko: '3 T, 피험자 1명을 2배·6배로 prospective undersampling해 촬영한 coronal MIP(crop). 촬영 시간은 연구 전체 평균입니다. Kim et al., NMR in Biomedicine 2025.',
+      en: 'One volunteer at 3 T, scanned at 2× and 6× acceleration. Cropped coronal MIP. Scan times are study averages. Kim et al., NMR in Biomedicine 2025.',
+      ko: '3 T 지원자 1명의 2배·6배 가속 촬영에서 얻은 관상면 MIP 일부입니다. 촬영 시간은 연구 전체 평균입니다. Kim et al., NMR in Biomedicine 2025.',
     },
     corRatio: [502, 423],
     start: { mode: 'p23', a: 0, b: 50 },
@@ -99,8 +99,8 @@ export const compareCases: CompareCase[] = [
     emphasis: { p12: ['time'] },
     label: { en: 'Segmentation MIP', ko: 'Segmentation MIP' },
     caption: {
-      en: 'Coronal and sagittal MIP of one patient at 3 T, original and proposed (after nnU-Net based suppression). Scores from two radiologists over 35 cases, 4-point scale. Kim, Werner et al., MAGMA 2026.',
-      ko: '3 T, 환자 1명의 coronal·sagittal MIP. nnU-Net segmentation으로 배경을 제거하기 전과 후입니다. 점수는 영상의학과 전문의 2명이 35건을 4점 척도로 평가한 결과입니다. Kim, Werner et al., MAGMA 2026.',
+      en: 'Coronal and sagittal MIPs from one patient at 3 T, before and after nnU-Net processing. Two radiologists rated 35 cases on a 4-point scale. Kim, Werner et al., MAGMA 2026.',
+      ko: '3 T 환자 1명의 관상면·시상면 MIP입니다. nnU-Net 처리 전후를 비교합니다. 전문의 2명이 35건을 4점 척도로 평가했습니다. Kim, Werner et al., MAGMA 2026.',
     },
     corRatio: [525, 387],
     sagRatio: [91, 387],

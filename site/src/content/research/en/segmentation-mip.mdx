@@ -1,8 +1,8 @@
 ---
 title: Clinical evaluation of nnU-Net-based segmentation for enhanced MRCP MIP visualization
 short: Segmentation-enhanced MIP
-sub: Removing overlapping bright anatomy before projection, so the biliary tree reads clearly.
-card: nnU-Net removes overlapping anatomy before projection. Structure-overlap score went from 2.5 to 3.5 out of 4.
+sub: Suppressing bright structures before projection yields clearer pancreatobiliary images.
+card: nnU-Net masks overlapping anatomy before projection. Overlap ratings rose from 2.5 to 3.5 out of 4.
 venue: MAGMA
 year: 2026
 order: 3
@@ -16,16 +16,16 @@ image: { src: /media/seg_segmented_cor.png, alt: "MRCP maximum intensity project
 
 ## Problem
 
-A MIP shows only the brightest signal along each ray. Bright fluid in the stomach or duodenum lands on top of the ducts and makes the image hard to read.
+A MIP displays the highest signal along each ray. Bright gastric or duodenal fluid can obscure the ducts.
 
 ## Approach
 
-A 3D nnU-Net segments background, primary and secondary structures. Generous safety margins keep ducts from being cut, and only the remaining volume is projected.
+A 3D nnU-Net segments background, primary and secondary structures. Safety margins reduce the risk of duct omission; MIPs use the retained volume.
 
 ## Implementation
 
-322 3D MRCP datasets from 162 patients: 265 cases from 127 patients for training, 35 single-acquisition cases for evaluation. Two board-certified radiologists rated original and processed MIPs on a 4-point scale; Wilcoxon tests with Benjamini–Hochberg correction.
+322 MRCP scans from 162 patients were collected. Training used 265 scans from 127 patients; evaluation used one scan each from 35 patients. Two radiologists rated original and processed MIPs on a 4-point scale; Wilcoxon tests used Benjamini–Hochberg correction.
 
 ## Results
 
-The structure-overlap score rose significantly from 2.5 ± 0.6 to 3.5 ± 0.9, and diagnostic confidence went from 3.2 to 3.4. The code is not public.
+Overlap ratings rose from 2.5 ± 0.6 to 3.5 ± 0.9; diagnostic confidence rose from 3.2 to 3.4. Both changes were significant. Code is not public.

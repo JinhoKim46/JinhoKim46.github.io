@@ -1,8 +1,8 @@
 ---
-title: Fully-sampled 데이터 없이 학습한 딥러닝 기반 accelerated MRCP
-short: Accelerated MRCP without fully-sampled data
-sub: 3 T와 0.55 T에서 6배 가속한 MRCP를, fully-sampled reference 없이 학습한 네트워크로 복원합니다.
-card: Fully-sampled 데이터 없이 학습했습니다. 3 T에서 촬영 시간이 599초에서 255초로 줄었습니다.
+title: 완전 샘플링 데이터 없이 학습한 딥러닝 고속 MRCP
+short: 완전 샘플링 데이터 없는 고속 MRCP
+sub: 완전 샘플링 정답 없이 학습한 네트워크로 3 T·0.55 T의 6배 가속 MRCP를 재구성합니다.
+card: 완전 샘플링 데이터 없이 학습했습니다. 3 T 평균 촬영 시간을 599초→255초로 줄였습니다.
 venue: NMR in Biomedicine
 year: 2025
 order: 2
@@ -18,16 +18,16 @@ image: { src: /media/dl_sv6x_cor.png, alt: "6배 가속 MRCP의 supervised 딥�
 
 ## 문제
 
-임상에서 쓰는 2배 가속 respiratory-triggered MRCP는 평균 599초(3 T), 542초(0.55 T)가 걸립니다. 더 가속하려면 reconstruction이 좋아져야 하는데, MRCP는 학습에 쓸 fully-sampled 데이터를 얻기가 사실상 불가능합니다.
+본 연구의 2배 가속 호흡동기 MRCP는 평균 599초(3 T), 542초(0.55 T)가 걸렸습니다. 추가 가속에는 적절한 재구성이 필요하지만, MRCP에서 완전 샘플링 학습 데이터를 얻기는 어렵습니다.
 
 ## 접근
 
-3 T 데이터를 6배로 retrospective undersampling해 unrolled network를 학습했습니다. 2배 가속 영상을 reference로 쓰는 supervised 방식과 reference 없이 학습하는 self-supervised 방식을 비교했고, 이후 prospective 6배 가속 촬영과 재학습 없는 0.55 T 데이터로 검증했습니다.
+3 T 데이터를 6배로 후향적 언더샘플링해 unrolled network를 학습했습니다. 2배 가속 영상을 정답으로 쓰는 지도학습과 정답 영상 없는 자기지도 학습을 비교했습니다. 실제 6배 가속 촬영과 재학습하지 않은 0.55 T 데이터로 평가했습니다.
 
 ## 구현
 
-3 T와 0.55 T에서 건강한 지원자 35명을 촬영했습니다. GRAPPA, CG-SENSE 같은 parallel imaging과 compressed sensing을 기준으로 PSNR과 SSIM을 비교했습니다.
+3 T와 0.55 T에서 건강한 지원자 35명을 촬영했습니다. 병렬영상(CG-SENSE)과 압축센싱을 비교했고, 후향적 실험의 PSNR·SSIM은 2배 가속 GRAPPA 영상을 기준으로 구했습니다.
 
 ## 결과
 
-Retrospective, prospective 실험 모두에서 딥러닝 reconstruction의 PSNR과 SSIM이 parallel imaging과 CS보다 높았습니다. 촬영 시간은 3 T에서 599초에서 255초로(2.4배), 0.55 T에서 542초에서 180초로(3.0배) 줄었고, 3 T 데이터로만 학습한 모델이 0.55 T에서도 좋은 화질을 유지했습니다.
+후향적 실험에서 딥러닝 재구성은 병렬영상·CS보다 높은 PSNR·SSIM을 보였습니다. 실제 촬영 시간은 3 T에서 599초→255초, 0.55 T에서 542초→180초로 줄었습니다. 3 T 학습 모델은 재학습 없이 0.55 T에도 적용했습니다.

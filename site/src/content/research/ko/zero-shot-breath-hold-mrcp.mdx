@@ -1,8 +1,8 @@
 ---
-title: Single breath-hold MRCP를 위한 zero-shot self-supervised reconstruction
-short: Zero-shot breath-hold MRCP
-sub: 14초 breath-hold로 얻은 k-space만으로, 외부 학습 데이터 없이 MRCP를 복원합니다.
-card: Reconstruction할 스캔 자체로 학습합니다. 13개 stage 중 12개를 고정해 학습 시간을 6.7배 줄였습니다.
+title: 한 번의 호흡정지로 얻는 제로샷 자기지도 MRCP 재구성
+short: 제로샷 호흡정지 MRCP
+sub: 14초간 호흡정지로 얻은 MRCP를 해당 촬영 데이터만으로 학습해 재구성합니다.
+card: 재구성할 촬영 데이터로 학습합니다. 13개 중 12단계를 고정해 학습 시간을 약 1/6.7로 줄였습니다.
 venue: Magnetic Resonance in Medicine
 year: 2026
 order: 1
@@ -18,24 +18,24 @@ image: { src: /media/zs_proposed_cor_full.png, alt: "호흡정지 MRCP의 zero-s
 
 ## 문제
 
-Respiratory-triggered 3D MRCP는 촬영에 몇 분이 걸리고(이 연구에서 338초), 환자가 고르게 숨을 쉬어야 합니다. 호흡이 불규칙하면 motion artifact가 생깁니다.
+호흡동기 3D MRCP는 수 분이 걸리며(본 연구에서는 338초), 규칙적인 호흡이 필요합니다. 호흡이 불규칙하면 움직임 인공물이 생길 수 있습니다.
 
-Breath-hold 촬영은 이 문제를 피하지만, compressed sensing을 써도 20초 안팎을 참아야 하고 가속을 높이면 SNR이 떨어집니다. Breath-hold 영상은 fully-sampled 데이터를 얻을 수 없어 supervised learning도 쓰기 어렵습니다.
+호흡정지 촬영은 호흡의 영향을 줄이지만, 압축센싱을 써도 약 20초를 참아야 하며 가속률이 높으면 SNR이 낮아질 수 있습니다. 완전 샘플링 데이터를 얻기 어려워 이를 정답으로 쓰는 지도학습에도 제약이 있습니다.
 
 ## 접근
 
-한 번의 스캔에서 얻은 k-space를 서로 겹치지 않는 세 subset으로 나누고, 그 스캔만을 위한 unrolled network를 학습합니다(zero-shot self-supervised learning).
+한 번 촬영한 k-space를 겹치지 않는 세 부분으로 나눠, 해당 데이터에 맞는 unrolled network를 학습합니다(제로샷 자기지도 학습).
 
-걸림돌은 스캔마다 몇 시간씩 걸리는 학습 시간이었습니다. 그래서 앞쪽 n개 stage는 사전학습한 SSDU 네트워크로 고정하고 뒤쪽 m개 stage만 학습하도록 나눠, backpropagation 깊이를 줄였습니다.
+촬영마다 수 시간이 걸리는 학습이 문제였습니다. 사전학습한 SSDU 모델로 앞쪽 n개 단계를 고정하고 뒤쪽 m개만 학습해 역전파 깊이를 줄였습니다.
 
 ## 구현
 
-13-stage unrolled network와 gradient 기반 data consistency block을 썼습니다. Breath-hold MRCP는 incoherent sampling으로 R = 25, 14초에 획득했습니다.
+13단계 unrolled network와 기울기 기반 데이터 일관성 블록을 사용했습니다. Incoherent sampling으로 R = 25 MRCP를 14초에 촬영했습니다.
 
-3 T에서 건강한 지원자 11명을 촬영해 respiratory-triggered parallel imaging(R = 3, 338초), compressed sensing과 비교했습니다. 2명은 40초 breath-hold(R = 6)를 추가로 찍고 R = 25로 다시 undersampling해 PSNR을 계산했습니다.
+3 T에서 건강한 지원자 11명을 촬영해 호흡동기 병렬영상(R = 3, 338초)과 압축센싱 재구성을 비교했습니다. 2명은 40초 호흡정지(R = 6) 촬영을 추가하고 R = 25로 후향적 언더샘플링해 PSNR을 구했습니다.
 
 ## 결과
 
-MRI 전문가 3명의 reader study에서 zero-shot reconstruction은 전체 화질, noise, aliasing 모두 CS보다 유의하게 높은 점수를 받았고, 호흡이 고른 respiratory-triggered 영상에 가까웠습니다.
+MRI 전문가 3명의 평가에서 제로샷 재구성은 전체 화질, 잡음과 에일리어싱에서 CS보다 유의하게 높은 점수를 받았습니다. 규칙적인 호흡으로 얻은 호흡동기 영상과 유사한 화질을 보였습니다.
 
-12개 stage를 고정해도 PSNR은 38.25 dB에서 37.67 dB로 조금만 떨어졌고, 11명 평균 학습 시간은 136분에서 20분으로 6.7배 줄었습니다.
+12개 단계를 고정하면 PSNR은 38.25 dB에서 37.67 dB로 낮아졌고, 11명 평균 학습 시간은 약 136분에서 20분으로 줄었습니다.

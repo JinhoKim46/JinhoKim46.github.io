@@ -1,8 +1,8 @@
 ---
 title: Zero-shot self-supervised reconstruction for single breath-hold MRCP
 short: Zero-shot breath-hold MRCP
-sub: Reconstructing a 14-second breath-hold MRCP from its own k-space, with no external training data.
-card: Learns from the scan it reconstructs. Freezing 12 of 13 stages makes training 6.7× shorter.
+sub: A network adapted to the acquired k-space reconstructs a 14-second breath-hold MRCP.
+card: It learns from the acquired scan. Freezing 12 of 13 stages cuts training by about 85%.
 venue: Magnetic Resonance in Medicine
 year: 2026
 order: 1
@@ -18,24 +18,24 @@ image: { src: /media/zs_proposed_cor_full.png, alt: "Zero-shot reconstruction of
 
 ## Problem
 
-Respiratory-triggered 3D MRCP takes minutes (338 s in this study) and relies on regular breathing. Irregular breathers get motion artifacts.
+Respiratory-triggered 3D MRCP takes minutes (338 s here) and requires regular breathing. Irregular breathing may cause artifacts.
 
-A breath-hold scan avoids that, but compressed sensing still needs around 20 s of breath-holding and loses SNR at high acceleration. Supervised deep learning would need fully-sampled breath-hold data, which cannot be acquired.
+Breath-holding reduces motion, but a CS scan may still require about 20 s, and high acceleration can lower SNR. Fully sampled breath-hold MRCP is impractical, limiting training with fully sampled targets.
 
 ## Approach
 
-Zero-shot self-supervised learning splits the k-space of a single scan into three disjoint sets and trains an unrolled network for that scan alone.
+Zero-shot learning splits the acquired k-space into three disjoint sets and trains an unrolled network for that scan.
 
-The catch is training time, several hours per scan. The network is split so the first n stages are frozen copies of a pretrained SSDU model and only the last m stages are trained, which cuts the backpropagation depth.
+Training takes hours per scan. To reduce backpropagation depth, the first n stages use frozen weights from a pretrained SSDU model, while only the last m stages are trained.
 
 ## Implementation
 
-A 13-stage unrolled network with gradient-based data consistency. Breath-hold MRCP used an incoherent sampling pattern at R = 25, acquired in 14 s.
+A 13-stage unrolled network used gradient-based data consistency. MRCP was acquired in 14 s at R = 25 with incoherent sampling.
 
-Eleven healthy volunteers were scanned at 3 T and compared with respiratory-triggered parallel imaging (R = 3, 338 s) and compressed sensing. For two of them, 40 s breath-holds at R = 6 were undersampled to R = 25 to compute PSNR.
+Eleven healthy volunteers were scanned at 3 T. Comparators were respiratory-triggered PI (R = 3, 338 s) and CS. For PSNR, two 40-s breath-hold scans at R = 6 were retrospectively undersampled to R = 25.
 
 ## Results
 
-In a reader study with three MRI experts, zero-shot reconstruction scored significantly higher than CS for overall quality, noise and aliasing, and came close to successful respiratory-triggered scans.
+Three MRI experts rated zero-shot reconstructions significantly higher than CS for quality, noise, and aliasing. Quality was comparable to respiratory-triggered scans with regular breathing.
 
-Freezing 12 stages lowered PSNR only from 38.25 dB to 37.67 dB, while average training time across the 11 volunteers fell from 136 min to 20 min, 6.7× faster.
+Freezing 12 stages reduced PSNR from 38.25 to 37.67 dB; mean training time across 11 volunteers fell from about 136 to 20 min.

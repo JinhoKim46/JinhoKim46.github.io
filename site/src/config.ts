@@ -15,8 +15,8 @@ export const profile = {
 };
 
 export const intro: T = {
-  en: 'I work on deep learning reconstruction for accelerated, undersampled MRI, mostly MRCP. My focus is self-supervised and zero-shot self-supervised learning, which train without fully-sampled data. On the engineering side, I am widening my scope through AI infrastructure and LLM-based agentic AI.',
-  ko: '딥러닝 기반 방법으로 고속 촬영한 undersampled MRI 데이터에서 영상을 복원하는 연구를 합니다. 주로 MRCP를 다루며, fully-sampled 데이터 없이 학습하는 self-supervised와 zero-shot self-supervised 방식이 중심입니다. 엔지니어링 쪽으로는 AI infrastructure와 LLM 기반 agentic AI를 공부하며 관심 분야를 넓히고 있습니다.',
+  en: 'I develop deep learning methods for accelerated MRI reconstruction, mainly MRCP. My research focuses on self-supervised and zero-shot self-supervised methods without fully sampled data. I also build AI infrastructure and LLM-based agents.',
+  ko: '딥러닝으로 고속 촬영한 MRI 데이터를 재구성하는 연구를 합니다. 주로 MRCP를 다루며, 완전 샘플링 데이터가 필요 없는 자기지도 학습과 제로샷 자기지도 학습에 집중합니다. AI 인프라와 LLM 기반 에이전트 개발로 연구 경험을 넓히고 있습니다.',
 };
 
 export const contacts = [
