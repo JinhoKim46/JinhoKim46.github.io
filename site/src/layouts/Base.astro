@@ -5,8 +5,9 @@ import { contacts } from '../config';
 
 interface Props { title: string; titleKo: string; description: string; descriptionKo: string; lang: Lang }
 const { title, titleKo, description, descriptionKo, lang } = Astro.props;
-const fullEn = `${title} | ${ui.name.en}`;
-const fullKo = `${titleKo} | ${ui.name.ko}`;
+// The home page passes the name itself as the title, so do not repeat it.
+const fullEn = title === ui.name.en ? ui.name.en : `${title} | ${ui.name.en}`;
+const fullKo = titleKo === ui.name.ko ? ui.name.ko : `${titleKo} | ${ui.name.ko}`;
 const pageEn = Astro.url.pathname.replace(/^\/ko(?=\/|$)/, '') || '/';
 ---
 <!doctype html>
