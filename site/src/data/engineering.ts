@@ -37,8 +37,8 @@ export const groups: { title: string; items: Project[] }[] = [
     items: [
       { title: 'Interview Helper', href: gh('TC_AE_Sprint1_Interview_helper'), meta: same('Sprint 1 capstone, Streamlit + OpenRouter'),
         text: { en: 'Mock interviews built from a real job ad and CV. Models ask and judge; code counts, weights and decides the score, and every input passes an injection guard.', ko: '실제 job description과 CV로 mock interview를 진행합니다. 질문과 평가는 모델이, 점수 계산은 코드가 맡고, 모든 입력은 injection guard를 거칩니다.' } },
-      { title: 'RAG domain chatbot', meta: { en: 'Sprint 2, in progress', ko: 'Sprint 2, 진행 중' },
-        text: { en: 'Planned: a LangChain chatbot with advanced RAG, three or more tool calls and a Streamlit UI.', ko: '계획: advanced RAG, tool call 3개 이상, Streamlit UI를 갖춘 LangChain chatbot.' } },
+      // { title: 'RAG domain chatbot', meta: { en: 'Sprint 2, in progress', ko: 'Sprint 2, 진행 중' },
+      //   text: { en: 'Planned: a LangChain chatbot with advanced RAG, three or more tool calls and a Streamlit UI.', ko: '계획: advanced RAG, tool call 3개 이상, Streamlit UI를 갖춘 LangChain chatbot.' } },
     ],
   },
   {
@@ -49,7 +49,7 @@ export const groups: { title: string; items: Project[] }[] = [
       { title: 'MLflow and cost dashboard', meta: same('BMW Group, 2026'),
         text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for 8 projects and about 30 users, with a GRAFANA dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트, 약 30명이 씁니다. AI workload 비용용 GRAFANA dashboard 포함.' } },
       { title: 'Distributed training', meta: same('Siemens Healthineers / FAU'),
-        text: { en: 'Scaled MRI reconstruction training on DGX (Kubernetes, Docker) and Slurm, cutting end-to-end training time by 25%.', ko: 'DGX(Kubernetes, Docker)와 Slurm으로 MRI 재구성 모델을 분산 학습해 전체 학습 시간을 25% 줄였습니다.' } },
+        text: { en: 'Scaled MRI reconstruction training on DGX (Kubernetes, Docker) and Slurm during PhD research, cutting end-to-end training time by 25%.', ko: '박사 과정동안, DGX(Kubernetes, Docker)와 Slurm으로 MRI 재구성 모델을 분산 학습해 전체 학습 시간을 25% 줄였습니다.' } },
     ],
   },
   {

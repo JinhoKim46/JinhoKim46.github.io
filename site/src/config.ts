@@ -4,8 +4,8 @@ import type { T } from './i18n';
 export const profile = {
   email: 'jinhokim.kor@gmail.com',
   role: {
-    en: 'MRI reconstruction and ML engineering',
-    ko: 'MRI reconstruction, ML engineering',
+    en: 'MRI reconstruction, MRI segmentation and ML engineering',
+    ko: 'MRI reconstruction, MRI segmentation, ML engineering',
   } satisfies T,
   // Change after the defense.
   affiliation: {
@@ -15,8 +15,8 @@ export const profile = {
 };
 
 export const intro: T = {
-  en: 'I develop deep learning methods for accelerated MRI reconstruction, mainly MRCP. My research focuses on self-supervised and zero-shot self-supervised methods without fully sampled data. I also build AI infrastructure and LLM-based agents.',
-  ko: '딥러닝으로 고속 촬영한 MRI 데이터를 재구성하는 연구를 합니다. 주로 MRCP를 다루며, 완전 샘플링 데이터가 필요 없는 자기지도 학습과 제로샷 자기지도 학습에 집중합니다. AI 인프라와 LLM 기반 에이전트 개발로 연구 경험을 넓히고 있습니다.',
+  en: 'I develop deep learning methods for accelerated MRI reconstruction and MRI segmentation, mainly MRCP. My research focuses on self-supervised and zero-shot self-supervised methods without fully sampled data. I also build AI infrastructure and LLM-based agents.',
+  ko: '딥러닝으로 고속 촬영한 MRI 데이터를 재구성하고 MRI 영상 분할을 연구를 합니다. 주로 MRCP를 다루며, 완전 샘플링 데이터가 필요 없는 자기지도 학습과 제로샷 자기지도 학습에 집중합니다. AI 인프라와 LLM 기반 에이전트 개발로 연구 경험을 넓히고 있습니다.',
 };
 
 export const contacts = [
