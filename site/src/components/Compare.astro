@@ -50,8 +50,8 @@ const fallback = first.layers[first.layers.length - 1];
   .compare .cmp-chip { position: absolute; bottom: 10px; margin-left: 8px; background: rgba(8,18,40,.8); color: #fff; font-size: 13px; padding: 4px 8px; border-radius: 3px; white-space: nowrap; pointer-events: none; }
   .compare .cmp-tab { font: inherit; font-size: 14px; min-height: 40px; padding: 8px 14px; border-radius: 999px; cursor: pointer; background: #fff; color: var(--color-navy); border: 1px solid #b9c2d3; }
   .compare .cmp-tab[aria-selected="true"] { background: var(--color-navy); color: #fff; border-color: var(--color-navy); }
-  .compare .cmp-preset { font: inherit; font-size: 14px; min-height: 36px; padding: 6px 2px; background: none; border: 0; border-bottom: 1px solid #8c99b3; color: var(--color-muted); cursor: pointer; }
-  .compare .cmp-preset[aria-pressed="true"] { border-bottom: 2px solid var(--color-navy); color: var(--color-navy); font-weight: 600; }
+  .compare .cmp-preset { font: inherit; font-size: 14px; min-height: 36px; padding: 6px 2px; white-space: nowrap; background: none; border: 0; border-bottom: 1px solid #8c99b3; color: var(--color-muted); cursor: pointer; }
+  .compare .cmp-preset[aria-pressed="true"] { border-bottom: 2px solid var(--color-navy); color: var(--color-navy); }
   .compare .cmp-em { font-weight: 600; }
   .compare .cmp-em[data-k="time"] { color: var(--color-em-time); }
   .compare .cmp-em[data-k="train"] { color: var(--color-em-train); }
@@ -153,7 +153,7 @@ const fallback = first.layers[first.layers.length - 1];
       const head = el('div', 'flex flex-col gap-1.5');
       head.append(titles, stage);
 
-      const presetBar = el('div', 'flex flex-wrap items-center gap-x-3.5 gap-y-1');
+      const presetBar = el('div', 'flex flex-nowrap items-center gap-x-3.5 overflow-x-auto');
       presetBar.setAttribute('role', 'group');
       presetBar.setAttribute('aria-label', t.quick);
       const L = c.layers;
