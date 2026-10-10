@@ -60,5 +60,15 @@ const other: Lang = lang === 'en' ? 'ko' : 'en';
         {contacts.map((c) => <a href={c.href} class="text-white hover:text-[#c9d3e6]">{c.label}</a>)}
       </div>
     </footer>
+    <script>
+      // Every link that leaves the current view opens in a new tab.
+      // In-page anchors (#section) and mail links keep their normal behaviour.
+      document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((a) => {
+        const href = a.getAttribute('href') ?? '';
+        if (href.startsWith('#') || href.startsWith('mailto:')) return;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      });
+    </script>
   </body>
 </html>
