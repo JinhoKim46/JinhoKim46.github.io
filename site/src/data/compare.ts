@@ -33,7 +33,7 @@ export const compareCases: CompareCase[] = [
       ko: '3 T, 피험자 1명의 coronal MIP(crop). PI-RT는 respiratory-triggered로 따로 촬영해 해부학적 위치가 조금 다릅니다. 학습 시간은 11명 평균입니다. Kim et al., Magnetic Resonance in Medicine 2026.',
     },
     corRatio: [508, 387],
-    start: { mode: 'p13', a: 50, b: 50 },
+    start: { mode: 'p23', a: 0, b: 50 },
     layers: [
       {
         name: 'PI-RT', cor: '/media/zs_pirt_cor.png',
@@ -63,7 +63,7 @@ export const compareCases: CompareCase[] = [
       ko: '3 T, 피험자 1명을 2배·6배로 prospective undersampling해 촬영한 coronal MIP(crop). 촬영 시간은 연구 전체 평균입니다. Kim et al., NMR in Biomedicine 2025.',
     },
     corRatio: [502, 423],
-    start: { mode: 'p13', a: 50, b: 50 },
+    start: { mode: 'p23', a: 0, b: 50 },
     layers: [
       {
         name: 'GRAPPA ×2', cor: '/media/dl_grappa2x_cor.png',

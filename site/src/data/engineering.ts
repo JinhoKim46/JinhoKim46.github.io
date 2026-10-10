@@ -16,7 +16,7 @@ export const groups: { title: string; items: Project[] }[] = [
   {
     title: 'Agentic AI',
     items: [
-      { title: 'Management reports and guide chatbot', meta: { en: 'Client work, 2026. Anthropic SDK (Claude Opus, Sonnet, Haiku)', ko: '고객 프로젝트, 2026. Anthropic SDK (Claude Opus, Sonnet, Haiku)' },
+      { title: 'Management reports and guide chatbot', meta: { en: 'Client work, 2026. Anthropic SDK', ko: '고객 프로젝트, 2026. Anthropic SDK' },
         text: { en: 'Daily, weekly and monthly management reports: code computes every number, Claude writes the summary and recommendations, and a checker rejects text whose numbers do not match. A role-aware guide chatbot answers in two steps (pick sections, then answer from them) with no access to business data. All calls pass one gateway with a kill switch, a monthly budget cap, PII removal and per-call cost logging.', ko: '일일·주간·월간 경영 보고서. 숫자는 모두 코드가 계산하고, Claude가 요약과 권고를 쓰며, 숫자가 맞지 않는 문장은 검사 단계에서 걸러집니다. 역할별 이용 안내 chatbot은 두 단계(관련 절 선택 후 그 절로 답변)로 답하고 업무 데이터에는 접근하지 않습니다. 모든 호출은 kill switch, 월 예산 상한, 개인정보 제거, 호출별 비용 기록을 갖춘 gateway 하나를 지납니다.' } },
       { title: 'litreview-agent', href: gh('litreview-agent'), meta: open,
         text: { en: 'Runs a systematic review and meta-analysis on Claude Code, with an audit trail from search to screening, and drafts a PRISMA 2020 manuscript.', ko: 'Claude Code에서 systematic review와 meta-analysis를 실제로 수행합니다. 검색부터 screening까지 기록을 남기고 PRISMA 2020 원고 초안을 씁니다.' } },
@@ -64,7 +64,7 @@ export const groups: { title: string; items: Project[] }[] = [
   {
     title: 'Full-stack and automation',
     items: [
-      { title: 'Contract operations platform', meta: { en: 'Client work, 2026. Python, Flask, PostgreSQL, Apache Superset, Android, Firebase, Docker, AWS (ECS Fargate, RDS, S3, ALB, Secrets Manager, CDK)', ko: '고객 프로젝트, 2026. Python, Flask, PostgreSQL, Apache Superset, Android, Firebase, Docker, AWS (ECS Fargate, RDS, S3, ALB, Secrets Manager, CDK)' },
+      { title: 'Contract operations platform', meta: { en: 'Client work, PostgreSQL, Docker, AWS', ko: '고객 프로젝트, PostgreSQL, Docker, AWS' },
         text: { en: 'Moved 1,000+ contracts from spreadsheets into a PostgreSQL model, cutting manual search time by 80%. Staff enter contracts, devices and maintenance logs in a Flask portal; technicians use an Android field app with push notifications; dashboards are defined in code on a read-only database role. Deployed to AWS with CDK behind a release gate that reruns the full test suite.', ko: '스프레드시트의 계약 1,000건 이상을 PostgreSQL 모델로 옮겨 수동 검색 시간을 80% 줄였습니다. 직원은 Flask portal에서 계약·기기·유지보수 일지를 입력하고, 기술자는 push 알림이 오는 Android 현장 앱을 씁니다. Dashboard는 read-only DB role 위에 코드로 정의했습니다. 전체 test suite를 다시 도는 release gate를 거쳐 AWS CDK로 배포합니다.' } },
       { title: 'Blog automation', href: gh('BlogAutomation'), meta: open,
         text: { en: 'Drafts posts with OpenAI, keeps Notion as the editorial database and publishes to Webflow.', ko: 'OpenAI로 글을 쓰고, Notion을 편집 DB로 두고, Webflow에 게시하는 pipeline.' } },
