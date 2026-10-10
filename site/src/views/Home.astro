@@ -7,7 +7,7 @@ import { ui, pick, localePath, sections, type Lang } from '../i18n';
 import { profile, intro } from '../config';
 import { groups } from '../data/engineering';
 import { paperGroups } from '../data/papers';
-import { bio, timeline, extras } from '../data/about';
+import { bio, learning, experience, education, extras, type Step } from '../data/about';
 import { research } from '../research';
 
 interface Props { lang: Lang }
@@ -84,17 +84,25 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       <div class="mt-8">
         <div class="max-w-[56em]">
           <p class="m-0 max-w-[40em] text-lg leading-[1.8] text-body">{pick(bio, lang)}</p>
-          <ol class="mt-8 mb-0 list-none p-0 border-l-2 border-navy">
-            {timeline.map((x, i) => (
-              <li class="relative pl-6 pb-6 last:pb-0">
-                <span class:list={['absolute -left-[7px] top-1.5 h-3 w-3 rounded-full', i === 0 ? 'bg-navy' : 'bg-white border-2 border-navy']} aria-hidden="true"></span>
-                <p class="m-0 text-sm text-faint">{pick(x.when, lang)}</p>
-                <p class="m-0 mt-0.5 text-[17px] font-semibold text-navy">{pick(x.what, lang)}</p>
-                <p class="m-0 text-[15px] text-muted">{pick(x.where, lang)}</p>
-                {x.note && <p class="m-0 mt-1 max-w-[44em] text-[15px] leading-relaxed text-body">{pick(x.note, lang)}</p>}
-              </li>
-            ))}
-          </ol>
+          {[
+            { title: lang === 'ko' ? '경력' : 'Experience', steps: [...learning, ...experience] },
+            { title: lang === 'ko' ? '학력' : 'Education', steps: education },
+          ].map((group) => (
+            <div class="mt-9 first:mt-8">
+              <h3 class="m-0 mb-4 font-serif text-xl font-medium text-navy">{group.title}</h3>
+              <ol class="m-0 list-none p-0 border-l-2 border-navy">
+                {group.steps.map((x: Step, i: number) => (
+                  <li class="relative pl-6 pb-6 last:pb-0">
+                    <span class:list={['absolute -left-[7px] top-1.5 h-3 w-3 rounded-full', i === 0 ? 'bg-navy' : 'bg-white border-2 border-navy']} aria-hidden="true"></span>
+                    <p class="m-0 text-sm text-faint">{pick(x.when, lang)}</p>
+                    <p class="m-0 mt-0.5 text-[17px] font-semibold text-navy">{pick(x.what, lang)}</p>
+                    <p class="m-0 text-[15px] text-muted">{pick(x.where, lang)}</p>
+                    {x.note && <p class="m-0 mt-1 max-w-[44em] text-[15px] leading-relaxed text-body">{pick(x.note, lang)}</p>}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
           <dl class="mt-10 mb-0">
             {extras.map((e) => (
               <div class="grid gap-x-8 gap-y-1 border-t border-rule py-3 sm:grid-cols-[140px_1fr]">
