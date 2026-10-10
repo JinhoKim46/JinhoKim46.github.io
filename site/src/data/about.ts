@@ -44,15 +44,15 @@ export const learning: Step[] = [
 /** Degrees, newest first (CV: education). */
 export const education: Step[] = [
   {
-    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'PhD (Dr.-Ing.), AI in Biomedical Engineering', ko: '박사 (Dr.-Ing.), AI in Biomedical Engineering' }, where: same('FAU Erlangen-Nürnberg'),
+    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'PhD (Dr.-Ing.), AI in Biomedical Engineering', ko: '공학박사 (Dr.-Ing.), AI in Biomedical Engineering' }, where: same('FAU Erlangen-Nürnberg'),
     note: { en: 'Dissertation submitted, defense upcoming. Dissertation: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.', ko: '학위논문 제출, 디펜스 예정. 학위논문: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.' },
   },
   {
-    when: { en: 'Oct 2018 – Jul 2021', ko: '2018.10 – 2021.07' }, what: same('M.Sc. Medical Engineering'), where: same('FAU Erlangen-Nürnberg'),
+    when: { en: 'Oct 2018 – Jul 2021', ko: '2018.10 – 2021.07' }, what: same('공학석사 (M.Sc). Medical Engineering'), where: same('FAU Erlangen-Nürnberg'),
     note: { en: 'Thesis on deep learning respiratory motion correction in abdominal DWI, graded 1.0. Final grade 1.8.', ko: '복부 확산강조 MRI의 딥러닝 호흡 움직임 보정 논문, 1.0. 최종 성적 1.8.' },
   },
   {
-    when: { en: 'Mar 2011 – Aug 2018', ko: '2011.03 – 2018.08' }, what: same('B.Eng. Information, Communication and Electronics Engineering'), where: { en: 'The Catholic University of Korea', ko: '가톨릭대학교' },
+    when: { en: 'Mar 2011 – Aug 2018', ko: '2011.03 – 2018.08' }, what: same('공학학사 (B.Eng). Information, Communication and Electronics Engineering'), where: { en: 'The Catholic University of Korea', ko: '가톨릭대학교' },
     note: { en: 'Double major in computer science. Exchange at St. Cloud State University, 2016.', ko: '컴퓨터공학 복수전공. 2016년 St. Cloud State University 교환학생.' },
   },
 ];

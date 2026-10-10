@@ -15,7 +15,7 @@ const authorParts = (s: string) => s.split(me).flatMap((part, i, arr) => (i < ar
         </span>
       )}
       <span class="font-semibold">{p.title}</span> <em>{p.venue}</em>, {p.detail}
-      {p.href && <> <a href={p.href}>{p.linkLabel ?? 'DOI'}</a></>}
+      {p.href && <> <a href={p.href} data-newtab>{p.linkLabel ?? 'DOI'}</a></>}
     </li>
   ))}
 </ol>
