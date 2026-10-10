@@ -5,15 +5,15 @@ export interface Step { when: T; what: T; where: T; note?: T }
 const same = (s: string): T => ({ en: s, ko: s });
 
 export const bio: T = {
-  en: 'I came to Erlangen in 2018 for a master’s in medical engineering and stayed for an industrial PhD with Siemens Healthineers on deep learning for MRCP. The dissertation is submitted. Before that I studied electronics and computer science in Korea, where my first papers were on image enhancement.',
-  ko: '2018년 의공학 석사를 위해 에를랑겐에 왔고, 이어서 Siemens Healthineers와 산학협력으로 MRCP 딥러닝 박사과정을 했습니다. 학위논문은 제출을 마쳤습니다. 그 전에는 한국에서 전자공학과 컴퓨터공학을 공부했고, 첫 논문은 image enhancement에 관한 것이었습니다.',
+  en: 'I came to Erlangen in 2018 for a master’s in medical engineering and stayed for an industrial PhD with Siemens Healthineers on a topic of deep learning-based reconstruction and segmentation for MRCP. The dissertation is submitted and the final defense talk will be planned soon. Before that I studied Information, Communication and Electronics Engineering and Computer Science in Korea.',
+  ko: '2018년 의공학 석사를 위해 에를랑겐에 왔고, 이어서 Siemens Healthineers와 산학협력으로 MRCP 딥러닝 재구성 및 영상 분할을 주제로 박사과정을 했습니다. 박사 학위논문은 제출을 마친 상태이며, 최종 구두 시험을 앞두고 있습니다. 그 전에는 한국에서 정보통신전자공학과 컴퓨터공학을 공부했습니다.',
 };
 
 /** Work and education on one line of time, newest first. */
 export const timeline: Step[] = [
   {
     when: { en: 'Aug 2026 – now', ko: '2026.08 – 현재' }, what: same('Agentic AI engineering'), where: { en: 'Projects and Turing College AI Engineering', ko: '개인 프로젝트, Turing College AI Engineering' },
-    note: { en: 'Building LLM agents and tools while studying the field. Alongside, a data and automation project for an SME client.', ko: 'LLM agent와 도구를 만들며 이 분야를 공부하고 있습니다. 중소기업 고객의 데이터·자동화 프로젝트도 함께 하고 있습니다.' },
+    note: { en: 'Building LLM agents and agentic tools while studying the field. Alongside, building and deploying data and automation systems for an SME client.', ko: 'LLM agent와 에이전트를 위한 도구를 만들며 이 분야를 공부하고 있습니다. 또한 중소기업 고객을 위한 데이터·자동화 시스템을 구축하고 실제 운영까지 이어가고 있습니다.' },
   },
   { when: { en: 'Jun – Aug 2026', ko: '2026.06 – 08' }, what: same('Senior AI Infrastructure Engineer'), where: same('BMW Group, Munich') },
   {
