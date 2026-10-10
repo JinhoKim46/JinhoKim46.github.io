@@ -11,7 +11,7 @@ const authorParts = (s: string) => s.split(me).flatMap((part, i, arr) => (i < ar
     <li>
       {p.authors && (
         <span>
-          {authorParts(p.authors).map((part) => (part === 'Kim J' ? <strong class="rounded-sm bg-[#dde6f5] px-1 font-semibold text-navy">Kim J</strong> : part))}{' '}
+          {authorParts(p.authors).map((part) => (part === 'Kim J' ? <strong class="rounded-sm bg-[#dde6f5] px-0.5 -mr-0.5 font-semibold text-navy">Kim J</strong> : part))}{' '}
         </span>
       )}
       <span class="font-semibold">{p.title}</span> <em>{p.venue}</em>, {p.detail}

@@ -61,13 +61,49 @@ const other: Lang = lang === 'en' ? 'ko' : 'en';
       </div>
     </footer>
     <script>
-      // Every link that leaves the current view opens in a new tab.
+      // Links that leave the current view open in a new tab and show a link icon.
       // In-page anchors (#section) and mail links keep their normal behaviour.
+      const SVG = 'http://www.w3.org/2000/svg';
+      const paths: Record<string, string[]> = {
+        external: ['M15 3h6v6', 'M10 14 21 3', 'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'],
+        mail: ['M4 4h16v16H4z', 'm22 6-10 7L2 6'],
+        internal: ['M5 12h14', 'm12 5 7 7-7 7'],
+      };
+      const icon = (kind: keyof typeof paths) => {
+        const svg = document.createElementNS(SVG, 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('width', '0.85em');
+        svg.setAttribute('height', '0.85em');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('class', 'link-icon');
+        svg.style.marginLeft = '0.3em';
+        svg.style.verticalAlign = '-0.08em';
+        svg.style.display = 'inline-block';
+        for (const d of paths[kind]) {
+          const path = document.createElementNS(SVG, 'path');
+          path.setAttribute('d', d);
+          svg.appendChild(path);
+        }
+        return svg;
+      };
       document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((a) => {
         const href = a.getAttribute('href') ?? '';
-        if (href.startsWith('#') || href.startsWith('mailto:')) return;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
+        const plainHash = href.startsWith('#');
+        const mail = href.startsWith('mailto:');
+        const external = /^https?:\/\//.test(href);
+        if (!plainHash && !mail) {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+        // Skip navigation, footer, call-to-action buttons and image links.
+        if (plainHash || a.closest('nav, footer') || a.querySelector('img') || a.classList.contains('rounded-md') || a.dataset.noicon !== undefined) return;
+        const kind = mail ? 'mail' : external ? 'external' : 'internal';
+        a.appendChild(icon(kind));
       });
     </script>
   </body>

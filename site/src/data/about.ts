@@ -13,7 +13,7 @@ export const bio: T = {
 export const experience: Step[] = [
   {
     when: { en: 'Aug 2026 – now', ko: '2026.08 – 현재' }, what: { en: 'Independent data and automation engineer', ko: '독립 데이터·자동화 엔지니어' }, where: { en: 'Confidential SME client, remote', ko: '비공개 중소기업 고객, 원격' },
-    note: { en: 'Contract data platform: PostgreSQL, Flask, Superset, Android and AWS CDK.', ko: '계약 데이터 플랫폼: PostgreSQL, Flask, Superset, Android, AWS CDK.' },
+    note: { en: 'Contract data platform: PostgreSQL, Flask, Superset, Android, AWS CDK, and Claude SDK.', ko: '계약 데이터 플랫폼: PostgreSQL, Flask, Superset, Android, AWS CDK, Claude SDK.' },
   },
   {
     when: { en: 'Jun – Aug 2026', ko: '2026.06 – 08' }, what: same('Senior AI Infrastructure Engineer'), where: same('BMW Group, Munich'),

@@ -47,7 +47,7 @@ export const groups: { title: string; items: Project[] }[] = [
       { title: 'Slurm + Ray', href: gh('Distributed-training-for-multiple-configurations'), meta: open,
         text: { en: 'Schedules 20 training runs inside one Slurm job. In a 20-configuration demo, GPU idle time fell 63% and blocked time 91% against array jobs.', ko: 'Slurm job 하나에서 학습 20개를 배정해 돌립니다. 20개 설정 데모에서 array job 대비 GPU idle time 63%, blocking time 91% 감소.' } },
       { title: 'MLflow and cost dashboard', meta: same('BMW Group, 2026'),
-        text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for 8 projects and about 30 users, with a Superset dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트, 약 30명이 씁니다. AI workload 비용용 Superset dashboard 포함.' } },
+        text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for 8 projects and about 30 users, with a GRAFANA dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트, 약 30명이 씁니다. AI workload 비용용 GRAFANA dashboard 포함.' } },
       { title: 'Distributed training', meta: same('Siemens Healthineers / FAU'),
         text: { en: 'Scaled MRI reconstruction training on DGX (Kubernetes, Docker) and Slurm, cutting end-to-end training time by 25%.', ko: 'DGX(Kubernetes, Docker)와 Slurm으로 MRI 재구성 모델을 분산 학습해 전체 학습 시간을 25% 줄였습니다.' } },
     ],
