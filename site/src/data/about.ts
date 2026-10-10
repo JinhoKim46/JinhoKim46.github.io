@@ -6,7 +6,7 @@ const same = (s: string): T => ({ en: s, ko: s });
 
 export const bio: T = {
   en: 'I came to Erlangen in 2018 for a master’s in medical engineering and stayed for an industrial PhD with Siemens Healthineers on a topic of deep learning-based reconstruction and segmentation for MRCP. The dissertation is submitted and the final defense talk will be planned soon. Before that I studied Information, Communication and Electronics Engineering and Computer Science in Korea.',
-  ko: '2018년 의공학 석사를 위해 에를랑겐에 왔고, 이어서 Siemens Healthineers와 산학협력으로 MRCP 딥러닝 재구성 및 영상 분할을 주제로 박사과정을 했습니다. 박사 학위논문은 제출을 마친 상태이며, 최종 구두 시험을 앞두고 있습니다. 그 전에는 한국에서 정보통신전자공학과 컴퓨터공학을 공부했습니다.',
+  ko: '2018년 의공학 석사를 위해 에를랑겐에 왔고, 이어서 Siemens Healthineers와 산학협력으로 MRCP 딥러닝 재구성 및 영상 분할을 주제로 박사 연구를 진행했습니다. 박사 학위논문은 제출을 마친 상태이며, 최종 구두 시험을 앞두고 있습니다. 그 전에는 한국에서 정보통신전자공학과 컴퓨터공학을 공부했습니다.',
 };
 
 /** Work experience, newest first (CV: Jinho Kim, comprehensive). */

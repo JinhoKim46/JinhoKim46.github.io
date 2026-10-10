@@ -18,10 +18,9 @@ export const groups: { title: string; items: Project[] }[] = [
     title: 'Agentic AI',
     items: [
       { title: 'Management reports and guide chatbot', meta: { en: 'Client work, built end to end, Anthropic SDK', ko: '고객 프로젝트, end-to-end 개발, Anthropic SDK' },
-        status: { en: 'In production', ko: '운영 중' },
-        text: { en: 'Code computes every number in the management reports, Claude writes the summary, and a checker rejects text whose numbers do not match. A guide chatbot answers from selected guide sections.', ko: '경영 보고서의 숫자는 모두 코드가 계산하고 Claude가 요약을 쓰며, 숫자가 맞지 않는 문장은 검사 단계에서 걸러냅니다. 이용 안내 chatbot은 업무 데이터 없이 선택한 절로만 답합니다.' } },
+        text: { en: 'Code computes every number in the management reports and fills it into placeholders; Claude writes the summary and recommendations around them. A guide chatbot answers from selected guide sections.', ko: '경영 보고서의 숫자는 모두 코드가 계산해 자리표시자에 채웁니다. Claude는 그 주변의 요약과 권고를 씁니다. 이용 안내 chatbot은 선택한 안내 절에서만 답합니다.' } },
       { title: 'litreview-agent', href: gh('litreview-agent'), meta: open,
-        text: { en: 'Runs a systematic review and meta-analysis on Claude Code, with an audit trail from search to screening, and drafts a PRISMA 2020 manuscript.', ko: 'Claude Code에서 systematic review와 meta-analysis를 실제로 수행합니다. 검색부터 screening까지 기록을 남기고 PRISMA 2020 원고 초안을 씁니다.' } },
+        text: { en: 'A Claude Code pipeline for systematic reviews and meta-analyses. It automates search, deduplication and synthesis with an audit trail and drafts a PRISMA 2020 manuscript; screening decisions stay with the reviewer.', ko: 'Claude Code 기반 systematic review·meta-analysis 파이프라인입니다. 검색, 중복 제거, 종합을 자동화하고 기록을 남기며 PRISMA 2020 원고 초안을 씁니다. 선별 판단은 연구자가 합니다.' } },
       { title: 'code-flow-report', href: gh('code-flow-report'), meta: { en: 'Open source, EN/KO', ko: '오픈소스, EN/KO' },
         text: { en: 'A Claude Code plugin that traces a Python codebase call by call. Every claim is re-checked against the AST on each build.', ko: 'Python 코드베이스를 호출 단위로 추적하는 Claude Code plugin. 모든 설명은 빌드할 때마다 AST로 다시 검증합니다.' } },
       { title: 'route-work', href: gh('agent-skills'), meta: open,
@@ -45,7 +44,7 @@ export const groups: { title: string; items: Project[] }[] = [
     title: 'ML infrastructure',
     items: [
       { title: 'Slurm + Ray', href: gh('Distributed-training-for-multiple-configurations'), meta: open,
-        text: { en: 'Runs 20+ experiments inside one Slurm job. Against array jobs, GPU idle time fell 63% and blocking time 91%.', ko: 'Slurm job 하나에서 실험 20개 이상을 동시에 돌립니다. Array job 대비 GPU idle time 63%, blocking time 91% 감소.' } },
+        text: { en: 'Schedules 20 training runs inside one Slurm job. In a 20-configuration demo, GPU idle time fell 63% and blocked time 91% against array jobs.', ko: 'Slurm job 하나에서 학습 20개를 배정해 돌립니다. 20개 설정 데모에서 array job 대비 GPU idle time 63%, blocking time 91% 감소.' } },
       { title: 'MLflow and cost dashboard', meta: same('BMW Group, 2026'),
         text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for 8 projects and about 30 users, with a Superset dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트, 약 30명이 씁니다. AI workload 비용용 Superset dashboard 포함.' } },
       { title: 'Distributed training', meta: same('Siemens Healthineers / FAU'),
@@ -67,7 +66,6 @@ export const groups: { title: string; items: Project[] }[] = [
     title: 'Full-stack and automation',
     items: [
       { title: 'Contract operations platform', meta: { en: 'Client work, built end to end. PostgreSQL, Docker, AWS', ko: '고객 프로젝트, end-to-end 개발. PostgreSQL, Docker, AWS' },
-        status: { en: 'In production', ko: '운영 중' },
         text: { en: 'Moved 1,000+ contracts from spreadsheets into PostgreSQL, cutting manual search time by 80%. Staff use a Flask portal and technicians an Android field app, deployed to AWS with CDK.', ko: '스프레드시트의 계약 1,000건 이상을 PostgreSQL로 옮겨 수동 검색 시간을 80% 줄였습니다. 직원은 Flask portal, 기술자는 Android 현장 앱을 쓰며 AWS CDK로 배포합니다.' } },
       { title: 'Blog automation', href: gh('BlogAutomation'), meta: open,
         text: { en: 'Drafts posts with OpenAI, keeps Notion as the editorial database and publishes to Webflow.', ko: 'OpenAI로 글을 쓰고, Notion을 편집 DB로 두고, Webflow에 게시하는 pipeline.' } },

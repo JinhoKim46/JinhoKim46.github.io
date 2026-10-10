@@ -36,7 +36,7 @@ export const compareCases: CompareCase[] = [
     label: { en: 'Zero-shot breath-hold', ko: 'Zero-shot breath-hold' },
     caption: {
       en: 'Cropped coronal MIP from a volunteer at 3 T. PI-RT was acquired separately, so structures are slightly displaced. Training times are 11-volunteer averages. Kim et al., Magnetic Resonance in Medicine 2026.',
-      ko: '3 T 지원자 1명의 관상면 MIP 일부입니다. PI-RT는 별도로 촬영한 호흡동기 영상으로, 구조물 위치가 조금 다릅니다. 학습 시간은 11명 평균입니다. Kim et al., Magnetic Resonance in Medicine 2026.',
+      ko: '3 T 자원자 1명의 관상면 MIP 일부입니다. PI-RT는 별도로 촬영한 호흡동기 영상으로, 구조물 위치가 조금 다릅니다. 학습 시간은 11명 평균입니다. Kim et al., Magnetic Resonance in Medicine 2026.',
     },
     corRatio: [508, 387],
     start: { mode: 'p23', a: 0, b: 50 },
@@ -68,7 +68,7 @@ export const compareCases: CompareCase[] = [
     label: { en: 'Accelerated MRCP', ko: 'Accelerated MRCP' },
     caption: {
       en: 'One volunteer at 3 T, scanned at 2× and 6× acceleration. Cropped coronal MIP. Scan times are study averages. Kim et al., NMR in Biomedicine 2025.',
-      ko: '3 T 지원자 1명의 2배·6배 가속 촬영에서 얻은 관상면 MIP 일부입니다. 촬영 시간은 연구 전체 평균입니다. Kim et al., NMR in Biomedicine 2025.',
+      ko: '3 T 자원자 1명의 2배·6배 가속 촬영에서 얻은 관상면 MIP 일부입니다. 촬영 시간은 연구 전체 평균입니다. Kim et al., NMR in Biomedicine 2025.',
     },
     corRatio: [502, 423],
     start: { mode: 'p23', a: 0, b: 50 },

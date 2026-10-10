@@ -48,7 +48,7 @@ export const software: Paper[] = [
 
 export const paperGroups: { title: T; items: Paper[] }[] = [
   { title: { en: 'Journal articles', ko: '저널 논문' }, items: journals },
-  { title: { en: 'Conference abstracts', ko: '학회 발표' }, items: conferences },
+  { title: { en: 'Conference abstracts', ko: '학회 초록' }, items: conferences },
   { title: { en: 'Oral presentations', ko: '구두 발표' }, items: talks },
   { title: { en: 'Datasets', ko: 'Datasets' }, items: datasets },
   { title: { en: 'Software', ko: 'Software' }, items: software },
