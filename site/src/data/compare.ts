@@ -13,6 +13,8 @@ export interface Layer {
 
 export interface CompareCase {
   id: 'zs' | 'dl' | 'seg';
+  /** research page slug (/research/<slug>) */
+  slug: string;
   label: T;
   caption: T;
   /** width / height of each view; sagittal shown only when present */
@@ -21,12 +23,16 @@ export interface CompareCase {
   layers: Layer[];
   /** default comparison: mode and divider positions in % */
   start: { mode: Mode; a: number; b: number };
+  // Which legend lines to highlight for each pairwise comparison; 'all' highlights the union per layer.
+  emphasis: Partial<Record<'p12' | 'p23' | 'p13', ('acq' | 'time' | 'train')[]>>;
 }
 
 // Rules: documents/rules/figures.md. Files: documents/sources/figures/README.md.
 export const compareCases: CompareCase[] = [
   {
     id: 'zs',
+    slug: 'zero-shot-breath-hold-mrcp',
+    emphasis: { p12: ['time'], p13: ['time'], p23: ['acq', 'train'] },
     label: { en: 'Zero-shot breath-hold', ko: 'Zero-shot breath-hold' },
     caption: {
       en: 'Cropped coronal MIP of one volunteer at 3 T. PI-RT is a separate respiratory-triggered scan, so anatomy shifts slightly. Training times are 11-volunteer averages. Kim et al., Magnetic Resonance in Medicine 2026.',
@@ -57,6 +63,8 @@ export const compareCases: CompareCase[] = [
   },
   {
     id: 'dl',
+    slug: 'accelerated-mrcp',
+    emphasis: { p12: ['time'], p23: ['acq'], p13: ['acq', 'time'] },
     label: { en: 'Accelerated MRCP', ko: 'Accelerated MRCP' },
     caption: {
       en: 'One volunteer at 3 T, prospectively undersampled at 2× and 6×. Cropped coronal MIP. Acquisition times are study averages. Kim et al., NMR in Biomedicine 2025.',
@@ -87,6 +95,8 @@ export const compareCases: CompareCase[] = [
   },
   {
     id: 'seg',
+    slug: 'segmentation-mip',
+    emphasis: { p12: ['time'] },
     label: { en: 'Segmentation MIP', ko: 'Segmentation MIP' },
     caption: {
       en: 'Coronal and sagittal MIP of one patient at 3 T, original and proposed (after nnU-Net based suppression). Scores from two radiologists over 35 cases, 4-point scale. Kim, Werner et al., MAGMA 2026.',

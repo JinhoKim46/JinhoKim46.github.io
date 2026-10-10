@@ -5,6 +5,7 @@ export interface Project {
   text: T;
   meta: T;
   href?: string;
+  status?: T;
 }
 
 const gh = (repo: string) => `https://github.com/JinhoKim46/${repo}`;
@@ -16,7 +17,8 @@ export const groups: { title: string; items: Project[] }[] = [
   {
     title: 'Agentic AI',
     items: [
-      { title: 'Management reports and guide chatbot', meta: { en: 'Client work, 2026. Anthropic SDK', ko: '고객 프로젝트, 2026. Anthropic SDK' },
+      { title: 'Management reports and guide chatbot', meta: { en: 'Client work, built end to end, Anthropic SDK', ko: '고객 프로젝트, end-to-end 개발, Anthropic SDK' },
+        status: { en: 'In production', ko: '운영 중' },
         text: { en: 'Code computes every number in the management reports, Claude writes the summary, and a checker rejects text whose numbers do not match. A guide chatbot answers from selected guide sections.', ko: '경영 보고서의 숫자는 모두 코드가 계산하고 Claude가 요약을 쓰며, 숫자가 맞지 않는 문장은 검사 단계에서 걸러냅니다. 이용 안내 chatbot은 업무 데이터 없이 선택한 절로만 답합니다.' } },
       { title: 'litreview-agent', href: gh('litreview-agent'), meta: open,
         text: { en: 'Runs a systematic review and meta-analysis on Claude Code, with an audit trail from search to screening, and drafts a PRISMA 2020 manuscript.', ko: 'Claude Code에서 systematic review와 meta-analysis를 실제로 수행합니다. 검색부터 screening까지 기록을 남기고 PRISMA 2020 원고 초안을 씁니다.' } },
@@ -64,7 +66,8 @@ export const groups: { title: string; items: Project[] }[] = [
   {
     title: 'Full-stack and automation',
     items: [
-      { title: 'Contract operations platform', meta: { en: 'Client work, PostgreSQL, Docker, AWS', ko: '고객 프로젝트, PostgreSQL, Docker, AWS' },
+      { title: 'Contract operations platform', meta: { en: 'Client work, built end to end. PostgreSQL, Docker, AWS', ko: '고객 프로젝트, end-to-end 개발. PostgreSQL, Docker, AWS' },
+        status: { en: 'In production', ko: '운영 중' },
         text: { en: 'Moved 1,000+ contracts from spreadsheets into PostgreSQL, cutting manual search time by 80%. Staff use a Flask portal and technicians an Android field app, deployed to AWS with CDK.', ko: '스프레드시트의 계약 1,000건 이상을 PostgreSQL로 옮겨 수동 검색 시간을 80% 줄였습니다. 직원은 Flask portal, 기술자는 Android 현장 앱을 쓰며 AWS CDK로 배포합니다.' } },
       { title: 'Blog automation', href: gh('BlogAutomation'), meta: open,
         text: { en: 'Drafts posts with OpenAI, keeps Notion as the editorial database and publishes to Webflow.', ko: 'OpenAI로 글을 쓰고, Notion을 편집 DB로 두고, Webflow에 게시하는 pipeline.' } },

@@ -1,26 +1,32 @@
 ---
 // Image comparison slider. Rules: documents/rules/figures.md.
 import { compareCases } from '../data/compare';
-import type { Lang } from '../i18n';
+import { localePath, pick, ui, type Lang } from '../i18n';
 
 interface Props { lang: Lang; only?: 'zs' | 'dl' | 'seg' }
 const { lang, only } = Astro.props;
 
 const cases = compareCases.filter((c) => !only || c.id === only).map((c) => ({
   id: c.id,
+  slug: c.slug,
+  href: localePath(`/research/${c.slug}`, lang),
   label: c.label[lang],
   caption: c.caption[lang],
   corRatio: c.corRatio,
   sagRatio: c.sagRatio ?? null,
   start: c.start,
+  emphasis: c.emphasis,
   layers: c.layers.map((l) => ({
     name: l.name, cor: l.cor, sag: l.sag ?? null,
-    lines: [l.acq[lang], l.time[lang], l.train?.[lang] ?? ''],
+    lines: [['acq', l.acq[lang]], ['time', l.time[lang]], ['train', l.train?.[lang] ?? '']],
   })),
 }));
-const t = lang === 'ko'
-  ? { study: '연구 선택', quick: '비교 조합', cor: 'Coronal', sag: 'Sagittal', all: '셋 다 보기', divider: 'Divider' }
-  : { study: 'Study', quick: 'Comparisons', cor: 'Coronal', sag: 'Sagittal', all: 'All three', divider: 'Divider' };
+const t = {
+  ...(lang === 'ko'
+    ? { study: '연구 선택', quick: '비교 조합', cor: 'Coronal', sag: 'Sagittal', all: '셋 다 보기', divider: 'Divider' }
+    : { study: 'Study', quick: 'Comparisons', cor: 'Coronal', sag: 'Sagittal', all: 'All three', divider: 'Divider' }),
+  caseStudy: pick(ui.caseStudy, lang),
+};
 const first = cases[0];
 const fallback = first.layers[first.layers.length - 1];
 ---
@@ -46,14 +52,18 @@ const fallback = first.layers[first.layers.length - 1];
   .compare .cmp-tab[aria-selected="true"] { background: var(--color-navy); color: #fff; border-color: var(--color-navy); }
   .compare .cmp-preset { font: inherit; font-size: 14px; min-height: 36px; padding: 6px 2px; background: none; border: 0; border-bottom: 1px solid #8c99b3; color: var(--color-muted); cursor: pointer; }
   .compare .cmp-preset[aria-pressed="true"] { border-bottom: 2px solid var(--color-navy); color: var(--color-navy); font-weight: 600; }
+  .compare .cmp-em { color: var(--color-accent); font-weight: 600; }
   .compare input[type=range] { width: 100%; min-height: 28px; accent-color: var(--color-link); }
 </style>
 
 <script>
   type Mode = 'all' | 'p12' | 'p23' | 'p13';
-  interface L { name: string; cor: string; sag: string | null; lines: string[] }
-  interface C { id: string; label: string; caption: string; corRatio: [number, number]; sagRatio: [number, number] | null; start: { mode: Mode; a: number; b: number }; layers: L[] }
+  type Key = 'acq' | 'time' | 'train';
+  interface L { name: string; cor: string; sag: string | null; lines: [Key, string][] }
+  interface C { id: string; slug: string; href: string; label: string; caption: string; corRatio: [number, number]; sagRatio: [number, number] | null; start: { mode: Mode; a: number; b: number }; emphasis: Partial<Record<'p12' | 'p23' | 'p13', Key[]>>; layers: L[] }
   interface Data { cases: C[]; t: Record<string, string>; tabs: boolean }
+
+  const pairs: Record<'p12' | 'p23' | 'p13', number[]> = { p12: [0, 1], p23: [1, 2], p13: [0, 2] };
 
   const el = <K extends keyof HTMLElementTagNameMap>(tag: K, cls = '', text = '') => {
     const e = document.createElement(tag);
@@ -65,7 +75,8 @@ const fallback = first.layers[first.layers.length - 1];
   class Compare {
     root: HTMLElement; d: Data; cur!: C; mode: Mode = 'all'; a = 33; b = 67; drag: 'a' | 'b' | null = null;
     corImgs: HTMLImageElement[] = []; sagImgs: HTMLImageElement[] = []; handles: HTMLElement[] = []; lines: HTMLElement[] = [];
-    chips: HTMLElement[] = []; legend: HTMLElement[] = []; presets: { m: Mode; btn: HTMLButtonElement }[] = [];
+    chips: HTMLElement[] = []; legend: HTMLElement[] = []; legendLines: { layer: number; k: Key; span: HTMLElement }[] = [];
+    presets: { m: Mode; btn: HTMLButtonElement }[] = [];
     ranges: { wrap: HTMLElement; label: HTMLElement; input: HTMLInputElement }[] = [];
     body!: HTMLElement; tabs: HTMLButtonElement[] = [];
 
@@ -168,18 +179,28 @@ const fallback = first.layers[first.layers.length - 1];
 
       const legend = el('div', 'grid border-t border-rule-strong');
       legend.style.gridTemplateColumns = 'repeat(auto-fit, minmax(180px, 1fr))';
-      this.legend = L.map((l) => {
+      this.legendLines = [];
+      this.legend = L.map((l, layer) => {
         const box = el('div', 'pt-3 pr-3.5 pb-1 flex flex-col gap-0.5 transition-opacity');
         box.append(el('span', 'font-semibold text-[15px] text-navy', l.name));
-        l.lines.filter(Boolean).forEach((x, i) => box.append(el('span', i === 0 ? 'text-sm leading-snug' : 'text-sm leading-snug text-muted', x)));
+        l.lines.filter(([, x]) => x).forEach(([k, x], i) => {
+          const span = el('span', i === 0 ? 'text-sm leading-snug' : 'text-sm leading-snug text-muted', x);
+          span.dataset.k = k;
+          box.append(span);
+          this.legendLines.push({ layer, k, span });
+        });
         legend.append(box);
         return box;
       });
 
       const cap = el('figcaption', 'text-sm leading-relaxed text-muted', c.caption);
+      const link = this.d.tabs ? el('a', 'cmp-study self-start text-[15px] font-semibold', `${t.caseStudy}: ${c.label} →`) : null;
+      if (link) link.href = c.href;
       this.body.append(head);
       if (this.presets.length) this.body.append(presetBar);
-      this.body.append(rangeBar, legend, cap);
+      this.body.append(rangeBar, legend);
+      if (link) this.body.append(link);
+      this.body.append(cap);
     }
 
     /** Which divider a range input drives in the current mode. */
@@ -239,6 +260,15 @@ const fallback = first.layers[first.layers.length - 1];
       });
       this.legend.forEach((box, i) => (box.style.opacity = to[i] - from[i] > 0 ? '1' : '0.35'));
       this.presets.forEach(({ m, btn }) => btn.setAttribute('aria-pressed', String(m === mode)));
+
+      // Emphasis: a layer gets the keys of every pair in play that contains it.
+      const modes = mode === 'all' ? (['p12', 'p23', 'p13'] as const) : [mode];
+      const emphasised = (layer: number) => {
+        const keys = new Set<string>();
+        for (const m of modes) if (pairs[m].includes(layer)) (this.cur.emphasis[m] ?? []).forEach((k) => keys.add(k));
+        return keys;
+      };
+      this.legendLines.forEach(({ layer, k, span }) => span.classList.toggle('cmp-em', emphasised(layer).has(k)));
 
       const { t } = this.d;
       const pair = (i: number, j: number) => `${t.divider}: ${L[i].name} | ${L[j].name}`;
