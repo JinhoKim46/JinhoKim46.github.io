@@ -69,7 +69,7 @@ export const education: Step[] = [
   },
   {
     when: { en: 'Mar 2011 – Aug 2018', ko: '2011.03 – 2018.08' }, what: { en: 'B.Eng., Information, Communication and Electronics Engineering', ko: '공학사 (B.Eng.), Information, Communication and Electronics Engineering' }, where: { en: 'The Catholic University of Korea', ko: '가톨릭대학교' },
-    note: { en: 'Final grade 4.03 (out of 4.5).\nDouble major in computer science. Exchange at St. Cloud State University, 2016.', ko: '최종 성적 4.03 (4.5 만점).\n컴퓨터공학 복수전공. 2016년 St. Cloud State University 교환학생.' },
+    note: { en: 'Final grade 4.03 (out of 4.5).\nThesis: fulfilled by two journal papers (2015, 2017). Double major in computer science. Exchange at St. Cloud State University, 2016.', ko: '최종 성적 4.03 (4.5 만점).\n학위논문: 학술지 논문 2편(2015, 2017)으로 대체. 컴퓨터공학 복수전공. 2016년 St. Cloud State University 교환학생.' },
   },
 ];
 
