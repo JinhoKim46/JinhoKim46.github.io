@@ -119,7 +119,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
             <h3 class="m-0 mb-5 font-serif text-xl font-medium text-navy">{g.title}</h3>
             <ul class="m-0 grid list-none gap-x-8 gap-y-7 p-0 md:grid-cols-2">
               {g.items.map((p) => (
-                <li class:list={['border-t border-rule pt-4', g.items.length === 1 && 'sm:col-span-2']}>
+                <li class:list={['border-t border-rule pt-4', g.items.length === 1 && 'md:col-span-2']}>
                   <span class="block font-semibold text-navy">{ext(p.href) ? <a href={p.href} class="text-navy" data-newtab>{p.title}</a> : p.title}</span>
                   <span class="mt-0.5 block text-sm text-faint">{pick(p.meta, lang)}</span>
                   <span class:list={['mt-2 inline-block rounded-full border px-2 py-0.5 text-xs font-semibold', p.status.en === 'In production' ? 'border-emerald-700/30 bg-emerald-50 text-emerald-800' : 'border-rule-strong bg-[#f4f6fa] text-muted']}>{pick(p.status, lang)}</span>
