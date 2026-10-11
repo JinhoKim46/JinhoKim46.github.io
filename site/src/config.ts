@@ -9,8 +9,8 @@ export const profile = {
   } satisfies T,
   // Change after the defense.
   affiliation: {
-    en: 'PhD candidate, FAU Erlangen-Nürnberg (industrial PhD with Siemens Healthineers, 2021–2026)',
-    ko: 'FAU 에를랑겐-뉘른베르크 박사과정 (Siemens Healthineers 산학협력, 2021–2026)',
+    en: 'PhD candidate, FAU Erlangen-Nürnberg (industrial PhD with Siemens Healthineers, 2021–2026). Dissertation submitted, defense upcoming.',
+    ko: 'FAU 에를랑겐-뉘른베르크 박사과정 (Siemens Healthineers 산학협력, 2021–2026). 학위논문 제출, 디펜스 예정.',
   } satisfies T,
 };
 
