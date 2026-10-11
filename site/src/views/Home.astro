@@ -49,38 +49,25 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
             <p class="m-0 text-sm text-faint">{s.data.venue}, {s.data.year}</p>
             <h3 class="m-0 text-xl font-semibold leading-snug"><a href={localePath(`/research/${s.slug}`, lang)} class="text-navy no-underline hover:underline">{s.data.short}</a></h3>
             <p class="m-0 text-base leading-relaxed text-body">{s.data.card}</p>
+            <p class="mt-auto mb-0 flex flex-wrap gap-x-4 gap-y-1 pt-1 text-[15px]">
+              {s.data.links.map((l) => <a href={l.href} data-newtab>{l.label === 'Paper' ? 'Full paper' : l.label}</a>)}
+            </p>
           </article>
         ))}
       </div>
     </section>
 
-    <section id={`${lang}-engineering`} class={`${wrap} py-16 border-t border-rule`}>
-      <h2 class={h2}>{label('engineering')}</h2>
-      <div class="mt-8 flex flex-col gap-10">
-        {groups.map((g) => (
-          <div class="grid gap-x-10 gap-y-3 sm:grid-cols-[200px_1fr]">
-            <h3 class="m-0 pt-3 text-[15px] font-semibold text-muted">{g.title}</h3>
-            <ul class="m-0 list-none p-0">
-              {g.items.map((p) => (
-                <li class="grid gap-x-8 gap-y-1 border-t border-rule py-3 md:grid-cols-[220px_1fr]">
-                  <div>
-                    <span class="block font-semibold text-navy">{ext(p.href) ? <a href={p.href} class="text-navy" data-newtab>{p.title}</a> : p.title}</span>
-                    <span class="mt-0.5 block text-sm text-faint">{pick(p.meta, lang)}</span>
-                    <span class="mt-2 inline-block rounded-full border border-emerald-700/30 bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-800">{pick(p.status, lang)}</span>
-                  </div>
-                  <div>
-                    <p class="m-0 text-[15px] leading-relaxed text-body">{pick(p.text, lang)}</p>
-                    <ul class="m-0 mt-2.5 flex flex-wrap gap-1.5 list-none p-0">
-                      {p.stack.map((s) => <li class="rounded border border-rule-strong bg-[#f4f6fa] px-2 py-0.5 text-xs text-muted">{s}</li>)}
-                    </ul>
-                  </div>
-                </li>
-              ))}
-            </ul>
+    <section id={`${lang}-papers`} class={`${wrap} py-16 border-t border-rule`}>
+      <h2 class={h2}>{label('papers')}</h2>
+      <div class="mt-8 flex flex-col gap-10 max-w-[64em]">
+        {paperGroups.map((g) => (
+          <div>
+            <h3 class="mb-3 mt-0 text-[15px] font-semibold text-muted">{pick(g.title, lang)}</h3>
+            <PaperList items={g.items} />
           </div>
         ))}
+        <p class="m-0 text-sm text-faint">{pick(ui.coFirst, lang)}</p>
       </div>
-      <div class="mt-12"><Glossary lang={lang} terms={['LLM', 'LoRA', 'CDK', 'AST', 'SDK', 'PR']} /></div>
     </section>
 
     <section id={`${lang}-about`} class={`${wrap} py-16 border-t border-rule`}>
@@ -124,17 +111,29 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
       </div>
     </section>
 
-    <section id={`${lang}-papers`} class={`${wrap} py-16 border-t border-rule`}>
-      <h2 class={h2}>{label('papers')}</h2>
-      <div class="mt-8 flex flex-col gap-10 max-w-[64em]">
-        {paperGroups.map((g) => (
-          <div>
-            <h3 class="mb-3 mt-0 text-[15px] font-semibold text-muted">{pick(g.title, lang)}</h3>
-            <PaperList items={g.items} />
+    <section id={`${lang}-engineering`} class={`${wrap} py-16 border-t border-rule`}>
+      <h2 class={h2}>{label('engineering')}</h2>
+      <div class="mt-8 flex flex-col gap-12">
+        {groups.map((g) => (
+          <div class="border-t-2 border-navy pt-5">
+            <h3 class="m-0 mb-5 font-serif text-xl font-medium text-navy">{g.title}</h3>
+            <ul class="m-0 grid list-none gap-x-8 gap-y-7 p-0 sm:grid-cols-2">
+              {g.items.map((p) => (
+                <li class:list={['border-t border-rule pt-4', g.items.length === 1 && 'sm:col-span-2']}>
+                  <span class="block font-semibold text-navy">{ext(p.href) ? <a href={p.href} class="text-navy" data-newtab>{p.title}</a> : p.title}</span>
+                  <span class="mt-0.5 block text-sm text-faint">{pick(p.meta, lang)}</span>
+                  <span class="mt-2 inline-block rounded-full border border-emerald-700/30 bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-800">{pick(p.status, lang)}</span>
+                  <p class="m-0 mt-3 text-[15px] leading-relaxed text-body">{pick(p.text, lang)}</p>
+                  <ul class="m-0 mt-3 flex flex-wrap gap-1.5 list-none p-0">
+                    {p.stack.map((s) => <li class="rounded border border-rule-strong bg-[#f4f6fa] px-2 py-0.5 text-xs text-muted">{s}</li>)}
+                  </ul>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
-        <p class="m-0 text-sm text-faint">{pick(ui.coFirst, lang)}</p>
       </div>
+      <div class="mt-12"><Glossary lang={lang} terms={['LLM', 'LoRA', 'CDK', 'AST', 'SDK', 'PR']} /></div>
     </section>
 
     <section id={`${lang}-contact`} class={`${wrap} pt-16 pb-20 border-t border-rule`}>
