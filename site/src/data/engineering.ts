@@ -73,7 +73,7 @@ export const groups: { title: string; items: Project[] }[] = [
     items: [
       { title: 'Contract operations platform', meta: { en: '2026 · Project for an SME', ko: '2026 · 중소기업 프로젝트' },
         status: production, stack: ['PostgreSQL', 'Flask', 'Android', 'AWS CDK', 'Anthropic SDK', 'LLM'],
-        text: { en: 'Structured fragmented business records into a database, cutting manual search time by 80%. Daily operational data feeds a deterministic pipeline for management reports; LLM judgments must cite evidence or are rejected. A scope-limited chatbot answers with evidence. Built and operated end to end.', ko: '업무 자료 조각을 DB로 정형화해 수동 검색 시간을 80% 줄임. 매일 쌓이는 운영 데이터는 결정적 파이프라인이 경영 보고서로 만들며, LLM 판단은 근거가 있어야 하고 없으면 반려됨. 범위가 정해진 chatbot이 근거와 함께 답함. 직접 만들고 운영까지 맡고 있음.' } },
+        text: { en: 'Structured fragmented business records into a database. Daily operational data feeds a deterministic pipeline for management reports; LLM judgments must cite evidence or are rejected. A scope-limited chatbot answers with evidence. Built and operated end to end.', ko: '업무 자료 조각을 DB로 정형화함. 매일 쌓이는 운영 데이터는 결정적 파이프라인이 경영 보고서로 만들며, LLM 판단은 근거가 있어야 하고 없으면 반려됨. 범위가 정해진 chatbot이 근거와 함께 답함. 직접 만들고 운영까지 맡고 있음.' } },
     ],
   },
 ];
