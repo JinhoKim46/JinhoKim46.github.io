@@ -2,7 +2,7 @@
 title: Zero-shot self-supervised reconstruction for single breath-hold MRCP
 short: Zero-shot breath-hold MRCP
 sub: A network adapted to the acquired k-space reconstructs a 14-second breath-hold MRCP.
-card: Zero-shot self-supervised reconstruction of a 14-second breath-hold MRCP at R = 25, trained on each scan's own data. Freezing 12 of 13 stages cut training from 136 to 20 min per scan, and three MRI experts rated it above CS.
+card: Zero-shot self-supervised reconstruction of a 14-second breath-hold MRCP at R = 25, trained on each scan's own data. Freezing 12 of 13 stages cut training 6.7-fold, from 136 min 16 s to 20 min 25 s per scan, and three MRI experts rated it above CS.
 venue: Magnetic Resonance in Medicine
 year: 2026
 order: 1
@@ -38,4 +38,4 @@ Eleven healthy volunteers were scanned at 3 T. Comparators were respiratory-tri
 
 Three MRI experts rated zero-shot reconstructions significantly higher than CS for quality, noise, and aliasing. Quality was comparable to respiratory-triggered scans with regular breathing.
 
-Freezing 12 stages reduced PSNR from 38.25 to 37.67 dB; mean training time across 11 volunteers fell from about 136 to 20 min.
+Freezing 12 stages reduced PSNR from 38.25 to 37.67 dB; mean training time across 11 volunteers fell 6.7-fold, from 136 min 16 s to 20 min 25 s.

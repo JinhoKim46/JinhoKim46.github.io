@@ -47,6 +47,10 @@ export const experience: Step[] = [
     when: { en: 'Apr 2019 – Dec 2020', ko: '2019.04 – 2020.12' }, what: { en: 'Student research assistant', ko: '학생 연구원' }, where: same('Fraunhofer IISB, Erlangen'),
     note: { en: 'GUI automation for design workflows, 92% less manual effort.', ko: '설계 작업 자동화 GUI, 수작업 92% 감소.' },
   },
+  {
+    when: { en: 'Jun 2014 – Jul 2018', ko: '2014.06 – 2018.07' }, what: { en: 'Undergraduate research assistant', ko: '학부 연구원' }, where: same('Image Signal Processing Lab, The Catholic University of Korea'),
+    note: { en: 'Super-resolution and real-time image enhancement; produced the 2015 and 2017 journal papers.', ko: '초해상도와 실시간 영상 개선 연구. 2015년과 2017년 학술지 논문을 냄.' },
+  },
 ];
 
 /** Study and self-learning, shown above the work history. */
@@ -60,7 +64,7 @@ export const learning: Step[] = [
 /** Degrees, newest first (CV: education). */
 export const education: Step[] = [
   {
-    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'PhD (Dr.-Ing.), AI in Biomedical Engineering', ko: '공학박사 (Dr.-Ing.), AI in Biomedical Engineering' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
+    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'Dr.-Ing. in Artificial Intelligence in Biomedical Engineering', ko: 'Dr.-Ing. in Artificial Intelligence in Biomedical Engineering' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
     note: { en: 'Dissertation submitted, defense upcoming.\nDissertation: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.', ko: '학위논문 제출, 디펜스 예정.\n학위논문: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.' },
   },
   {

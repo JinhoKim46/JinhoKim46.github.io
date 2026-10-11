@@ -21,8 +21,6 @@ const openSource = { en: 'Open source', ko: '오픈소스' };
 const claudeSkill = { en: 'Claude skill', ko: 'Claude skill' };
 const claudePlugin = { en: 'Claude Code plugin', ko: 'Claude Code plugin' };
 
-// Only work with a measured result, a production deployment, or a shipped tool.
-// Course projects and unrelated older work stay off this page.
 export const groups: { title: string; items: Project[] }[] = [
   {
     title: 'Agentic AI',
@@ -41,7 +39,7 @@ export const groups: { title: string; items: Project[] }[] = [
 
       { title: 'Laya vs JEV', href: gh('laya-vs-jev'), meta: { en: `2026 · Personal project`, ko: `2026 · 개인 프로젝트` },
         status: { en: 'Exploratory benchmark', ko: '실험적 벤치마크' }, stack: ['Laya', 'Fine-tuning', 'JEV', 'OpenRouter', 'PyTorch', 'GPU'],
-        text: { en: 'Exploratory run, not a formal benchmark: Laya vs JEV on 16 support tickets. Fine-tuned Laya beat JEV on urgency and churn risk; Laya on GPU was about 5 times faster per request.', ko: '정식 벤치마크가 아닌 실험적 실행임. 지원 ticket 16건으로 Laya와 JEV를 비교함. fine-tuned Laya가 긴급도와 이탈 위험에서 JEV를 앞섰고, GPU에서 요청당 약 5배 빨랐음.' } },
+        text: { en: 'Exploratory run, not a formal benchmark: Laya vs JEV on 16 support tickets. Fine-tuned Laya beat JEV on urgency and churn risk; Laya on GPU took about 12 ms per request against about 250 ms for JEV, roughly 20 times faster.', ko: '정식 벤치마크가 아닌 실험적 실행임. 지원 ticket 16건으로 Laya와 JEV를 비교함. fine-tuned Laya가 긴급도와 이탈 위험에서 JEV를 앞섰고, GPU에서는 요청당 약 12ms로 JEV의 약 250ms보다 약 20배 빨랐음.' } },
         
       { title: 'LoRA fine-tuning', href: gh('BMW_LLMs_Finetuning'), meta: { en: '2026 · Personal project', ko: '2026 · 개인 프로젝트' },
         status: openSource, stack: ['Fine-tuning', 'LoRA', 'GPT-2 Large', 'LLM'],
@@ -49,7 +47,7 @@ export const groups: { title: string; items: Project[] }[] = [
 
       { title: 'Adversarial unit test generator', meta: same('2025 · Hackbay, team lead'),
         status: { en: 'Hackathon', ko: '해커톤' }, stack: ['VS Code extension', 'Multi-agent', 'LLM'],
-        text: { en: 'A VS Code extension in which a generator agent and a checker agent write tests together. Built with a team of four in 48 hours: tests 90% faster, coverage up to 74% higher.', ko: 'Generator agent와 checker agent가 함께 테스트를 작성하는 VS Code extension을 팀 4명과 48시간 만에 만듦. 테스트 작성 속도 90% 향상, coverage 최대 74% 향상.' } },
+        text: { en: 'A VS Code extension in which a generator agent and a checker agent compete adversarially to write unit tests. Built with a team of four in 48 hours: tests 90% faster, coverage up to 74% higher.', ko: 'Generator agent와 checker agent가 서로 적대적으로 경쟁하며 unit test를 작성하는 VS Code extension을 팀 4명과 48시간 만에 만듦. 테스트 작성 속도 90% 향상, coverage 최대 74% 향상.' } },
     ],
   },
   {
@@ -61,7 +59,7 @@ export const groups: { title: string; items: Project[] }[] = [
         
       { title: 'MLflow and cost dashboard', meta: { en: '2026 · BMW Group', ko: '2026 · BMW Group' },
         status: { en: 'Internal tool', ko: '사내 도구' }, stack: ['MLflow', 'AWS', 'Grafana'],
-        text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for about 30 users from 8 projects, with a GRAFANA dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트의 약 30명이 쓰도록 구성함. AI workload 비용을 보는 GRAFANA dashboard도 함께 만듦.' } },
+        text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for about 30 users from 8 projects, with a Grafana dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트의 약 30명이 쓰도록 구성함. AI workload 비용을 보는 Grafana dashboard도 함께 만듦.' } },
         
       { title: 'Distributed training', meta: { en: '2021–2026 · Siemens Healthineers / FAU', ko: '2021–2026 · Siemens Healthineers / FAU' },
         status: { en: 'In research', ko: '연구에 사용' }, stack: ['DGX', 'Kubernetes', 'Docker', 'Slurm'],
@@ -72,8 +70,8 @@ export const groups: { title: string; items: Project[] }[] = [
     title: 'Full-stack development',
     items: [
       { title: 'Contract operations platform', meta: { en: '2026 · Project for an SME', ko: '2026 · 중소기업 프로젝트' },
-        status: production, stack: ['PostgreSQL', 'Flask', 'Android', 'AWS CDK', 'Anthropic SDK', 'LLM'],
-        text: { en: 'Structured fragmented business records into a database. Daily operational data feeds a deterministic pipeline for management reports; LLM judgments must cite evidence or are rejected. A scope-limited chatbot answers with evidence. Built and operated end to end.', ko: '업무 자료 조각을 DB로 정형화함. 매일 쌓이는 운영 데이터는 결정적 파이프라인이 경영 보고서로 만들며, LLM 판단은 근거가 있어야 하고 없으면 반려됨. 범위가 정해진 chatbot이 근거와 함께 답함. 직접 만들고 운영까지 맡고 있음.' } },
+        status: production, stack: ['Claude Code', 'PostgreSQL', 'Flask', 'Android', 'AWS CDK', 'Anthropic SDK', 'LLM'],
+        text: { en: 'Structured fragmented business records into a database. Daily operational data feeds a deterministic pipeline for management reports; LLM judgments must cite evidence or are rejected. A scope-limited chatbot answers with evidence. Built with Claude Code, and operated end to end.', ko: '업무 자료 조각을 DB로 정형화함. 매일 쌓이는 운영 데이터는 결정적 파이프라인이 경영 보고서로 만들며, LLM 판단은 근거가 있어야 하고 없으면 반려됨. 범위가 정해진 chatbot이 근거와 함께 답함. Claude Code로 직접 만들고 운영까지 맡고 있음.' } },
     ],
   },
 ];
