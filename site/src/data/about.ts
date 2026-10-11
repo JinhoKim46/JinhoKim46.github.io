@@ -19,8 +19,8 @@ export const bio: { lead: T; paragraphs: T[] } = {
       ko: 'FAU와 Siemens Healthineers에서 진행한 박사과정 연구에서는 MRI, 특히 MRCP를 더 빠르고 실용적으로 만드는 데 집중했습니다. 3 T와 0.55 T MRI를 위한 자기지도 재구성, 14초 호흡정지 MRCP의 스캔별 재구성, 영상 분할 기반 MIP 개선 기술을 개발했습니다.',
     },
     {
-      en: 'I enjoy taking ideas beyond publications and turning them into systems people can use. Alongside my MRI research, I build AI infrastructure and LLM-based agents, and have built and run a full-stack service for an SME that is in daily use.',
-      ko: '저는 연구 아이디어를 논문에만 머무르게 하지 않고 실제 사용할 수 있는 시스템으로 구현하는 일을 좋아합니다. MRI 연구와 함께 AI 인프라와 LLM 기반 에이전트를 개발하고 있으며, 중소기업의 풀스택 서비스를 직접 만들고 운영하고 있습니다. 지금도 매일 쓰이는 서비스입니다.',
+      en: 'I enjoy taking ideas beyond publications and turning them into systems people can use. Alongside my MRI research, I build AI infrastructure and LLM-based agents, and have built, deployed and run a full-stack service for an SME that is in daily use.',
+      ko: '저는 연구 아이디어를 논문에만 머무르게 하지 않고 실제 사용할 수 있는 시스템으로 구현하는 일을 좋아합니다. MRI 연구와 함께 AI 인프라와 LLM 기반 에이전트를 개발하고 있으며, 중소기업의 풀스택 서비스를 직접 만들고 배포하며 운영하고 있습니다.',
     },
     {
       en: 'My next research direction is agentic AI in medical imaging, especially the MRI workflow, where I can combine my reconstruction work with the agent systems I build now.',
