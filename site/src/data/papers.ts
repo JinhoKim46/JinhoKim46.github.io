@@ -23,7 +23,7 @@ export const journals: Paper[] = [
 
 export const conferences: Paper[] = [
   { authors: 'Kim J, Nickel MD, Knoll F.', title: 'Deep learning-based reconstruction of accelerated MR cholangiopancreatography.', venue: 'ISMRM & ISMRT Annual Meeting', detail: 'Singapore, 2024.' },
-  { authors: 'Kim J, Benkert T, Nickel MD, Knoll F.', title: 'Analyzing of two deep learning-based reconstruction models for highly accelerated MR cholangiopancreatography.', venue: 'ISMRM & ISMRT Annual Meeting', detail: 'Toronto, 2023.' },
+  { authors: 'Kim J, Benkert T, Riemenschneider B, Nickel MD, Knoll F.', title: 'Analysis of deep learning-based reconstruction models for highly accelerated MR cholangiopancreatography: to fine-tune or not to fine-tune.', venue: 'ISMRM & ISMRT Annual Meeting', detail: 'Toronto, 2023.' },
   { authors: 'Kim J, Gadjimuradov F, Benkert T, Vahle T, Maier A.', title: 'Deep learning-based respiratory motion correction in free-breathing abdominal diffusion-weighted imaging.', venue: 'ISMRM & ISMRT Annual Meeting', detail: 'London, 2022.' },
 ];
 
@@ -36,8 +36,8 @@ export const talks: Paper[] = [
 ];
 
 export const datasets: Paper[] = [
-  { authors: 'Kim J, Nickel D, Knoll F.', title: 'Single breath-hold MRCP at 3T using a 3D T2-weighted TSE (3D SPACE) sequence for zero-shot learning reconstruction.', venue: 'Zenodo', detail: 'v1.0.0, 2025.', href: doi('10.5281/zenodo.16731625') },
-  { authors: 'Kim J, Nickel D, Knoll F.', title: 'Respiratory-triggered MRCP acquisition at 3T using a T2-weighted TSE (3D SPACE) sequence for deep learning-based reconstruction of MRCP.', venue: 'Zenodo', detail: 'v3, 2024.', href: doi('10.5281/zenodo.13912092') },
+  { authors: 'Kim J, Nickel MD, Knoll F.', title: 'Single breath-hold MRCP at 3T using a 3D T2-weighted TSE (3D SPACE) sequence for zero-shot learning reconstruction.', venue: 'Zenodo', detail: 'v1.0.0, 2025.', href: doi('10.5281/zenodo.16731625') },
+  { authors: 'Kim J, Nickel MD, Knoll F.', title: 'Respiratory-triggered MRCP acquisition at 3T using a T2-weighted TSE (3D SPACE) sequence for deep learning-based reconstruction of MRCP.', venue: 'Zenodo', detail: 'v3, 2024.', href: doi('10.5281/zenodo.13912092') },
 ];
 
 export const software: Paper[] = [
