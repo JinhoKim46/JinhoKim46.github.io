@@ -9,6 +9,12 @@ const { title, titleKo, description, descriptionKo, lang } = Astro.props;
 const fullEn = title === ui.name.en ? ui.name.en : `${title} | ${ui.name.en}`;
 const fullKo = titleKo === ui.name.ko ? ui.name.ko : `${titleKo} | ${ui.name.ko}`;
 const pageEn = Astro.url.pathname.replace(/^\/ko(?=\/|$)/, '') || '/';
+// Build date = deploy date; month precision so minor fixes don't churn it.
+const built = new Date();
+const updated = {
+  en: built.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'Europe/Berlin' }),
+  ko: built.toLocaleDateString('ko-KR', { month: 'long', year: 'numeric', timeZone: 'Europe/Berlin' }),
+};
 ---
 <!doctype html>
 <html lang={lang} data-title-en={fullEn} data-title-ko={fullKo}>
@@ -60,6 +66,8 @@ const pageEn = Astro.url.pathname.replace(/^\/ko(?=\/|$)/, '') || '/';
         <span class="l-en mr-auto font-semibold text-white">{ui.name.en}</span>
         <span class="l-ko mr-auto font-semibold text-white">{ui.name.ko}</span>
         {contacts.map((c) => <a href={c.href} class="text-white hover:text-[#c9d3e6]" data-newtab={c.href.startsWith('mailto:') ? undefined : true}>{c.label}</a>)}
+        <span class="l-en w-full text-sm">Last updated: {updated.en}</span>
+        <span class="l-ko w-full text-sm">최종 업데이트: {updated.ko}</span>
       </div>
     </footer>
 
