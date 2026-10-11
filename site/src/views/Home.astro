@@ -80,16 +80,16 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
           </div>
         ))}
       </div>
-      <div class="mt-12"><Glossary lang={lang} terms={['LLM', 'LoRA', 'CDK', 'AST', 'SDK']} /></div>
+      <div class="mt-12"><Glossary lang={lang} terms={['LLM', 'LoRA', 'CDK', 'AST', 'SDK', 'PR']} /></div>
     </section>
 
     <section id={`${lang}-about`} class={`${wrap} py-16 border-t border-rule`}>
       <h2 class={h2}>{label('about')}</h2>
       <div class="mt-8">
-        <div class="max-w-[56em]">
-          <p class="m-0 max-w-[40em] text-lg font-semibold leading-[1.6] text-navy">{pick(bio.lead, lang)}</p>
-          {bio.paragraphs.map((p) => <p class="mt-4 mb-0 max-w-[40em] text-lg leading-[1.8] text-body">{pick(p, lang)}</p>)}
-          <div class="mt-5 max-w-[40em]"><Glossary lang={lang} terms={['SME']} /></div>
+        <div>
+          <p class="m-0 text-lg font-semibold leading-[1.6] text-navy">{pick(bio.lead, lang)}</p>
+          {bio.paragraphs.map((p) => <p class="mt-4 mb-0 text-lg leading-[1.8] text-body">{pick(p, lang)}</p>)}
+          {lang === 'en' && <div class="mt-5"><Glossary lang={lang} terms={['SME']} /></div>}
           {[
             { title: lang === 'ko' ? '경력' : 'Experience', steps: [...learning, ...experience] },
             { title: lang === 'ko' ? '학력' : 'Education', steps: education },
@@ -103,8 +103,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
                     <p class="m-0 text-sm text-faint">{pick(x.when, lang)}</p>
                     <p class="m-0 mt-0.5 text-[17px] font-semibold text-navy">{pick(x.what, lang)}</p>
                     <p class="m-0 text-[15px] text-muted">{pick(x.where, lang)}</p>
-                    {x.note && <p class="m-0 mt-1 max-w-[44em] text-[15px] leading-relaxed text-body">{pick(x.note, lang)}</p>}
-                  </li>
+                    {x.note && <p class="m-0 mt-1 max-w-[44em] text-[15px] leading-relaxed text-body">{pick(x.note, lang)}</p>}                  </li>
                 ))}
               </ol>
             </div>

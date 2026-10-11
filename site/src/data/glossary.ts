@@ -21,4 +21,5 @@ export const glossary: Record<string, string> = {
   SDK: 'software development kit',
   CDK: 'AWS Cloud Development Kit',
   SME: 'small and medium-sized enterprise',
+  PR: 'pull request',
 };

@@ -40,7 +40,7 @@ export const compareCases: CompareCase[] = [
       en: 'Cropped coronal MIP from a volunteer at 3 T. PI-RT was acquired separately, so structures are slightly displaced. Training times are 11-volunteer averages. Kim et al., Magnetic Resonance in Medicine 2026.',
       ko: '3 T 자원자 1명의 관상면 MIP 일부입니다. PI-RT는 별도로 촬영한 호흡동기 영상으로, 구조물 위치가 조금 다릅니다. 학습 시간은 11명 평균입니다. Kim et al., Magnetic Resonance in Medicine 2026.',
     },
-    gloss: ['MRCP', 'ZS-BH', 'PI-RT', 'CS', 'R', 'SSDU', 'SNR', 'PSNR'],
+    gloss: ['MRI', 'MRCP', 'ZS-BH', 'PI-RT', 'MIP', 'CS', 'R', 'SSDU', 'SNR', 'PSNR'],
     corRatio: [508, 387],
     start: { mode: 'p23', a: 0, b: 50 },
     layers: [
