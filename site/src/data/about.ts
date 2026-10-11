@@ -90,7 +90,7 @@ export const extras: { title: T; items: T[] }[] = [
     title: { en: 'Community', ko: '커뮤니티' },
     items: [
       { en: 'Founder of the largest Korean online community in Franconia, 2019–now', ko: '프랑켄 지역 최대 한인 온라인 커뮤니티 설립·운영, 2019–현재' },
-      { en: 'Founder and president of KOIN, a Korean students initiative, 2023–2024', ko: '한인 학생 모임 KOIN 설립, 회장, 2023 설립 및 회장 취임' },
+      { en: 'Founder and president of KOIN, a Korean students initiative, 2023–2024', ko: '한인 학생 모임 KOIN 설립·회장, 2023–2024' },
     ],
   },
   {
