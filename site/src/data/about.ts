@@ -64,7 +64,7 @@ export const learning: Step[] = [
 /** Degrees, newest first (CV: education). */
 export const education: Step[] = [
   {
-    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'Dr.-Ing. in Artificial Intelligence in Biomedical Engineering', ko: 'Dr.-Ing. in Artificial Intelligence in Biomedical Engineering' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
+    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'Dr.-Ing. in Artificial Intelligence in Biomedical Engineering', ko: '공학박사 (Dr.-Ing.), Artificial Intelligence in Biomedical Engineering' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
     note: { en: 'Dissertation submitted, defense upcoming.\nDissertation: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.', ko: '학위논문 제출, 디펜스 예정.\n학위논문: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.' },
   },
   {
