@@ -40,7 +40,7 @@ export const experience: Step[] = [
     note: { en: 'Deep learning MRCP reconstruction and segmentation, distributed training on DGX and Slurm, Computational MRI and Deep Learning in MRI teaching.', ko: 'MRCP 딥러닝 재구성과 분할, DGX·Slurm 분산 학습, Computational MRI와 Deep Learning in MRI 강의.' },
   },
   {
-    when: { en: 'Nov 2020 – Jul 2021', ko: '2020.11 – 2021.07' }, what: { en: 'Deep learning research intern', ko: '딥러닝 연구 인턴' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
+    when: { en: 'Nov 2020 – Jul 2021', ko: '2020.11 – 2021.07' }, what: { en: "Deep learning research intern and master's thesis", ko: '딥러닝 연구 인턴 및 석사논문' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
     note: { en: 'Respiratory motion correction for diffusion-weighted MRI.', ko: '확산강조 MRI의 호흡 움직임 보정.' },
   },
   {
@@ -60,11 +60,11 @@ export const learning: Step[] = [
 /** Degrees, newest first (CV: education). */
 export const education: Step[] = [
   {
-    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'PhD (Dr.-Ing.), AI in Biomedical Engineering', ko: '공학박사 (Dr.-Ing.), AI in Biomedical Engineering' }, where: same('FAU Erlangen-Nürnberg'),
+    when: { en: 'Oct 2021 – now', ko: '2021.10 – 현재' }, what: { en: 'PhD (Dr.-Ing.), AI in Biomedical Engineering', ko: '공학박사 (Dr.-Ing.), AI in Biomedical Engineering' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
     note: { en: 'Dissertation submitted, defense upcoming. Dissertation: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.', ko: '학위논문 제출, 디펜스 예정. 학위논문: Applications of Deep Learning Models to Magnetic Resonance Cholangiopancreatography: Reconstruction and Visualization.' },
   },
   {
-    when: { en: 'Oct 2018 – Jul 2021', ko: '2018.10 – 2021.07' }, what: { en: 'M.Sc., Medical Engineering', ko: '공학석사 (M.Sc.), Medical Engineering' }, where: same('FAU Erlangen-Nürnberg'),
+    when: { en: 'Oct 2018 – Jul 2021', ko: '2018.10 – 2021.07' }, what: { en: 'M.Sc., Medical Engineering', ko: '공학석사 (M.Sc.), Medical Engineering' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
     note: { en: 'Thesis on deep learning respiratory motion correction in abdominal DWI, graded 1.0. Final grade 1.8.', ko: '복부 확산강조 MRI의 딥러닝 호흡 움직임 보정 논문, 1.0. 최종 성적 1.8.' },
   },
   {
