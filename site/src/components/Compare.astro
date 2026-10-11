@@ -1,6 +1,7 @@
 ---
 // Image comparison slider. Rules: documents/rules/figures.md.
 import { compareCases } from '../data/compare';
+import { glossary } from '../data/glossary';
 import { localePath, pick, ui, type Lang } from '../i18n';
 
 interface Props { lang: Lang; only?: 'zs' | 'dl' | 'seg' }
@@ -12,6 +13,7 @@ const cases = compareCases.filter((c) => !only || c.id === only).map((c) => ({
   href: localePath(`/research/${c.slug}`, lang),
   label: c.label[lang],
   caption: c.caption[lang],
+  gloss: c.gloss.map((k) => [k, glossary[k]]),
   corRatio: c.corRatio,
   sagRatio: c.sagRatio ?? null,
   start: c.start,
@@ -26,6 +28,7 @@ const t = {
     ? { study: '연구 선택', quick: '비교 조합', cor: 'Coronal', sag: 'Sagittal', all: '셋 다 보기', divider: 'Divider' }
     : { study: 'Study', quick: 'Comparisons', cor: 'Coronal', sag: 'Sagittal', all: 'All three', divider: 'Divider' }),
   caseStudy: pick(ui.caseStudy, lang),
+  abbr: lang === 'ko' ? '약어' : 'Abbreviations',
 };
 const first = cases[0];
 const fallback = first.layers[first.layers.length - 1];
@@ -63,7 +66,7 @@ const fallback = first.layers[first.layers.length - 1];
   type Mode = 'all' | 'p12' | 'p23' | 'p13';
   type Key = 'acq' | 'time' | 'train';
   interface L { name: string; cor: string; sag: string | null; lines: [Key, string][] }
-  interface C { id: string; slug: string; href: string; label: string; caption: string; corRatio: [number, number]; sagRatio: [number, number] | null; start: { mode: Mode; a: number; b: number }; emphasis: Partial<Record<'p12' | 'p23' | 'p13', Key[]>>; layers: L[] }
+  interface C { id: string; slug: string; href: string; label: string; caption: string; gloss: [string, string][]; corRatio: [number, number]; sagRatio: [number, number] | null; start: { mode: Mode; a: number; b: number }; emphasis: Partial<Record<'p12' | 'p23' | 'p13', Key[]>>; layers: L[] }
   interface Data { cases: C[]; t: Record<string, string>; tabs: boolean }
 
   const pairs: Record<'p12' | 'p23' | 'p13', number[]> = { p12: [0, 1], p23: [1, 2], p13: [0, 2] };
@@ -197,13 +200,19 @@ const fallback = first.layers[first.layers.length - 1];
       });
 
       const cap = el('figcaption', 'text-sm leading-relaxed text-muted', c.caption);
+      const gloss = el('p', 'm-0 mt-2 text-[13px] leading-relaxed text-faint');
+      gloss.append(el('span', 'font-semibold', `${t.abbr}: `));
+      c.gloss.forEach(([k, d], i) => {
+        if (i) gloss.append('; ');
+        gloss.append(el('span', 'text-muted', k), `, ${d}`);
+      });
       const link = this.d.tabs ? el('a', 'cmp-study self-start text-[15px] font-semibold', `${t.caseStudy}: ${c.label} →`) : null;
       if (link) link.href = c.href;
       this.body.append(head);
       if (this.presets.length) this.body.append(presetBar);
       this.body.append(rangeBar, legend);
       if (link) this.body.append(link);
-      this.body.append(cap);
+      this.body.append(cap, gloss);
     }
 
     /** Which divider a range input drives in the current mode. */

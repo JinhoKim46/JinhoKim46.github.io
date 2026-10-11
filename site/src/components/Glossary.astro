@@ -1,0 +1,16 @@
+---
+import { glossary } from '../data/glossary';
+import type { Lang } from '../i18n';
+
+interface Props { lang: Lang; terms: string[] }
+const { lang, terms } = Astro.props;
+---
+<p class="m-0 text-[13px] leading-relaxed text-faint">
+  <span class="font-semibold">{lang === 'ko' ? '약어' : 'Abbreviations'}:</span>
+  {terms.map((t, i) => (
+    <>
+      {i > 0 && '; '}
+      <span class="text-muted">{t}</span>, {glossary[t]}
+    </>
+  ))}
+</p>
