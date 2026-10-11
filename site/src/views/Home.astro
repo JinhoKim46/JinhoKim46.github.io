@@ -90,7 +90,7 @@ const ext = (h?: string) => !!h && !h.startsWith('/');
                     <p class="m-0 text-sm text-faint">{pick(x.when, lang)}</p>
                     <p class="m-0 mt-0.5 text-[17px] font-semibold text-navy">{pick(x.what, lang)}</p>
                     <p class="m-0 text-[15px] text-muted">{pick(x.where, lang)}</p>
-                    {x.note && <p class="m-0 mt-1 max-w-[44em] text-[15px] leading-relaxed text-body">{pick(x.note, lang)}</p>}                  </li>
+                    {x.note && <p class="m-0 mt-1 max-w-[44em] whitespace-pre-line text-[15px] leading-relaxed text-body">{pick(x.note, lang)}</p>}                  </li>
                 ))}
               </ol>
             </div>

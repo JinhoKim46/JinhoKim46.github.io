@@ -65,11 +65,11 @@ export const education: Step[] = [
   },
   {
     when: { en: 'Oct 2018 – Jul 2021', ko: '2018.10 – 2021.07' }, what: { en: 'M.Sc., Medical Engineering', ko: '공학석사 (M.Sc.), Medical Engineering' }, where: same('Siemens Healthineers / FAU Erlangen-Nürnberg'),
-    note: { en: 'Thesis: Deep Learning-Based Respiratory Motion Correction in Free-Breathing Abdominal Diffusion-Weighted Imaging (1.0). Final grade 1.8.', ko: '학위논문: Deep Learning-Based Respiratory Motion Correction in Free-Breathing Abdominal Diffusion-Weighted Imaging (1.0). 최종 성적 1.8.' },
+    note: { en: 'Final grade 1.8.\nThesis: Deep Learning-Based Respiratory Motion Correction in Free-Breathing Abdominal Diffusion-Weighted Imaging (1.0).', ko: '최종 성적 1.8.\n학위논문: Deep Learning-Based Respiratory Motion Correction in Free-Breathing Abdominal Diffusion-Weighted Imaging (1.0).' },
   },
   {
     when: { en: 'Mar 2011 – Aug 2018', ko: '2011.03 – 2018.08' }, what: { en: 'B.Eng., Information, Communication and Electronics Engineering', ko: '공학사 (B.Eng.), Information, Communication and Electronics Engineering' }, where: { en: 'The Catholic University of Korea', ko: '가톨릭대학교' },
-    note: { en: 'Double major in computer science. Exchange at St. Cloud State University, 2016. Final grade 4.03/4.5.', ko: '컴퓨터공학 복수전공. 2016년 St. Cloud State University 교환학생. 최종 성적 4.03/4.5.' },
+    note: { en: 'Final grade 4.03/4.5.\nDouble major in computer science. Exchange at St. Cloud State University, 2016.', ko: '최종 성적 4.03/4.5.\n컴퓨터공학 복수전공. 2016년 St. Cloud State University 교환학생.' },
   },
 ];
 
