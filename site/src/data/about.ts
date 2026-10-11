@@ -53,7 +53,7 @@ export const experience: Step[] = [
 export const learning: Step[] = [
   {
     when: { en: 'Sep 2026 – now', ko: '2026.09 – 현재' }, what: same('Agentic AI engineering'), where: { en: 'Personal projects and Turing College AI Engineering', ko: '개인 프로젝트, Turing College AI Engineering' },
-    note: { en: 'Hands-on LLM agent and tool building alongside coursework.', ko: 'LLM agent와 도구 직접 구현, 과정 학습 병행.' },
+    note: { en: 'Hands-on LLM agent and tool building alongside coursework.', ko: 'LLM agent와 도구 직접 구현, 학습 과정 병행.' },
   },
 ];
 
