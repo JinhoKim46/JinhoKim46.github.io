@@ -60,7 +60,7 @@ export const groups: { title: string; items: Project[] }[] = [
         text: { en: 'Schedules 20 training runs inside one Slurm job. In a 20-configuration demo, GPU idle time fell 63% and blocked time 91% against array jobs.', ko: 'Slurm job 하나에 학습 20개를 배정해 실행함. 20개 설정 데모에서 array job 대비 GPU idle time을 63%, blocked time을 91% 줄임.' } },
         
       { title: 'MLflow and cost dashboard', meta: { en: '2026 · BMW Group', ko: '2026 · BMW Group' },
-        status: production, stack: ['MLflow', 'AWS', 'Grafana'],
+        status: { en: 'Internal tool', ko: '사내 도구' }, stack: ['MLflow', 'AWS', 'Grafana'],
         text: { en: 'Self-hosted MLflow on AWS ECS, RDS and S3 for about 30 users from 8 projects, with a GRAFANA dashboard for AI workload cost.', ko: 'AWS ECS, RDS, S3 위에 MLflow를 self-hosting해 8개 프로젝트의 약 30명이 쓰도록 구성함. AI workload 비용을 보는 GRAFANA dashboard도 함께 만듦.' } },
         
       { title: 'Distributed training', meta: { en: '2021–2026 · Siemens Healthineers / FAU', ko: '2021–2026 · Siemens Healthineers / FAU' },
