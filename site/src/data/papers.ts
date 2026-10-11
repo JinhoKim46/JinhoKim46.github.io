@@ -17,8 +17,8 @@ export const journals: Paper[] = [
   { authors: 'Kim J*, Werner S*, Afat S, Nickel MD, Knoll F.', title: 'Clinical evaluation of nnU-Net-based segmentation for enhanced MRCP maximum intensity projection visualization.', venue: 'Magnetic Resonance Materials in Physics, Biology and Medicine', detail: '2026.', href: doi('10.1007/s10334-026-01407-x') },
   { authors: 'Kim J, Nickel MD, Knoll F.', title: 'Zero-shot self-supervised learning of single breath-hold magnetic resonance cholangiopancreatography (MRCP) reconstruction.', venue: 'Magnetic Resonance in Medicine', detail: '2026.', href: doi('10.1002/mrm.70467') },
   { authors: 'Kim J, Nickel MD, Knoll F.', title: 'Deep learning-based accelerated MR cholangiopancreatography without fully-sampled data.', venue: 'NMR in Biomedicine', detail: '38(3):e70002, 2025.', href: doi('10.1002/nbm.70002') },
-  { authors: 'Kim J, Lee C.', title: 'Efficient method for real-time implementation of image enhancement and image upscaling.', venue: 'Journal of IEIE', detail: '54(11):146–153, 2017.', href: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002285062', linkLabel: 'KCI' },
-  { authors: 'Kim J, Gil M, Lee C.', title: 'Efficient color image enhancement technique using saturation components of color images.', venue: 'Journal of KIBME', detail: '20(5):770–773, 2015.', href: doi('10.5909/JBE.2015.20.5.770') },
+  { authors: 'Kim J, Lee C.', title: 'Efficient method for real-time implementation of image enhancement and image upscaling.', venue: 'Journal of the Institute of Electronics and Information Engineers', detail: '54(11):146–153, 2017 (in Korean).', href: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002285062', linkLabel: 'KCI' },
+  { authors: 'Kim J, Gil M, Lee C.', title: 'Efficient color image enhancement technique using saturation components of color images.', venue: 'Journal of Broadcast Engineering', detail: '20(5):770–773, 2015 (in Korean).', href: doi('10.5909/JBE.2015.20.5.770') },
 ];
 
 export const conferences: Paper[] = [
