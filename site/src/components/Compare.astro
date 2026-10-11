@@ -45,7 +45,9 @@ const fallback = first.layers[first.layers.length - 1];
   .compare .cmp-stage { display: grid; column-gap: 4px; background: #000; border-radius: 4px; overflow: hidden; }
   .compare .cmp-titles { display: grid; column-gap: 4px; font-size: 13px; font-weight: 600; color: var(--color-navy); }
   .compare .cmp-pane { position: relative; overflow: hidden; }
-  .compare .cmp-pane img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+  /* .cmp-fit is the image's own box (its aspect ratio, centred, full pane height); the black pane around it is padding. */
+  .compare .cmp-fit { position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; margin: 0 auto; }
+  .compare .cmp-fit img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; user-select: none; -webkit-user-drag: none; pointer-events: none; }
   .compare .cmp-cor { cursor: ew-resize; touch-action: pan-y; }
   .compare .cmp-handle { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: #fff; pointer-events: none; }
   .compare .cmp-handle span { position: absolute; top: 50%; left: -10px; width: 20px; height: 40px; margin-top: -20px; border-radius: 10px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
@@ -133,27 +135,44 @@ const fallback = first.layers[first.layers.length - 1];
 
       const stage = el('div', 'cmp-stage');
       stage.style.gridTemplateColumns = cols;
-      const cor = el('div', 'cmp-pane cmp-cor');
-      cor.style.aspectRatio = `${c.corRatio[0]} / ${c.corRatio[1]}`;
+      // Home: every study's stage gets the height of the widest one (Segmentation, coronal + sagittal);
+      // narrower images sit centred on black. Case-study pages keep each pane at its image's aspect ratio.
+      const home = this.d.tabs;
+      const fit = (pane: HTMLElement, r: [number, number]) => {
+        if (!home) pane.style.aspectRatio = `${r[0]} / ${r[1]}`;
+        const f = el('div', 'cmp-fit');
+        f.style.aspectRatio = `${r[0]} / ${r[1]}`;
+        pane.append(f);
+        return f;
+      };
+      if (home) {
+        const w = (x: C) => x.corRatio[0] / x.corRatio[1] + (x.sagRatio ? x.sagRatio[0] / x.sagRatio[1] : 0);
+        const ref = this.d.cases.reduce((m, x) => (w(x) > w(m) ? x : m));
+        stage.style.height = `calc((100cqw - ${ref.sagRatio ? 4 : 0}px) / ${w(ref)})`;
+      }
+      const corPane = el('div', 'cmp-pane');
+      const cor = fit(corPane, c.corRatio);
+      cor.classList.add('cmp-cor');
       this.corImgs = c.layers.map((l) => { const i = el('img'); i.src = l.cor; i.alt = `${l.name}, ${t.cor}`; i.draggable = false; cor.append(i); return i; });
       this.handles = [0, 1].map(() => { const h = el('div', 'cmp-handle'); h.append(el('span')); cor.append(h); return h; });
       this.chips = c.layers.map((l) => { const s = el('span', 'cmp-chip', l.name); cor.append(s); return s; });
       cor.addEventListener('pointerdown', (e) => this.down(e, cor));
       cor.addEventListener('pointermove', (e) => this.drag && this.set(this.drag, this.pct(e, cor)));
       ['pointerup', 'pointercancel'].forEach((ev) => cor.addEventListener(ev, () => (this.drag = null)));
-      stage.append(cor);
+      stage.append(corPane);
 
       this.sagImgs = []; this.lines = [];
       if (c.sagRatio) {
-        const sag = el('div', 'cmp-pane');
-        sag.setAttribute('aria-hidden', 'true');
-        sag.style.aspectRatio = `${c.sagRatio[0]} / ${c.sagRatio[1]}`;
+        const sagPane = el('div', 'cmp-pane');
+        sagPane.setAttribute('aria-hidden', 'true');
+        const sag = fit(sagPane, c.sagRatio);
         this.sagImgs = c.layers.map((l) => { const i = el('img'); i.src = l.sag ?? ''; i.alt = ''; sag.append(i); return i; });
         this.lines = [0, 1].map(() => { const ln = el('div', 'cmp-line'); sag.append(ln); return ln; });
-        stage.append(sag);
+        stage.append(sagPane);
       }
 
       const head = el('div', 'flex flex-col gap-1.5');
+      head.style.containerType = 'inline-size';
       head.append(titles, stage);
 
       const presetBar = el('div', 'flex flex-nowrap items-center gap-x-3.5 overflow-x-auto');
