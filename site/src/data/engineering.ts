@@ -29,7 +29,7 @@ export const groups: { title: string; items: Project[] }[] = [
         status: openSource, stack: ['LLM', 'OpenRouter', 'Streamlit'],
         text: { en: 'Mock interviews built from a real job ad and CV. Models ask and judge; code counts, weights and decides the score, and every input passes an injection guard.', ko: '실제 job description과 CV로 mock interview를 진행하도록 구현함. 질문과 평가는 모델이, 점수 계산은 코드가 맡고, 모든 입력은 injection guard를 거치도록 함.' } },
 
-      { title: 'route-work', href: gh('agent-skills'), meta: { en: `2026 · Personal project`, ko: `2026 · 개인 프로젝트` },
+      { title: 'route-work', href: gh('route-work'), meta: { en: `2026 · Personal project`, ko: `2026 · 개인 프로젝트` },
         status: claudeSkill, stack: ['Claude Code', 'Agent skills'],
         text: { en: 'A Claude Code skill that sizes a coding request and routes it through the right skills, issues and PRs.', ko: '코딩 요청의 규모를 판단해 알맞은 skill과 issue·PR 흐름으로 보내도록 구현함.' } },
 
