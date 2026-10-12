@@ -124,7 +124,6 @@ const updated = {
         const href = a.getAttribute('href') ?? '';
         const plainHash = href.startsWith('#');
         const mail = href.startsWith('mailto:');
-        const external = /^https?:\/\//.test(href);
         // Only case-study pages and engineering repository links open in a new tab.
         const newTab = !plainHash && !mail && (href.includes('/research/') || a.dataset.newtab !== undefined);
         if (newTab) {

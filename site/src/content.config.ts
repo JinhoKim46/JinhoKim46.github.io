@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 // One MDX file per study per language: src/content/research/<lang>/<slug>.mdx
@@ -14,7 +15,7 @@ const research = defineCollection({
     order: z.number(),
     role: z.string(),
     collaborators: z.string(),
-    links: z.array(z.object({ label: z.string(), href: z.string().url() })),
+    links: z.array(z.object({ label: z.string(), href: z.url() })),
     compare: z.enum(['zs', 'dl', 'seg']),
     image: z.object({
       src: z.string(),
