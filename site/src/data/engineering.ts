@@ -27,7 +27,7 @@ export const groups: { title: string; items: Project[] }[] = [
     items: [
       { title: 'MILO', meta: { en: '2026 · Turing College AI Engineering, Sprint 2', ko: '2026 · Turing College AI Engineering, Sprint 2' },
         status: { en: 'Private repo', ko: '비공개 repo' }, stack: ['Python', 'Flask', 'RAG', 'Chroma', 'Supabase PostgreSQL', 'OpenRouter', 'Claude Sonnet'],
-        text: { en: 'An app that listens to a business owner\'s story, diagnoses the workflow, and proposes which parts to automate. Built end to end: the owner talks with an AI assistant, every fact is stored with the quote it came from, and on submit it produces a report with the current process, automation candidates, recommended modules, an indicative cost range and next steps. Dense RAG over the knowledge base, Supabase PostgreSQL with row-level security, a Flask app, and Claude Sonnet as the product model.', ko: '고객의 비즈니스 이야기를 듣고 워크플로우를 진단해, 자동화할 수 있는 부분과 그 제안을 만드는 앱을 혼자 end-to-end로 구현함. 사업자는 AI 어시스턴트와 대화하고, 모든 사실은 근거 문장과 함께 저장됨. 제출하면 현재 프로세스, 자동화 후보, 추천 모듈, 예상 비용 범위, 다음 단계를 담은 보고서를 만듦. 지식 베이스에 dense RAG를, 데이터에 RLS가 적용된 Supabase PostgreSQL을, 웹에 Flask를 쓰고 제품 모델은 Claude Sonnet임.' } },
+        text: { en: 'Listens to a business owner\'s story, diagnoses the workflow, and proposes automation with recommended modules and a cost range. Built end to end on dense RAG, Supabase PostgreSQL and Flask.', ko: '고객 이야기를 듣고 워크플로우를 진단해 자동화 후보와 추천 모듈, 예상 비용 범위를 제안하는 앱을 혼자 구현함. dense RAG, Supabase PostgreSQL, Flask로 end-to-end 구축함.' } },
 
       { title: 'Interview Helper', href: gh('TC_AE_Sprint1_Interview_helper'), meta: { en: '2026 · Turing College AI Engineering', ko: '2026 · Turing College AI Engineering' },
         status: openSource, stack: ['LLM', 'OpenRouter', 'Streamlit'],
