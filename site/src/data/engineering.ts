@@ -75,7 +75,7 @@ export const groups: { title: string; items: Project[] }[] = [
     items: [
       { title: 'Contract operations platform', meta: { en: '2026 · Project for an SME', ko: '2026 · 중소기업 프로젝트' },
         status: production, stack: ['Claude Code', 'PostgreSQL', 'Flask', 'Android', 'AWS CDK', 'Anthropic SDK', 'RAG', 'Titan Embeddings V2', 'Hybrid search', 'LLM'],
-        text: { en: 'Structured fragmented business records into a PostgreSQL database, with a Flask web app and an Android client on top. A deterministic pipeline turns daily operational data into management reports. Added a retrieval chatbot over live records: keyword and vector search run side by side and merge into one candidate pool, and the assistant queries through a read-only database role. Infrastructure is defined with AWS CDK. Raised answer accuracy from a first measurement of 48% to 99% through a 12-round improvement loop. Built with Claude Code, and operated end to end.', ko: '업무 자료 조각을 PostgreSQL DB로 정형화하고, 그 위에 Flask 웹 앱과 Android 클라이언트를 만듦. 매일 쌓이는 운영 데이터는 결정적 파이프라인이 경영 보고서로 만듦. 운영 기록을 검색해 답하는 챗봇을 추가함. 키워드 검색과 벡터 검색을 나란히 돌려 후보 하나로 합치고, 비서는 읽기 전용 DB 권한으로만 조회함. 인프라는 AWS CDK로 정의함. 12라운드 개선 루프로 답변 정확도를 첫 측정 48%에서 최종 99%까지 높임. Claude Code로 직접 만들고 운영까지 맡고 있음.' } },
+        text: { en: 'Structured business records into PostgreSQL, with a Flask web app and an Android client. Built a RAG chatbot over live records: keyword and vector search merged into one candidate pool. Raised answer accuracy from 48% to 99% in a 12-round improvement loop.', ko: '업무 자료를 PostgreSQL로 정형화하고 Flask 웹 앱과 Android 클라이언트를 만듦. 운영 기록을 검색하는 RAG 챗봇을 추가해 키워드·벡터 검색 후보를 합침. 12라운드 개선 루프로 답변 정확도를 첫 측정 48%에서 최종 99%까지 높임.' } },
     ],
   },
 ];
