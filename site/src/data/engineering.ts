@@ -25,6 +25,10 @@ export const groups: { title: string; items: Project[] }[] = [
   {
     title: 'Agentic AI',
     items: [
+      { title: 'MILO', meta: { en: '2026 · Turing College AI Engineering, Sprint 2', ko: '2026 · Turing College AI Engineering, Sprint 2' },
+        status: { en: 'Private repo', ko: '비공개 repo' }, stack: ['Python', 'Flask', 'RAG', 'Chroma', 'Supabase PostgreSQL', 'OpenRouter', 'Claude Sonnet'],
+        text: { en: 'An app that listens to a business owner\'s story, diagnoses the workflow, and proposes which parts to automate. Built end to end: the owner talks with an AI assistant, every fact is stored with the quote it came from, and on submit it produces a report with the current process, automation candidates, recommended modules, an indicative cost range and next steps. Dense RAG over the knowledge base, Supabase PostgreSQL with row-level security, a Flask app, and Claude Sonnet as the product model.', ko: '고객의 비즈니스 이야기를 듣고 워크플로우를 진단해, 자동화할 수 있는 부분과 그 제안을 만드는 앱을 혼자 end-to-end로 구현함. 사업자는 AI 어시스턴트와 대화하고, 모든 사실은 근거 문장과 함께 저장됨. 제출하면 현재 프로세스, 자동화 후보, 추천 모듈, 예상 비용 범위, 다음 단계를 담은 보고서를 만듦. 지식 베이스에 dense RAG를, 데이터에 RLS가 적용된 Supabase PostgreSQL을, 웹에 Flask를 쓰고 제품 모델은 Claude Sonnet임.' } },
+
       { title: 'Interview Helper', href: gh('TC_AE_Sprint1_Interview_helper'), meta: { en: '2026 · Turing College AI Engineering', ko: '2026 · Turing College AI Engineering' },
         status: openSource, stack: ['LLM', 'OpenRouter', 'Streamlit'],
         text: { en: 'Mock interviews built from a real job ad and CV. Models ask and judge; code counts, weights and decides the score, and every input passes an injection guard.', ko: '실제 job description과 CV로 mock interview를 진행하도록 구현함. 질문과 평가는 모델이, 점수 계산은 코드가 맡고, 모든 입력은 injection guard를 거치도록 함.' } },
@@ -70,8 +74,8 @@ export const groups: { title: string; items: Project[] }[] = [
     title: 'Full-stack development',
     items: [
       { title: 'Contract operations platform', meta: { en: '2026 · Project for an SME', ko: '2026 · 중소기업 프로젝트' },
-        status: production, stack: ['Claude Code', 'PostgreSQL', 'Flask', 'Android', 'AWS CDK', 'Anthropic SDK', 'LLM'],
-        text: { en: 'Structured fragmented business records into a database. Daily operational data feeds a deterministic pipeline for management reports; LLM judgments must cite evidence or are rejected. A scope-limited chatbot answers with evidence. Built with Claude Code, and operated end to end.', ko: '업무 자료 조각을 DB로 정형화함. 매일 쌓이는 운영 데이터는 결정적 파이프라인이 경영 보고서로 만들며, LLM 판단은 근거가 있어야 하고 없으면 반려됨. 범위가 정해진 chatbot이 근거와 함께 답함. Claude Code로 직접 만들고 운영까지 맡고 있음.' } },
+        status: production, stack: ['Claude Code', 'PostgreSQL', 'Flask', 'Android', 'AWS CDK', 'Anthropic SDK', 'RAG', 'Titan Embeddings V2', 'Hybrid search', 'LLM'],
+        text: { en: 'Structured fragmented business records into a PostgreSQL database, with a Flask web app and an Android client on top. A deterministic pipeline turns daily operational data into management reports. Added a retrieval chatbot over live records: keyword and vector search run side by side and merge into one candidate pool, and the assistant queries through a read-only database role. Infrastructure is defined with AWS CDK. Raised answer accuracy from a first measurement of 48% to 99% through a 12-round improvement loop. Built with Claude Code, and operated end to end.', ko: '업무 자료 조각을 PostgreSQL DB로 정형화하고, 그 위에 Flask 웹 앱과 Android 클라이언트를 만듦. 매일 쌓이는 운영 데이터는 결정적 파이프라인이 경영 보고서로 만듦. 운영 기록을 검색해 답하는 챗봇을 추가함. 키워드 검색과 벡터 검색을 나란히 돌려 후보 하나로 합치고, 비서는 읽기 전용 DB 권한으로만 조회함. 인프라는 AWS CDK로 정의함. 12라운드 개선 루프로 답변 정확도를 첫 측정 48%에서 최종 99%까지 높임. Claude Code로 직접 만들고 운영까지 맡고 있음.' } },
     ],
   },
 ];
