@@ -28,20 +28,19 @@ export const groups: { title: string; items: Project[] }[] = [
     items: [
       {
         title: 'MILO',
-        href: gh('TC_AE_Sprint2_MILO'),
+        href: gh('TC_AE_Sprint2_MILO_v2'),
         meta: {
           en: '2026 · Turing College AI Engineering, Sprint 2',
           ko: '2026 · Turing College AI Engineering, Sprint 2'
         },
         status: openSource,
         stack: [
-          'Python', 'Flask', 'RAG', 'Chroma',
-          'Supabase PostgreSQL', 'OpenRouter',
-          'Claude Sonnet', 'Pydantic'
+          'Python', 'Flask', 'LangChain', 'RAG',
+          'Chroma', 'Supabase PostgreSQL', 'OpenRouter', 'Ollama'
         ],
-        text: {
-          en: 'Built an evidence-grounded AI assistant that interviews business owners, extracts structured requirements, and proposes workflow automation with rule-based cost estimates. Implemented RAG, fact verification, and security evaluation.',
-          ko: '사업자와 대화하며 업무 요구사항을 구조화하고 자동화 방안과 규칙 기반 비용 견적을 제안하는 AI 시스템을 구축함. RAG, 정보 근거 검증, 보안 평가 체계를 구현함.'
+    text: {
+      en: 'Built a RAG assistant for IT-maintenance businesses that structures owner interviews, recommends workflow automation, and estimates time savings from recorded business data. Implemented tool calling, source tracing, local-model fallback, and retrieval and prompt-injection evaluations.',
+      ko: 'IT 유지보수 사업자의 상담 내용을 구조화하고, 업무 자동화 방안과 입력 데이터 기반 예상 절감 시간을 제시하는 RAG 어시스턴트를 구축함. 도구 호출, 답변 근거 추적, 로컬 모델 폴백, 검색 품질 및 프롬프트 인젝션 평가를 구현함.'
         }
       },
       {
