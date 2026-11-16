@@ -20,12 +20,29 @@ const production = { en: "In production", ko: "운영 중" };
 const openSource = { en: "Open source", ko: "오픈소스" };
 const claudeSkill = { en: "Claude skill", ko: "Claude skill" };
 const claudePlugin = { en: "Claude Code plugin", ko: "Claude Code plugin" };
-const publicRepo: T = { en: "Public repository", ko: "공개 저장소"};
 
 export const groups: { title: string; items: Project[] }[] = [
   {
     title: "AI Systems & LLM Engineering",
     items: [
+      {
+        title: "Autonomous agentic system",
+        meta: { en: "2026 · Personal project", ko: "2026 · 개인 프로젝트" },
+        status: production,
+        stack: [
+          "Paperclip",
+          "Claude Code",
+          "Codex",
+          "Multi-agent",
+          "Guard hooks",
+          "Git worktrees",
+        ],
+        text: {
+          en: "Built an autonomous agentic system of 12 Claude Code and Codex agents on Paperclip that develops and deploys the freelance client platform, from ticket intake through spec, implementation and independent QA review to production, with my approval on requirements and every deployment. In a one-week baseline (29 Oct – 5 Nov 2026): 3,830 agent runs, 233 merged PRs and 495 full test-suite runs.",
+          ko: "Paperclip 위에서 Claude Code·Codex 에이전트 12개로 구성된 autonomous agentic system을 구축함. 외주 클라이언트 플랫폼의 요청 접수, 명세, 구현, 독립 QA 리뷰, 운영 배포까지 처리하며, 요구사항과 모든 운영 배포는 직접 승인함. 1주 기준(2026.10.29–11.05) 에이전트 실행 3,830회, PR 병합 233건, 전체 테스트 실행 495회.",
+        },
+      },
+
       {
         title: 'MILO',
         href: gh('TC_AE_Sprint2_MILO_v2'),
@@ -101,7 +118,7 @@ export const groups: { title: string; items: Project[] }[] = [
         title: "Laya vs JEV",
         href: gh("laya-vs-jev"),
         meta: { en: `2026 · Personal project`, ko: `2026 · 개인 프로젝트` },
-        status: { en: "Exploratory benchmark", ko: "실험적 벤치마크" },
+        status: openSource,
         stack: [
           "Laya",
           "JEV",
@@ -163,7 +180,7 @@ export const groups: { title: string; items: Project[] }[] = [
         title: "Slurm + Ray",
         href: gh("Distributed-training-for-multiple-configurations"),
         meta: { en: `2026 · Personal project`, ko: `2026 · 개인 프로젝트` },
-        status: publicRepo,
+        status: openSource,
         stack: [
           "Slurm",
           "Ray",

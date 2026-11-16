@@ -81,6 +81,7 @@ export const extras: { title: T; items: T[] }[] = [
   {
     title: { en: 'Awards', ko: '수상' },
     items: [
+      { en: 'ISMRM Trainee Stipend, 2022, 2023 and 2024', ko: 'ISMRM Trainee Stipend, 2022·2023·2024' },
       { en: '2nd Best Lecture Award, Computational MRI, FAU', ko: 'FAU 우수강의상 2위 (Computational MRI)' },
       { en: 'Outstanding Exchange Student Award, The Catholic University of Korea, 2016', ko: '가톨릭대학교 우수 교환학생상, 2016' },
       { en: 'Academic Excellence Scholarship, 4 semesters, The Catholic University of Korea', ko: '가톨릭대학교 성적 우수 장학금, 4학기' },
