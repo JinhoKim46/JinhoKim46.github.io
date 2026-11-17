@@ -44,6 +44,30 @@ export const groups: { title: string; items: Project[] }[] = [
       },
 
       {
+        title: "PACT",
+        href: gh("pact-agent"),
+        meta: {
+          en: "2026 · Turing College AI Engineering, Sprint 3",
+          ko: "2026 · Turing College AI Engineering, Sprint 3",
+        },
+        status: openSource,
+        stack: [
+          "Python",
+          "FastAPI",
+          "Deep Agents",
+          "LangGraph",
+          "Claude",
+          "Next.js",
+          "DeepEval",
+          "LangSmith",
+        ],
+        text: {
+          en: "Built an AI agent that writes contracts, field assignments and work logs from what staff describe, only after a person approves a confirmation card. Permissions and required fields are enforced in code, not in the prompt. Passed all 165 code-checked runs (55 scenarios × 3) against live models.",
+          ko: "직원이 한 일을 말하면 계약, 현장 배정, 작업 일지를 작성하고 사람이 승인한 뒤에만 저장하는 AI 에이전트를 개발함. 권한과 필수 항목은 프롬프트가 아닌 코드로 강제함. 실제 모델로 55개 시나리오를 3회씩 실행해 코드 검사 165회를 모두 통과함.",
+        },
+      },
+
+      {
         title: 'MILO',
         href: gh('TC_AE_Sprint2_MILO_v2'),
         meta: {
