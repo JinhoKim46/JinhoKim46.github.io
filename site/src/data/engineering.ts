@@ -68,6 +68,27 @@ export const groups: { title: string; items: Project[] }[] = [
       },
 
       {
+        title: "Baupfad",
+        meta: {
+          en: "2026 · Turing College hackathon, backend (team of three)",
+          ko: "2026 · Turing College 해커톤, 백엔드 담당 (3인 팀)",
+        },
+        status: { en: "Hackathon", ko: "해커톤" },
+        stack: [
+          "Python",
+          "FastAPI",
+          "SQLite (FTS5)",
+          "Claude",
+          "Cloud Run",
+          "pytest",
+        ],
+        text: {
+          en: "Built the backend of a Munich building-permit checker: a legal database of 21 laws and bylaws and 306 court decisions from official sources, and 17 fixed rules, each citing its provision, giving repeatable findings at no model cost. The LLM only answers questions; code drops citations, numbers and fields the sources do not back. The jury highlighted the problem statement, innovative idea and honest engineering.",
+          ko: "뮌헨 건축 허가 점검 서비스의 백엔드를 개발함. 공식 출처의 법령·조례 21개와 판례 306건으로 법률 DB를 구축하고, 근거 조항을 인용하는 룰 기반 규칙 17개로 모델 비용 없이 같은 결과를 냄. LLM은 질문에만 답하고, 출처 없는 인용·숫자·항목은 코드가 걸러냄. 심사위원단은 문제 정의, 혁신적 아이디어, 정직한 엔지니어링을 강점으로 꼽음.",
+        },
+      },
+
+      {
         title: 'MILO',
         href: gh('TC_AE_Sprint2_MILO_v2'),
         meta: {
